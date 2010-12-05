@@ -25,7 +25,7 @@ point."
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
 
-(add-to-list 'load-path "./vendor/mmm-mode")
+(add-to-list 'load-path "~/.emacs.d/vendor/mmm-mode")
 (require 'mmm-mako)
 
 (add-to-list 'auto-mode-alist '("\\.mako\\'" . html-mode))
