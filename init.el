@@ -94,4 +94,5 @@
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
   
 (require 'tim-custom)
+(require 'alex-custom)
 ;;; init.el ends here
