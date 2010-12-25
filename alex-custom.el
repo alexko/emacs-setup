@@ -32,15 +32,15 @@
 ;;         ("Idea" ?i "* %?\n  %i\n  %a" "~/org/journal.org" "Ideas")))
 (setq org-remember-templates
       '(("Todo" ?t "* TODO %^{Title} %^g\n%?\nAdded: %U" "~/org/tasks.org" "Tasks")
-        ("Journal"   ?j "** %^{Head Line} %U %^g\n%i%?"  "~/org/journal.org")
-        ("Clipboard" ?c "** %^{Head Line} %U %^g\n%c\n%?"  "~/org/journal.org")
-        ("XClipboard" ?x "** %^{Head Line} %U %^g\n%x\n%?"  "~/org/journal.org")
-        ("Expenses"   ?e "** %^{Description} %U %^g\n%?"   "~/org/finance.org")
-        ("Book" ?b "** %^{Book Title} %t :book: \n%[~/.emacs.d/org/.book.tmpl]\n" 
+        ("Journal"   ?j "* %^{Head Line} %U %^g\n%i%?"  "~/org/journal.org")
+        ("Clipboard" ?c "* %^{Head Line} %U %^g\n%c\n%?"  "~/org/journal.org")
+        ("XClipboard" ?x "* %^{Head Line} %U %^g\n%x\n%?"  "~/org/journal.org")
+        ("Expenses"   ?e "* %^{Description} %U %^g\n%?"   "~/org/finance.org")
+        ("Book" ?b "* %^{Book Title} %t :book: \n%[~/.emacs.d/org/.book.tmpl]\n" 
          "~/org/journal.org")
-        ("Daily Review" ?a "** %t :review: \n%[~/.emacs.d/org/.review.tmpl]\n"
+        ("Daily Review" ?a "* %t :review: \n%[~/.emacs.d/org/.review.tmpl]\n"
          "~/org/journal.org")
-        ("Idea" ?i "** %?\n  %i\n  %a" "~/org/journal.org" "Ideas")))
+        ("Idea" ?i "* %?\n  %i\n  %a" "~/org/journal.org" "Ideas")))
 
 (define-key global-map "\C-cr" 'org-remember)
 ;(define-key global-map "\C-cc" 'org-capture)
