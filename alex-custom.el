@@ -59,5 +59,9 @@
           (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":DAILY:"))))
         ;; other commands here
         ))
-
+;; save/restore desktop sessions
+;;(load "desktop")
+(desktop-load-default)
+;;(desktop-read) ;;-> spurious warning: file appears to be used by own pid
+(desktop-save-mode 1)
 (provide 'alex-custom)
