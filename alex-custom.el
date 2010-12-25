@@ -21,7 +21,11 @@
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-attach-directory (concat org-directory "/data"))
-(setq org-agenda-files (list org-default-notes-file))
+;;(setq org-agenda-files (list org-default-notes-file))
+(eval-after-load 'org
+  '(progn ;; Add .org files to the agenda
+     (mapcar (lambda (file) (add-to-list 'org-agenda-files file))
+             (directory-files (expand-file-name "~/org/") t "^\\w+\\.org$"))))
 (setq org-refile-targets '((org-agenda-files . (:level . 1))))
 (setq remember-annotation-functions '(org-remember-annotation))
 (setq remember-handler-functions '(org-remember-handler)) ;!!
@@ -49,7 +53,8 @@
 (setq org-agenda-dim-blocked-tasks t)
 (setq org-agenda-include-diary t)
 (setq org-clock-persist 'history)
-;(org-clock-persistence-insiduate)
+;; (org-clock-persistence-insiduate)
+
 (setq org-agenda-custom-commands
       '(("h" "Daily habits" 
          ((agenda ""))
