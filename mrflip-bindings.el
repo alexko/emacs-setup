@@ -130,8 +130,12 @@
 (global-set-key  [f8]                   'kmacro-end-and-call-macro)
 (global-set-key  [M-f8]                 'kmacro-end-and-call-macro)
 (global-set-key  (kbd "<s-f8>")         'call-last-kbd-macro)
-(global-set-key  (kbd "C->")            'nxml-finish-element)
-(global-set-key  (kbd "C-/")            'nxml-complete)
 (global-set-key  (kbd "C-x C-z")        'undo)
 (global-set-key  (kbd "C-c C-s")        'Buffer-menu-sort-by-path)
+
+(add-hook 'nxml-mode-hook
+          '(lambda ()
+             (define-key nxml-mode-map (kbd "C->") 'nxml-finish-element)
+             (define-key nxml-mode-map (kbd "C-/") 'nxml-complete)))
+
 (provide 'mrflip-bindings)
