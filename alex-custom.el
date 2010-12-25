@@ -13,9 +13,6 @@
 (define-key global-map [(control c) (d)] 'insert-date)
 (define-key global-map [(control c) (t)] 'insert-unixtime)
 
-;; (setq browse-url-browser-function 'browse-url-generic
-;;       browse-url-generic-program "google-chrome")
-
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium-browser")
 (setq org-directory "~/org")
@@ -49,6 +46,9 @@
 (define-key global-map "\C-cr" 'org-remember)
 ;(define-key global-map "\C-cc" 'org-capture)
 
+(setq org-log-done t)
+(setq org-odd-levels-only t)
+(setq org-hide-leading-stars t)
 (setq org-enforce-todo-dependencies t)
 (setq org-agenda-dim-blocked-tasks t)
 (setq org-agenda-include-diary t)
@@ -69,4 +69,5 @@
 (desktop-load-default)
 ;;(desktop-read) ;;-> spurious warning: file appears to be used by own pid
 (desktop-save-mode 1)
+;;(load "pivotal-tracker")
 (provide 'alex-custom)
