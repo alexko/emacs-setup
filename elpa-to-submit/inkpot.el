@@ -23,7 +23,7 @@
       (cursor-color . "#404040")
       (background-mode . dark))
      (region ((t (:background "#404040"))))
-     (highlight ((t (:background "#404040"))))
+     (highlight ((t (:background "#242424")))) ; original inkpot: #404040
      (fringe ((t (:background "#16161b"))))
      (show-paren-match-face ((t (:background "#606060"))))
      (isearch ((t (:bold t :foreground "#303030" :background "#cd8b60"))))
