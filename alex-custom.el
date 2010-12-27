@@ -18,11 +18,7 @@
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-attach-directory (concat org-directory "/data"))
-;;(setq org-agenda-files (list org-default-notes-file))
-(eval-after-load 'org
-  '(progn ;; Add .org files to the agenda
-     (mapcar (lambda (file) (add-to-list 'org-agenda-files file))
-             (directory-files (expand-file-name "~/org/") t "^\\w+\\.org$"))))
+(setq org-agenda-files (list org-directory))
 (setq org-refile-targets '((org-agenda-files . (:level . 1))))
 (setq remember-annotation-functions '(org-remember-annotation))
 (setq remember-handler-functions '(org-remember-handler)) ;!!
