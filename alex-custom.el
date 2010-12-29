@@ -13,6 +13,9 @@
 (define-key global-map [(control c) (d)] 'insert-date)
 (define-key global-map [(control c) (t)] 'insert-unixtime)
 
+(setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
+;; (setq save-abbrevs t)
+
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium-browser")
 (setq org-directory "~/org")
