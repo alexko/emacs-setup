@@ -40,7 +40,7 @@
          (proxy (split-string tt-proxy-cmd))
          (tcr (append proxy (list "tcrmgr" "ext" "-port" stport thost "repl" srport)))
          (cmd (append proxy (list "nc" "-q5" thost srport)))
-         (pname (concat host ":" stport))
+         (pname (concat thost ":" stport))
          (wname (concat "*" pname "*"))
          (tproc (apply 'start-process " ttserver" "ttserver" tcr)))
     (sleep-for 0 500)
