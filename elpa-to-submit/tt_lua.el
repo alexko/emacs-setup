@@ -25,11 +25,13 @@
   :type 'string
   :group 'tt-lua)
 
-(defun tt-lua (tport)
-  ;; how to override default proxy on C-u?
+(defun tt-lua (spec)
+  ;; todo: override the default proxy on C-u?
   "Interactive Lua repl for ttserver"
-  (interactive "P") ; it woudl be nice to send mark to tt-lua
-  (tt-repl nil tport))
+  (interactive (let ((host-port (read-from-minibuffer (concat "Host:port (" tt-default-thost ":" (int-to-string tt-default-tport) ") "))))
+                 (list host-port)))
+  (defun mapper (x) (cond ((equal x "") nil) ((string-match "^[0-9]+$" x) (string-to-number x)) (t x)))
+  (apply 'tt-repl (mapcar 'mapper (split-string spec ":"))))
 
 (defun tt-repl (&optional thost tport rport lcmd)
   "Lua repl for ttserver"
