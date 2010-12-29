@@ -31,16 +31,17 @@
 ;;         ("Journal" ?j "* %U %?\n\n  %i\n  %a" "~/org/journal.org")
 ;;         ("Idea" ?i "* %?\n  %i\n  %a" "~/org/journal.org" "Ideas")))
 (setq org-remember-templates
-      '(("Todo" ?t "* TODO %^{Title} %^g\n%?\nAdded: %U" "~/org/tasks.org" "Tasks")
-        ("Journal"   ?j "* %^{Head Line} %U %^g\n%i%?"  "~/org/journal.org")
-        ("Clipboard" ?c "* %^{Head Line} %U %^g\n%c\n%?"  "~/org/journal.org")
-        ("XClipboard" ?x "* %^{Head Line} %U %^g\n%x\n%?"  "~/org/journal.org")
-        ("Expenses"   ?e "* %^{Description} %U %^g\n%?"   "~/org/finance.org")
-        ("Book" ?b "* %^{Book Title} %t :book: \n%[~/.emacs.d/org/.book.tmpl]\n" 
+      '(("Todo" ?t "* TODO %^{Title} %^g\n%?\n  %i\n  %a\nAdded: %U" "~/org/tasks.org" "Tasks")
+        ("Journal"   ?j "* %^{Title} %U %^g\n%?\n  %i\n  %a" "~/org/journal.org")
+        ("Clip" ?x "* %^{Title} %U :xclip:\n%?\n  %x\n  %a" "~/org/journal.org")
+        ("Clip" ?y "* %^{Title} %U :yclip:\n%?\n  %c\n  %a" "~/org/journal.org")
+        ("Expenses"   ?e "* %^{Title} %U %^g\n%?"   "~/org/finance.org")
+        ("Book" ?b "* %^{Title} %t :book: \n%[~/.emacs.d/org/.book.tmpl]\n" 
          "~/org/journal.org")
-        ("Daily Review" ?a "* %t :review: \n%[~/.emacs.d/org/.review.tmpl]\n"
+        ("Review" ?a "* Daily review %T :review: \n%[~/.emacs.d/org/.review.tmpl]\n"
          "~/org/journal.org")
-        ("Idea" ?i "* %?\n  %i\n  %a" "~/org/journal.org" "Ideas")))
+        ("Idea" ?i "* %^{Title} %^g\n%?\n  %i\n  %x\n  %a\nAdded: %U"
+         "~/org/journal.org" "Ideas")))
 
 (define-key global-map "\C-cr" 'org-remember)
 ;(define-key global-map "\C-cc" 'org-capture)
