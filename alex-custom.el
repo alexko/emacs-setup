@@ -72,4 +72,5 @@
 ;;(desktop-read) ;;-> spurious warning: file appears to be used by own pid
 (desktop-save-mode 1)
 ;;(load "pivotal-tracker")
+(setq shell-prompt-pattern " ") ;; this prevents tramp from hanging on /sudo::
 (provide 'alex-custom)
