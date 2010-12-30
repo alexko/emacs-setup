@@ -66,6 +66,23 @@
           (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":DAILY:"))))
         ;; other commands here
         ))
+
+(require 'org-learn)
+(require 'command-frequency)
+(command-frequency-table-load)
+(command-frequency-mode 1)
+(command-frequency-autosave-mode 1)
+
+(require 'org-depend)
+(defun org-push-id (arg)
+  (interactive "p")
+  (if (= arg 1) (kill-new (org-id-get (point) t)) ;; push id on the kill ring
+    (let ((id (current-kill 0))
+          (propname (if (= arg 4) "TRIGGER" "BLOCKER"))
+          (suffix (if (= arg 4) "(TODO)" "")))
+      (org-entry-add-to-multivalued-property (point) propname (concat id suffix)))
+    ))
+
 ;; save/restore desktop sessions
 ;;(load "desktop")
 (desktop-load-default)
