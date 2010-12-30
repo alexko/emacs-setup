@@ -25,6 +25,7 @@
   :type 'string
   :group 'tt-lua)
 
+;;;###autoload
 (defun tt-lua (spec proxy expr)
   "Interactive Lua repl for ttserver"
   (interactive
@@ -49,6 +50,7 @@
   (apply 'tt-repl
          (extract 3 (mapcar 'mapper (split-string spec ":")) (list proxy expr))))
 
+;;;###autoload
 (defun tt-repl (&optional thost tport rport proxy-cmd expr)
   "Lua repl for ttserver"
   (let* ((thost (or thost tt-default-thost))
