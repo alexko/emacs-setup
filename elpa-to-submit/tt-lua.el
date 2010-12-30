@@ -1,3 +1,48 @@
+;;; tt-lua.el --- emacs helper to access Tokyo Tyrant tt_debug extension
+
+;; Author: Alex Kosorukoff <alex@3form.com>
+;; Created: 28 Dec 2010
+;; Keywords: tt-lua
+
+;; available from http://github.com/alexko/emacs-starter-kit/
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+;;; Usage:
+
+;; This is a helper to connect to Tokyo Tyrant tt_debug extension
+;; (available from http://github.com/alexko/tokyo-recipes/tree/master/debug)
+;; that provides remote Lua repl running inside Tokyo Tyrant.
+
+;; M-x tt-lua
+;; Host:port to connect (localhost:1978) <enter>
+;; It will open a window with Lua repl running in one of the worker threads of
+;; ttserver run with default parameters
+;;
+;; A proxy command needed to access the ttserver can also be specified by using
+;; prefix, e.g. C-u M-x tt-lua
+;;
+;; Host:port to connect (localhost:1978) myhost
+;; Proxy command: ssh my-gateway
+;;
+;; This is useful if ttserver only binds to localhost and is not accessible from
+;; the outside. The port used by repl is 1999 by default, it can be changed by
+;; specifying it after ttserver port like this as follows
+;;
+;; M-x tt-lua
+;; Host:port to connect (localhost:1978) <ttserver host>:<ttserver port>:<repl port>
+
 (require 'comint)
 
 (defgroup tt-lua nil
@@ -30,7 +75,7 @@
   "Interactive Lua repl for ttserver"
   (interactive
    (let* ((host-port-prompt
-           (format "Host:port (%s:%d) " tt-default-thost tt-default-tport))
+           (format "Host:port to connect (%s:%d) " tt-default-thost tt-default-tport))
           (host-port
            (read-from-minibuffer host-port-prompt))
           (proxy-cmd
