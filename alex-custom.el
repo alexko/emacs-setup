@@ -78,14 +78,25 @@
 ;; if invoked with C-u C-u it sets the previously pushed id as a BLOCKER
 ;; see org-depend for explanation of the TRIGGER and BLOCKER properties
 (require 'org-depend)
-(defun org-push-id (arg)
-  (interactive "p")
-  (if (= arg 1) (kill-new (org-id-get (point) t)) ;; push id on the kill ring
-    (let ((id (current-kill 0))
-          (propname (if (= arg 4) "TRIGGER" "BLOCKER"))
-          (suffix (if (= arg 4) "(TODO)" "")))
-      (org-entry-add-to-multivalued-property (point) propname (concat id suffix)))
-    ))
+(defun org-make-dependency (arg)
+  (interactive
+   (if (= (prefix-numeric-value current-prefix-arg) 1)
+       (list
+        (format "ID %s" (kill-new (org-id-get (point) t)))) ;; push item id on the kill ring
+     (let*
+         ((id (current-kill 0)) ;; pop item id from the kill ring
+          (pos (point))
+          (tup
+           (if (= (prefix-numeric-value current-prefix-arg) 4)
+               (cons "TRIGGER"
+                     (format "%s(%s)" id
+                             (read-from-minibuffer "TRIGGER STATUS: " "TODO")))
+             (cons "BLOCKER" id))))
+       (org-entry-add-to-multivalued-property pos (car tup) (cdr tup))
+       (list (format "%s = %s" (car tup) (cdr tup))))))
+  (message arg))
+(add-hook 'org-mode-hook
+          '(lambda () (define-key org-mode-map [f12] 'org-make-dependency)))
 
 ;; save/restore desktop sessions
 ;;(load "desktop")
