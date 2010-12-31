@@ -94,6 +94,6 @@
 (desktop-save-mode 1)
 ;;(load "pivotal-tracker")
 (setq magit-item-highlight
-      ((((class color) (background dark)) (:background "gray10"))))
+      '((((class color) (background dark)) (:background "gray10"))))
 (setq shell-prompt-pattern " ") ;; this prevents tramp from hanging on /sudo::
 (provide 'alex-custom)
