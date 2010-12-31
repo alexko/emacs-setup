@@ -74,6 +74,10 @@
 (command-frequency-autosave-mode 1)
 
 (require 'org-depend)
+;; this pushes id of current entry into the kill ring (crreates id if needed)
+;; if invoked with C-u it creates a TRIGGER for the previously pushed id
+;; if invoked with C-u C-u it sets the previously pushed id as a BLOCKER
+;; see org-depend for explanation of the TRIGGER and BLOCKER properties
 (defun org-push-id (arg)
   (interactive "p")
   (if (= arg 1) (kill-new (org-id-get (point) t)) ;; push id on the kill ring
