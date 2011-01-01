@@ -20,7 +20,7 @@
       browse-url-generic-program "chromium-browser")
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-attach-directory (concat org-directory "/data"))
+;;(setq org-attach-directory (concat org-directory "/data"))
 (setq org-agenda-files (list org-directory))
 (setq org-refile-targets '((org-agenda-files . (:level . 1))))
 (setq remember-annotation-functions '(org-remember-annotation))
