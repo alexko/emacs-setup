@@ -110,7 +110,6 @@
          (exprn (if expr (concat expr "\n") nil)))
     (sleep-for 0 500)
     (when (equal 'run (process-status tproc))
-      (delete-other-windows)
       (switch-to-buffer-other-window wname)
       (insert (format "TT Lua repl %s %s\n" pname
                       (if proxyl (combine-and-quote-strings (cons "via" proxyl)) "")))
