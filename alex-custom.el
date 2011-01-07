@@ -16,8 +16,15 @@
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 ;; (setq save-abbrevs t)
 
+(defun find-preferred-browser ()
+  (let ((candidates (list
+                     "google-chrome"
+                     "chromium-browser"
+                     "firefox")))
+    (car (delq nil (mapcar 'executable-find candidates)))))
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "chromium-browser")
+      browse-url-generic-program (find-preferred-browser))
+
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 ;;(setq org-attach-directory (concat org-directory "/data"))
