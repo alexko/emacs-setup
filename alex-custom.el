@@ -113,5 +113,7 @@
 ;;(load "pivotal-tracker")
 (setq magit-item-highlight
       '((((class color) (background dark)) (:background "gray10"))))
+
+(add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:"))
 (setq shell-prompt-pattern " ") ;; this prevents tramp from hanging on /sudo::
 (provide 'alex-custom)
