@@ -114,7 +114,9 @@
        (list (format "%s = %s" (car tup) (cdr tup))))))
   (message arg))
 (add-hook 'org-mode-hook
-          '(lambda () (define-key org-mode-map [f12] 'org-make-dependency)))
+          '(lambda ()
+             (define-key org-mode-map [f12] 'org-make-dependency)
+             (auto-fill-mode 1)))
 
 ;; save/restore desktop sessions
 ;;(load "desktop")
