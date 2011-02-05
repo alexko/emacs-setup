@@ -27,7 +27,16 @@
 
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
-;;(setq org-attach-directory (concat org-directory "/data"))
+(setq org-mobile-directory "~/org.mobile")
+;; the org-mobile-files are org-agenda-files by default
+(setq org-mobile-files '("~/org/notes.org"
+                         "~/org/tasks.org"
+                         "~/org/journal.org"))
+(setq org-drawers-for-agenda nil)
+(setq org-mobile-inbox-for-pull "~/org/flagged.org")
+;;(setq org-mobile-use-encryption t)
+;;(setq org-mobile-encryption-passpword "omega52")
+(setq org-attach-directory (concat org-directory "/data"))
 (setq org-agenda-files (list org-directory))
 (setq org-refile-targets '((org-agenda-files . (:level . 1))))
 (setq remember-annotation-functions '(org-remember-annotation))
@@ -52,11 +61,13 @@
         ("Idea" ?i "* %^{Title} %^g\n%?\n  %i\n  %x\n  %a\nAdded: %U"
          "~/org/journal.org" "Ideas"))))
 
+(define-key global-map "\C-cb" 'org-ido-switchb)
+(global-set-key (kbd "C-<f11>") 'org-clock-in)
 (define-key global-map "\C-cr" 'org-remember)
 ;(define-key global-map "\C-cc" 'org-capture)
 
 (setq org-log-done t)
-(setq org-odd-levels-only t)
+(setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
 (setq org-hide-leading-stars t)
 (setq org-enforce-todo-dependencies t)
 (setq org-agenda-dim-blocked-tasks t)
