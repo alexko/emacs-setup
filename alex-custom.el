@@ -13,7 +13,7 @@
 (define-key global-map [(control c) (d)] 'insert-date)
 (define-key global-map [(control c) (t)] 'insert-unixtime)
 
-(setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
+;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 ;; (setq save-abbrevs t)
 
 (defun find-preferred-browser ()
