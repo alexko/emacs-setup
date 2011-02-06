@@ -1,3 +1,12 @@
+;; org-mode
+(setq load-path (cons "~/.emacs.d/org/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/org/contrib/lisp" load-path))
+(require 'org-install)
+(require 'ob-python)
+(require 'ob-emacs-lisp)
+(require 'ob-gnuplot)
+(require 'ob-R)
+
 (when window-system (color-theme-inkpot))
 (defun f-toggle-selective-display (column)
   (interactive "P")
