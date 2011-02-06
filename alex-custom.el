@@ -5,6 +5,8 @@
 (require 'ob-python)
 (require 'ob-emacs-lisp)
 (require 'ob-gnuplot)
+(require 'ob-ruby)
+(require 'ob-sh)
 (require 'ob-R)
 
 (when window-system (color-theme-inkpot))
