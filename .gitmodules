@@ -10,9 +10,6 @@
 [submodule "vendor/sinatra"]
 	path = vendor/sinatra
 	url = git://github.com/eschulte/sinatra_el.git
-[submodule "vendor/rorg"]
-	path = vendor/rorg
-	url = git://github.com/eschulte/rorg.git
-[submodule "vendor/ess"]
-	path = vendor/ess
-	url = git://github.com/eschulte/ess.git
+[submodule "org"]
+	path = org
+	url = git://orgmode.org/org-mode.git
