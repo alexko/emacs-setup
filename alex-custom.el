@@ -8,6 +8,10 @@
 (require 'ob-ruby)
 (require 'ob-sh)
 (require 'ob-R)
+(require 'ob-ledger)
+(require 'ob-latex)
+
+(load "ledger")
 
 (when window-system (color-theme-inkpot))
 (defun f-toggle-selective-display (column)
@@ -26,6 +30,11 @@
 
 ;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 ;; (setq save-abbrevs t)
+(setq org-link-abbrev-alist
+       '(("g"        . "http://www.google.com/search?q=")
+         ("gfin"     . "http://www.google.com/finance?q=")
+         ("gmap"     . "http://maps.google.com/maps?q=%s")
+         ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")))  
 
 (defun find-preferred-browser ()
   (let ((candidates (list
@@ -138,6 +147,7 @@
 (setq magit-item-highlight
       '((((class color) (background dark)) (:background "gray10"))))
 
+(require 'tramp)
 (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:"))
 (setq shell-prompt-pattern " ") ;; this prevents tramp from hanging on /sudo::
 
