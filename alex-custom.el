@@ -160,4 +160,10 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
+(defun fix-org-column ()
+  (interactive)
+  (custom-set-faces
+   '(org-column
+     ((t (:family "DejaVu Sans Mono" :height 120))))))
+
 (provide 'alex-custom)
