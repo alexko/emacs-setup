@@ -88,7 +88,28 @@
 (define-key global-map "\C-cb" 'org-ido-switchb)
 (global-set-key (kbd "C-<f11>") 'org-clock-in)
 (define-key global-map "\C-cr" 'org-remember)
-;(define-key global-map "\C-cc" 'org-capture)
+
+
+(define-key global-map "\C-cc" 'org-capture)
+(setq org-capture-templates
+      (append
+       (if (boundp 'org-capture-templates) org-capture-templates nil)
+       '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
+           "* TODO %^{Title} %^g\n%?\n  %i\n  %aAdded: %U" :prepend t)
+          ("j" "Journal" entry (file+headline "~/org/journal.org" "")
+           "* %^{Title} %U %^g\n%?\n  %i\n  %a")
+          ("x" "Clip" entry (file+headline "~/org/journal.org" "")
+           "* %^{Title} %U :xclip:\n%?\n  %x\n %a")
+          ("y" "Clip" entry (file+headline "~/org/journal.org" "")
+           "* %^{Title} %U :yclip:\n%?\n  %c\n  %a")
+          ("e" "Expenses" entry (file+headline "~/org/finance.org" "")
+           "* %^{Title} %U %^g\n%?")
+          ("b" "Book" entry (file+headline "~/org/journal.org" "")
+           "* %^{Title} %t :book:\n%[~/.emacs.d/org/.book.tmpl]\n")
+          ("a" "Review" entry (file+headline "~/org/journal.org" "")
+           "* Daily review %T :review:\n%[~/.emacs.d/org/.review.tmpl]\n")
+          ("i" "Idea" entry (file+headline "~/org/journal.org" "Ideas")
+           "* %^{Title} %^g\n%?\n  %i\n  %x\n  %a\nAdded: %U"))))
 
 (setq org-log-done t)
 (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
