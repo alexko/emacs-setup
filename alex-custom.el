@@ -10,6 +10,7 @@
 (require 'ob-R)
 (require 'ob-ledger)
 (require 'ob-latex)
+(require 'ob-lua)
 
 (load "ledger")
 
