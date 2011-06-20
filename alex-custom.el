@@ -56,9 +56,12 @@
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;;(setq org-mobile-use-encryption t)
 ;;(setq org-mobile-encryption-passpword "omega52")
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
+(setq org-refile-use-outline-path (quote file))
+(setq org-completion-use-ido t)
+
 (setq org-attach-directory (concat org-directory "/data"))
 (setq org-agenda-files (list org-directory))
-(setq org-refile-targets '((org-agenda-files . (:level . 1))))
 (setq remember-annotation-functions '(org-remember-annotation))
 (setq remember-handler-functions '(org-remember-handler)) ;!!
 (add-hook 'remember-mode-hook 'org-remember-apply-template)
