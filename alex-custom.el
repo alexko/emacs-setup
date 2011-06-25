@@ -133,6 +133,7 @@
         ;; other commands here
         ))
 
+(require 'org-collector)
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
