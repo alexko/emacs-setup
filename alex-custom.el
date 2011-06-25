@@ -32,10 +32,12 @@
 ;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 ;; (setq save-abbrevs t)
 (setq org-link-abbrev-alist
-       '(("g"        . "http://www.google.com/search?q=")
-         ("gfin"     . "http://www.google.com/finance?q=")
-         ("gmap"     . "http://maps.google.com/maps?q=%s")
-         ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")))  
+      '(("g"        . "http://www.google.com/search?q=")
+        ("gs"       . "https://encrypted.google.com/search?q=")
+        ("gfin"     . "http://www.google.com/finance?q=")
+        ("gmap"     . "http://maps.google.com/maps?q=%s")
+        ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")
+        ("tw"       . "http://twitter.com/")))
 
 (defun find-preferred-browser ()
   (let ((candidates (list
