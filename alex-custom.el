@@ -193,4 +193,5 @@
    '(org-column
      ((t (:family "DejaVu Sans Mono" :height 120))))))
 
+(set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 (provide 'alex-custom)
