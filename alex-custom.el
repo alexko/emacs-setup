@@ -187,7 +187,7 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
-(defun fix-org-column ()
+(defun fix-org-column () ;; this seems not necessary in org 7.5
   (interactive)
   (custom-set-faces
    '(org-column
