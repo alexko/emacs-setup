@@ -163,10 +163,10 @@
        (org-entry-add-to-multivalued-property pos (car tup) (cdr tup))
        (list (format "%s = %s" (car tup) (cdr tup))))))
   (message arg))
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (define-key org-mode-map [f12] 'org-make-dependency)
-             (auto-fill-mode 1)))
+(defun my-org-mode-hook ()
+  (define-key org-mode-map [f12] 'org-make-dependency)
+  (auto-fill-mode 1))
+(add-hook 'org-mode-hook 'my-org-mode-hook)
 
 ;; save/restore desktop sessions
 ;;(load "desktop")
