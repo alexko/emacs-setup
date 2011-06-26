@@ -189,6 +189,22 @@
      ((t (:family "DejaVu Sans Mono" :height 120))))))
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
+
+(defun org-task-sample () ;; random sampling of todos from the org file
+  (interactive)
+  (let* ((process
+          (lambda () (cons (point) (org-entry-get nil "PRIORITY" t))))
+         (match "+TODO=\"TODO\"|+TODO=\"BUG\"|+TODO=\"IDEA\"")
+         (scope nil)
+         (lst (org-map-entries 'process match scope))
+         (lst (sort lst (lambda (x y) (string< (cdr y) (cdr x)))))
+         (lst (filter ))
+         (ri (random (length lst)))
+         (rp (car (nth ri lst))))
+    (push-mark)
+    (goto-char rp)))
+(global-set-key [f12] 'org-task-sample)
+
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
