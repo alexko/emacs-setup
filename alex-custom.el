@@ -135,11 +135,6 @@
         ))
 
 (require 'org-collector)
-(require 'org-learn)
-(require 'command-frequency)
-(command-frequency-table-load)
-(command-frequency-mode 1)
-(command-frequency-autosave-mode 1)
 
 ;; this pushes id of current entry into the kill ring (crreates id if needed)
 ;; if invoked with C-u it creates a TRIGGER for the previously pushed id
@@ -194,4 +189,9 @@
      ((t (:family "DejaVu Sans Mono" :height 120))))))
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
+(require 'org-learn)
+(require 'command-frequency)
+(command-frequency-table-load)
+(command-frequency-mode 1)
+(command-frequency-autosave-mode 1)
 (provide 'alex-custom)
