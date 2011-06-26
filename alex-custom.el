@@ -205,6 +205,15 @@
     (goto-char rp)))
 (global-set-key [f12] 'org-task-sample)
 
+(defun org-toggle-eval-confirmation ()
+  (interactive)
+  (let ((state (if org-confirm-babel-evaluate nil t)))
+    (setq org-confirm-babel-evaluate state
+          org-confirm-shell-link-function state
+          org-confirm-elisp-link-function state)
+    (message
+     (concat "org eval confirmation is " (if state "on" "off")))))
+
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
