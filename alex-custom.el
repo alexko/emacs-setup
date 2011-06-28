@@ -212,6 +212,20 @@
     (message
      (concat "org eval confirmation is " (if state "on" "off")))))
 
+(defun adb-org-mobile-sync ()
+  (interactive)
+  (let ((adb "/home/alkos/android/android-sdk-linux_86/tools/adb")
+        (org-mobile-remote-dir "/sdcard")
+        (org-mobile-local-dir (expand-file-name org-mobile-directory)))
+    (org-mobile-pull) ;; to prevent overwriting mobileorg.org
+    (call-process adb nil "*adb*" nil "-d" "pull"
+                  (concat org-mobile-remote-dir "/mobileorg.org")
+                  org-mobile-local-dir)
+    (org-mobile-pull)
+    (org-mobile-push)
+    (call-process adb nil "*adb*" nil "-d" "push"
+                  org-mobile-local-dir org-mobile-remote-dir)))
+
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
