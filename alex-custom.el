@@ -192,8 +192,9 @@
      (concat "org eval confirmation is " (if state "on" "off")))))
 
 (defun adb-org-mobile-sync ()
+  "syncs with org-mobile android app via adb"
   (interactive)
-  (let ((adb "/home/alkos/android/android-sdk-linux_86/tools/adb")
+  (let ((adb  (expand-file-name "~/android/android-sdk-linux_86/tools/adb"))
         (org-mobile-remote-dir "/sdcard")
         (org-mobile-local-dir (expand-file-name org-mobile-directory)))
     (org-mobile-pull) ;; to prevent overwriting mobileorg.org
