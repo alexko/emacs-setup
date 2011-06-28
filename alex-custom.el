@@ -62,6 +62,7 @@
 ;;(setq org-mobile-encryption-passpword "omega52")
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
 (setq org-refile-use-outline-path (quote file))
+(setq org-reverse-note-order t) ;; refiling puts item at the top
 (setq org-completion-use-ido t)
 
 (setq org-attach-directory (concat org-directory "/data"))
