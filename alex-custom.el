@@ -206,6 +206,17 @@
     (call-process adb nil "*adb*" nil "-d" "push"
                   org-mobile-local-dir org-mobile-remote-dir)))
 
+(defun my-calc-eval ()
+  "calculates expression at the point using calc"
+  (interactive)
+  (set-mark (point))
+  (skip-chars-backward "^ ")
+  (exchange-point-and-mark)
+  (let ((selection (buffer-substring-no-properties (mark) (point))))
+    (insert (concat " = " (calc-eval selection)))))
+
+(global-set-key (kbd "C-=") 'my-calc-eval)
+
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
