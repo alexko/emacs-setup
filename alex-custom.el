@@ -19,7 +19,8 @@
 (defun f-toggle-selective-display (column)
   (interactive "P")
   (set-selective-display
-   (if selective-display nil (or column 1))))
+   (if selective-display nil
+     (or column (+ 1 (current-column))))))
 
 (global-set-key [f1] 'f-toggle-selective-display)
 
