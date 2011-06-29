@@ -170,17 +170,25 @@
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 
-(defun org-task-sample () ;; random sampling of todos from the org file
+(defun org-task-sample (&optional match)
+  "Random sampling of todos from the org file"
   (interactive)
-  (let* ((process
-          (lambda () (cons (point) (org-entry-get nil "PRIORITY" t))))
-         (match "+TODO=\"TODO\"|+TODO=\"BUG\"|+TODO=\"IDEA\"")
-         (scope nil)
-         (lst (org-map-entries process match scope))
-         (ri (random (length lst)))
-         (rp (car (nth ri lst))))
-    (push-mark)
-    (goto-char rp)))
+  (let ((rpos
+         (save-excursion
+           (outline-up-heading 1)
+           (skip-chars-forward "*") ;; to get level of the parent entry
+           (let* ((level (current-column))
+                  (extract
+                   (lambda () (cons (point) (org-entry-get nil "PRIORITY" t))))
+                  (match (format "+TODO=\"TODO\"+LEVEL=%d" (+ 1 level)))
+                  (scope 'tree)
+                  (candidates
+                   (org-map-entries extract match scope))
+                  (pick (random (length candidates))))
+             (car (nth pick candidates))))))
+    (when (and rpos (/= rpos (point)))
+      (push-mark) (goto-char rpos))))
+
 (global-set-key [f11] 'org-task-sample)
 
 (defun org-toggle-eval-confirmation ()
