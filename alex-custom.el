@@ -11,6 +11,8 @@
 (require 'ob-ledger)
 (require 'ob-latex)
 (require 'ob-lua)
+(require 'ob-C)
+(require 'ob-octave)
 (org-babel-lob-ingest "~/org/lob.org")
 
 (load "ledger")
