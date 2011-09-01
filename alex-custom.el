@@ -161,7 +161,8 @@
 
 (require 'tramp)
 (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:"))
-(setq shell-prompt-pattern " ") ;; this prevents tramp from hanging on /sudo::
+;; (setq shell-prompt-pattern " ") ;; this prevents tramp from hanging on /sudo::
+(setq shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
 
 (require 'buffer-move)
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
