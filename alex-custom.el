@@ -170,6 +170,8 @@
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 
+(setq org-task-sample-time nil)
+
 (defun org-task-sample (&optional match)
   "Random sampling of todos from the org file"
   (interactive)
@@ -179,7 +181,7 @@
            (skip-chars-forward "*") ;; to get level of the parent entry
            (let* ((level (current-column))
                   (extract
-                   (lambda () (cons (point) (org-entry-get nil "PRIORITY" t))))
+                   (lambda () (cons (point) (org-entry-get nil "Effort" t))))
                   (match (format "+TODO=\"TODO\"+LEVEL=%d" (+ 1 level)))
                   (scope 'tree)
                   (candidates
