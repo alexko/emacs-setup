@@ -164,6 +164,12 @@
 ;; (setq shell-prompt-pattern " ") ;; this prevents tramp from hanging on /sudo::
 (setq shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
 
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 (require 'buffer-move)
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
