@@ -13,6 +13,7 @@
 (require 'ob-lua)
 (require 'ob-C)
 (require 'ob-octave)
+(org-babel-lob-ingest "~/.emacs.d/org/contrib/babel/library-of-babel.org")
 (org-babel-lob-ingest "~/org/lob.org")
 
 (load "ledger")
