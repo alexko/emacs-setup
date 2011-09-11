@@ -16,6 +16,7 @@
 (org-babel-lob-ingest "~/.emacs.d/org/contrib/babel/library-of-babel.org")
 (org-babel-lob-ingest "~/org/lob.org")
 (add-to-list 'org-src-lang-modes (cons "cu" 'c))
+(add-to-list 'auto-mode-alist (cons "\\.cu$" 'c-mode))
 
 (load "ledger")
 
