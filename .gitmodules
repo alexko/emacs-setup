@@ -12,4 +12,4 @@
 	url = git://github.com/eschulte/sinatra_el.git
 [submodule "org"]
 	path = org
-	url = git://orgmode.org/org-mode.git
+	url = git://github.com/alexko/org-mode.git
