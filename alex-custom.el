@@ -89,13 +89,13 @@
       (append
        (if (boundp 'org-capture-templates) org-capture-templates nil)
        '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-           "* TODO %^{Title} %^g\nAdded: %U\n  %a\n  %i\n%?\n---" :prepend t)
+           "* TODO %^{Title} %^g\nAdded: %U\n  %a\n  %i\n%?\n- - -" :prepend t)
           ("j" "Journal" entry (file "~/org/journal.org")
-           "* %^{Title} %U %^g\n  %a\n  %i\n%?\n---" :prepend t)
+           "* %^{Title} %U %^g\n  %a\n  %i\n%?\n- - -" :prepend t)
           ("x" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} %U :xclip:\n  %a\n  %x\n%?\n---" :prepend t)
+           "* %^{Title} %U :xclip:\n  %a\n  %x\n%?\n- - -" :prepend t)
           ("y" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} %U :yclip:\n  %a\n  %c\n%?\n---" :prepend t)
+           "* %^{Title} %U :yclip:\n  %a\n  %c\n%?\n- - -" :prepend t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %U %^g\n%?\n")
           ("b" "Book" entry (file "~/org/journal.org")
@@ -103,7 +103,7 @@
           ("a" "Review" entry (file "~/org/journal.org")
            "* Daily review %T :review:\n%[~/.emacs.d/org/.review.tmpl]\n" :prepend t)
           ("i" "Idea" entry (file+headline "~/org/journal.org" "Ideas")
-           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?\n---"))))
+           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?\n- - -"))))
 
 (setq org-log-done t)
 (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
