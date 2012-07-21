@@ -223,7 +223,7 @@
   "syncs with org-mobile android app via adb"
   (interactive)
   (let ((adb  (expand-file-name "~/android/android-sdk-linux_86/tools/adb"))
-        (org-mobile-remote-dir "/sdcard")
+        (org-mobile-remote-dir "/sdcard/org")
         (org-mobile-local-dir (expand-file-name org-mobile-directory)))
     (org-mobile-pull) ;; to prevent overwriting mobileorg.org
     (call-process adb nil "*adb*" nil "-d" "pull"
