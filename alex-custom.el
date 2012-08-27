@@ -36,6 +36,17 @@
 (define-key global-map [(control c) (d)] 'insert-date)
 (define-key global-map [(control c) (t)] 'insert-unixtime)
 
+(setq ffip-patterns '("*.c", "*.h", "*.cc", "*.cpp", "*.cu",
+                      "*.py", "*.el", "*.java", "*.js"))
+(put 'ffip-patterns 'safe-local-variable 'listp) ;; fixes ffip setting
+;; (defmacro setl (sym val)
+;;   "Like setq, but makes sym a local variable first."
+;;   `(set (make-local-variable ',sym) ,val))
+;; (add-hook 'c++-mode-hook
+;;           (lambda () (setl ffip-patterns
+;;                       '("*.c", "*.h", "*.cc", "*.cpp", "*.cu",
+;;                         "*.py", "*.el", "*.java", "*.js"))))
+
 ;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 ;; (setq save-abbrevs t)
 (setq org-link-abbrev-alist
