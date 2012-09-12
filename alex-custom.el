@@ -56,12 +56,14 @@
         ("gmap"     . "http://maps.google.com/maps?q=")
         ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")
         ("tw"       . "http://twitter.com/")
-        ("d"        . "http://www.duckduckgoog.com/?q=")
+        ("d"        . "http://www.duckduckgo.com/?q=")
         ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
         ("sd"       . "http://slickdeals.net/newsearch.php?firstonly=1&q=")
         ("cb"       . "http://crunchbase.com/search?query=")
         ("ups"      . "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=")
-        ("wp"       . "http://en.wikipedia.org/w/index.php?title=Special:Search&search=")))
+        ("ontrack"  . "http://www.ontrac.com/trackres.asp?tracking_number=")
+        ("wp"       . "http://en.wikipedia.org/w/index.php?title=Special:Search&search=")
+        ("yelp"     . "http://www.yelp.com/search?find_desc=")))
 
 (defun find-preferred-browser ()
   (let ((candidates (list
