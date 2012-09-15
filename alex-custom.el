@@ -230,7 +230,7 @@
     (when (and rpos (/= rpos (point)))
       (push-mark) (goto-char rpos))))
 
-(global-set-key [f11] 'org-task-sample)
+(define-key org-mode-map [f11] 'org-task-sample)
 
 (defun org-toggle-eval-confirmation ()
   (interactive)
