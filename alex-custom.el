@@ -205,6 +205,9 @@
      ((t (:family "DejaVu Sans Mono" :height 120))))))
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
+(defun my-open-link (k) (org-occur-in-agenda-files k) t)
+(add-hook 'org-open-link-functions 'my-open-link)
+(define-key occur-mode-map (kbd "q") 'delete-window)
 
 (setq org-task-sample-time nil)
 
