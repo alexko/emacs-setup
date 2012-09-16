@@ -209,6 +209,27 @@
 (add-hook 'org-open-link-functions 'my-open-link)
 (define-key occur-mode-map (kbd "q") 'delete-window)
 
+(global-set-key (kbd "C-c o") 'occur)
+(defun occur-mode-goto-occurrence (&optional event)
+  "Go to the occurrence the current line describes."
+  (interactive (list last-nonmenu-event))
+  (let ((pos
+         (if (null event)
+             ;; Actually `event-end' works correctly with a nil argument as
+             ;; well, so we could dispense with this test, but let's not
+             ;; rely on this undocumented behavior.
+             (occur-mode-find-occurrence)
+           (with-current-buffer (window-buffer (posn-window (event-end event)))
+             (save-excursion
+               (goto-char (posn-point (event-end event)))
+               (occur-mode-find-occurrence)))))
+        same-window-buffer-names
+        same-window-regexps)
+    ;;(pop-to-buffer (marker-buffer pos))
+    (switch-to-buffer (marker-buffer pos)) ;; stay in the same window
+    (goto-char pos)
+    (run-hooks 'occur-mode-find-occurrence-hook)))
+
 (setq org-task-sample-time nil)
 
 (defun org-task-sample (&optional match)
