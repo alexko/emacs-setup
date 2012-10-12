@@ -207,6 +207,7 @@
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 (defun my-open-link (k) (org-occur-in-agenda-files k) t)
 (add-hook 'org-open-link-functions 'my-open-link)
+(add-to-list 'org-link-frame-setup '(file . find-file-other-frame))
 (define-key occur-mode-map (kbd "q") 'delete-window)
 
 (global-set-key (kbd "C-c o") 'occur)
