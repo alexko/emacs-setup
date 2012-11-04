@@ -11,14 +11,15 @@
 ;; don't show any of this
 (setq erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
 
-(defun erc-go ()
+(defun erc-go (password)
   "Connect to ERC, or switch to last active buffer"
-  (interactive)
+  (interactive (list (if (boundp 'irc-password) irc-password
+                       (read-passwd "IRC Password: "))))
+  (setq irc-password password)
   (if (get-buffer "irc.freenode.net:6667") ;; ERC already active?
-
     (erc-track-switch-buffer 1) ;; yes: switch to last active
-    (when (y-or-n-p "Start ERC? ") ;; no: maybe start ERC
-      (erc :server "irc.freenode.net" :port 6667 :nick "twee" :full-name "timwee" :password "pword"))))
+    (erc :server "irc.freenode.net" :port 6667 :nick "alexko"
+         :full-name "alexko" :password password)))
 
 (global-set-key (kbd "C-c e") 'erc-go)
 
