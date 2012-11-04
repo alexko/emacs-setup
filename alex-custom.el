@@ -297,6 +297,16 @@
     (dotimes (i n)
       (insert (concat "[[~/dl/" (nth i rfiles) "]] ")))))
 
+(defun convert-win-to-frame ()
+  "makes frame out of window"
+  (interactive)
+  (save-excursion
+    (make-frame-command)
+    (delete-window)))
+
+(define-key global-map (kbd "M-n") 'convert-win-to-frame)
+(define-key global-map (kbd "C-c n") nil)
+
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
