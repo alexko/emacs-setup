@@ -289,6 +289,14 @@
 
 (global-set-key (kbd "C-=") 'my-calc-eval)
 
+(defun recent-dl (n)
+  "insert link to a recently downloaded file"
+  (interactive "p")
+  (let ((rfiles
+         (split-string (shell-command-to-string "ls -t ~/dl/") "\n")))
+    (dotimes (i n)
+      (insert (concat "[[~/dl/" (nth i rfiles) "]] ")))))
+
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
