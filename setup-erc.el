@@ -2,7 +2,8 @@
 
 (erc-autojoin-mode t)
 (setq erc-autojoin-channels-alist
-  '((".*\\.freenode.net" "#cascading" "#cascading-clojure" "#hbase" "#katta" "#clojure")))
+      '((".*\\.freenode.net" "##math" "##cs" "##statistics"
+         "#scipy" "#scikit-learn" "#machinelearning" "#cuda")))
 
 (erc-track-mode t)
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
