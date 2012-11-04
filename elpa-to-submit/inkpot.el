@@ -7,7 +7,7 @@
 ;; (color-theme-initialize)
 ;; (load-file "~/.emacs.d/themes/color-theme-inkpot.el")
 ;;
-;; And then (color-theme-blackboard) to activate it.
+;; And then (color-theme-inkpot) to activate it.
 
 (require 'color-theme)
 
