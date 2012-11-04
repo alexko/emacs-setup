@@ -20,7 +20,7 @@
      ((foreground-color . "#cfbfad")
       (background-color . "#1e1e27")
       (border-color . "#3e3e5e")
-      (cursor-color . "#404040")
+      (cursor-color . "#ccaa40")
       (background-mode . dark))
      (region ((t (:background "#404040"))))
      (highlight ((t (:background "#242424")))) ; original inkpot: #404040
