@@ -108,21 +108,29 @@
       (append
        (if (boundp 'org-capture-templates) org-capture-templates nil)
        '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-           "* TODO %^{Title} %^g\nAdded: %U\n  %a\n  %i\n%?\n- - -" :prepend t)
+           "* TODO %^{Title} %^g\nAdded: %U\n  %a\n  %i\n%?\n- - -"
+           :prepend t :clock-in t :clock-resume t)
           ("j" "Journal" entry (file "~/org/journal.org")
-           "* %^{Title} %U %^g\n  %a\n  %i\n%?\n- - -" :prepend t)
+           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n%?\n- - -"
+           :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} %U :xclip:\n  %a\n  %x\n%?\n- - -" :prepend t)
+           "* %^{Title} :xclip:\nAdded: %U\n  %a\n  %x\n%?\n- - -"
+           :prepend t :clock-in t :clock-resume t)
           ("y" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} %U :yclip:\n  %a\n  %c\n%?\n- - -" :prepend t)
+           "* %^{Title} yclip:\nAdded: %U\n  %a\n  %c\n%?\n- - -"
+           :prepend t :clock-in t :clock-resume t)
           ("e" "Expenses" entry (file "~/org/finance.org")
-           "* %^{Title} %U %^g\n%?\n")
+           "* %^{Title} %U %^g\n%?\n"
+           :prepend t :clock-in t :clock-resume t)
           ("b" "Book" entry (file "~/org/journal.org")
-           "* %^{Title} %t :book:\n%[~/.emacs.d/org/.book.tmpl]\n" :prepend t)
+           "* %^{Title} %t :book:\n%[~/.emacs.d/org/.book.tmpl]\n"
+           :prepend t :clock-in t :clock-resume t)
           ("a" "Review" entry (file "~/org/journal.org")
-           "* Daily review %T :review:\n%[~/.emacs.d/org/.review.tmpl]\n" :prepend t)
+           "* Daily review %T :review:\n%[~/.emacs.d/org/.review.tmpl]\n"
+           :prepend t :clock-in t :clock-resume t)
           ("i" "Idea" entry (file+headline "~/org/journal.org" "Ideas")
-           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?\n- - -"))))
+           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?\n- - -"
+           :prepend t :clock-in t :clock-resume t))))
 
 (setq org-log-done t)
 (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
