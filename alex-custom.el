@@ -89,6 +89,21 @@
 (setq org-refile-use-outline-path (quote file))
 (setq org-reverse-note-order t) ;; refiling puts item at the top
 (setq org-completion-use-ido t)
+(setq ido-everywhere t)
+(setq ido-max-directory-size 100000)
+(ido-mode (quote both))
+; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets '((nil :maxlevel . 4) ;; current buffer
+                           (org-agenda-files :maxlevel . 4)))
+; Use full outline paths for refile targets - we file directly with IDO
+(setq org-refile-use-outline-path t) 
+; Targets complete directly with IDO
+(setq org-outline-path-complete-in-steps nil)
+; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+
+; Save all org buffers every hour
+(run-at-time "00:59" 3600 'org-save-all-org-buffers)
 
 (setq org-attach-directory (concat org-directory "/data"))
 (setq org-agenda-files (list org-directory))
