@@ -113,11 +113,11 @@
       '(("Effort_ALL". "1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00 9:00 0:30")
         ("COLUMNS". "%30ITEM %8TAGS %PRIORITY %TODO %5Effort{:} %5CLOCKSUM")))
 
+(define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cb" 'org-ido-switchb)
-(global-set-key (kbd "C-<f11>") 'org-clock-in)
-
-
 (define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-cl" 'org-store-link)
+
 ;; (setq org-capture-templates nil)
 (setq org-capture-templates
       (append
