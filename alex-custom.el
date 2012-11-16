@@ -225,7 +225,7 @@
   (interactive)
   (custom-set-faces
    '(org-column
-     ((t (:family "DejaVu Sans Mono" :height 120))))))
+     ((t (:family "DejaVu Sans Mono" :height 120 :background "grey40"))))))
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 (defun my-open-link (k) (org-occur-in-agenda-files k) t)
