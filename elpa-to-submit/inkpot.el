@@ -42,6 +42,7 @@
      (font-lock-keyword-face ((t (:bold t :foreground "#c080d0"))))
      (font-lock-preprocessor-face ((t (:foreground "309090"))))
      (font-lock-reference-face ((t (:bold t :foreground "#808bed"))))
+     (font-lock-negation-char-face ((t (:background "#7B0000"))))
      (font-lock-string-face ((t (:foreground "#ffcd8b" :background "#404040"))))
      (font-lock-type-face ((t (:foreground "#ff8bff"))))
      (font-lock-variable-name-face ((t nil)))
