@@ -118,6 +118,16 @@
 (define-key global-map "\C-cc" 'org-capture)
 (define-key global-map "\C-cl" 'org-store-link)
 
+(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C--") 'text-scale-decrease)
+(define-key global-map (kbd "C-x C-b") 'ibuffer)
+(define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window)
+(define-key global-map (kbd "C-x C-M-f") 'find-file-in-project)
+(define-key global-map (kbd "C-x g") 'magit-status)
+
+(define-key global-map (kbd "C-x f") 'recentf-ido-find-file)
+(define-key global-map (kbd "C-x C-i") 'ido-imenu)
+
 ;; (setq org-capture-templates nil)
 (setq org-capture-templates
       (append
