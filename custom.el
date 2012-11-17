@@ -71,7 +71,7 @@
  '(tramp-default-method "ssh")
  '(transient-mark-mode t)
  '(visible-bell t)
- '(x-select-enable-clipboard t)
+ '(show-trailing-whitespace t)
  '(yaml-indent-offset 2))
  
 
@@ -110,7 +110,7 @@
  '(org-column ((t (:background "grey30" :strike-through nil :underline nil :slant normal :weight normal :height 120 :family "DejaVu Sans Mono"))))
  '(region ((((class color) (background light)) (:background "honeydew2"))))
  '(rng-error-face ((t (:underline "#eecccc"))))
- '(secondary-selection ((t (:background "lavender"))))
+ '(secondary-selection ((((class color) (background light)) (:background "lavender")) (((class color) (background dark)) (:background "grey30"))))
  '(show-paren-match ((t (:background "bisque" :foreground "firebrick"))))
  '(textile-acronym-face ((t (:foreground "#242"))))
  '(textile-alignments-face ((t (:foreground "#228"))))
@@ -118,4 +118,5 @@
  '(textile-image-face ((t (:foreground "#848"))))
  '(textile-pre-face ((t (:foreground "#266"))))
  '(textile-span-face ((t (:foreground "#699"))))
- '(trailing-whitespace ((((class color) (background light)) (:background "cornsilk2")))))
+ '(trailing-whitespace ((((class color) (background light)) (:background "cornsilk2")) (((class color) (background dark)) (:background "grey20"))))
+)
