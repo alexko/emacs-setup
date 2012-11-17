@@ -105,7 +105,7 @@
  '(isearch ((((class color) (background light)) (:background "burlywood" :foreground "Black"))))
  '(lazy-highlight ((((class color) (background light)) (:background "Beige" :foreground "FireBrick"))))
  '(link ((((class color) (min-colors 88) (background light)) (:foreground "#000088" :underline t))))
- '(magit-item-highlight ((((class color) (background dark)) (:background "gray10"))))
+ '(magit-item-highlight ((((class color) (background dark)) (:background "gray15"))))
  '(mode-line ((((class color) (min-colors 88)) (:background "grey75" :foreground "black" :box (:line-width -1 :style released-button) :height 1.1 :family "Helvetica"))))
  '(org-column ((t (:background "grey30" :strike-through nil :underline nil :slant normal :weight normal :height 120 :family "DejaVu Sans Mono"))))
  '(region ((((class color) (background light)) (:background "honeydew2"))))
