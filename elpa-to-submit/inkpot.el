@@ -24,6 +24,7 @@
       (background-mode . dark))
      (region ((t (:background "#404040"))))
      (highlight ((t (:background "#242424")))) ; original inkpot: #404040
+     (secondary-selection ((t (:background "#303030"))))
      (fringe ((t (:background "#16161b"))))
      (show-paren-match-face ((t (:background "#606060"))))
      (isearch ((t (:bold t :foreground "#303030" :background "#cd8b60"))))
@@ -42,4 +43,4 @@
      (font-lock-string-face ((t (:foreground "#ffcd8b" :background "#404040"))))
      (font-lock-type-face ((t (:foreground "#ff8bff"))))
      (font-lock-variable-name-face ((t nil)))
-     (font-lock-warning-face ((t (:foreground "#ffffff" :background "#ff0000")))))))
+     (font-lock-warning-face ((t (:foreground "#a02020")))))))
