@@ -221,6 +221,19 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE"))))
+
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "pink" :weight bold)
+              ("NEXT" :foreground "deepskyblue" :weight bold)
+              ("DONE" :foreground "palegreen" :weight bold)
+              ("WAITING" :foreground "orange" :weight bold)
+              ("HOLD" :foreground "magenta" :weight bold)
+              ("CANCELLED" :foreground "forest green" :weight bold)
+              ("PHONE" :foreground "forest green" :weight bold))))
+
 (defun fix-org-column () ;; this seems not necessary in org 7.5
   (interactive)
   (custom-set-faces
