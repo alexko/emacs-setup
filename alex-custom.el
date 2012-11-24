@@ -124,6 +124,10 @@
 (define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window)
 (define-key global-map (kbd "C-x C-M-f") 'find-file-in-project)
 (define-key global-map (kbd "C-x g") 'magit-status)
+(define-key global-map (kbd "M-g") 'goto-line)
+(define-key global-map (kbd "M-/") 'hippie-expand)
+(define-key global-map (kbd "<C-f9>") 'compile)
+(define-key global-map (kbd "<f9>") 'next-error)
 
 (define-key global-map (kbd "C-x f") 'recentf-ido-find-file)
 (define-key global-map (kbd "C-x C-i") 'ido-imenu)
