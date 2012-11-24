@@ -231,6 +231,29 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
+(setq ibuffer-expert t)
+(setq ibuffer-show-empty-filter-groups nil)
+(setq ibuffer-saved-filter-groups
+      '(("home"
+	 ("Org" (or (mode . org-mode)
+		    (filename . "OrgMode")))
+         ("Code" (or (mode . python-mode)
+                     (mode . c-mode)
+                     (mode . lua-mode)))
+	 ("Web Dev" (or (mode . html-mode)
+			(mode . css-mode)))
+	 ("Emacs-config" (or (filename . ".emacs.d")
+			     (filename . "emacs-config")))
+	 ("Magit" (name . "\*magit"))
+	 ("ERC" (mode . erc-mode))
+	 ("Help" (or (name . "\*Help\*")
+		     (name . "\*Apropos\*")
+		     (name . "\*info\*"))))))
+(add-hook 'ibuffer-mode-hook 
+	  '(lambda ()
+	     (ibuffer-auto-mode 1)
+	     (ibuffer-switch-to-saved-filter-groups "home")))
+
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE"))))
