@@ -244,11 +244,15 @@
               ("CANCELLED" :foreground "forest green" :weight bold)
               ("PHONE" :foreground "forest green" :weight bold))))
 
-(defun fix-org-column () ;; this seems not necessary in org 7.5
-  (interactive)
-  (custom-set-faces
-   '(org-column
-     ((t (:family "DejaVu Sans Mono" :height 120 :background "grey40"))))))
+(defun fix-org-column-font ()
+  (when (fboundp 'set-face-attribute)
+    (set-face-attribute 'org-column nil
+                        :height (face-attribute 'default :height)
+                        :family (face-attribute 'default :family)
+                        :background "grey40")))
+(defun org-columns-with-font-fix ()
+  (interactive) (fix-org-column-font) (org-columns))
+(define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-font-fix)
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 (defun my-open-link (k) (org-occur-in-agenda-files k) t)
