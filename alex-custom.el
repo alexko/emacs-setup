@@ -214,7 +214,7 @@
 (desktop-load-default)
 ;;(desktop-read) ;;-> spurious warning: file appears to be used by own pid
 (desktop-save-mode 1)
-;;(load "pivotal-tracker")
+
 (setq magit-item-highlight
       '((((class color) (background dark)) (:background "gray10"))))
 
