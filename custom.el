@@ -96,7 +96,7 @@
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#8888aa"))))
  '(font-lock-function-name-face ((((class color) (background light)) (:foreground "#501070"))))
  '(font-lock-keyword-face ((((class color) (background light)) (:foreground "DodgerBlue3"))))
- '(font-lock-negation-char-face ((t (:background "#f0e8e8"))))
+ '(font-lock-negation-char-face ((((class color) (background light)) (:background "#f0e8e8")) (((class color) (background dark)) (:background "#7B0000"))))
  '(font-lock-string-face ((((class color) (background light)) (:foreground "Tan4"))))
  '(font-lock-type-face ((((class color) (background light)) (:foreground "DarkSlateBlue"))))
  '(font-lock-variable-name-face ((((class color) (background light)) (:foreground "Gray30"))))
