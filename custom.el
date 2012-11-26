@@ -34,8 +34,6 @@
  '(fill-column 80)
  '(flymake-gui-warnings-enabled nil)
  '(frame-title-format "[%b] in %F, %f" t)
- '(hl-line-mode nil t)
- '(ibuffer-expert t)
  '(icon-title-format "%b" t)
  '(ido-auto-merge-work-directories-length -1)
  '(ido-default-buffer-method (quote selected-window))
