@@ -32,6 +32,8 @@
      (modeline-inactive ((t (:foreground "#708090" :background "#3e3e5e"))))
      (modeline-buffer-id ((t (:bold t :foreground "#b9b9b9" :background "#3e3e5e"))))
      (minibuffer-prompt ((t (:bold t :foreground "#708090"))))
+     (ido-first-match ((t (:bold t :weight bold))))
+     (ido-only-match ((t (:foreground "ForestGreen"))))
      (diff-header ((((class color) (background dark)) (:background "#202020"))))
      (diff-file-header ((((class color) (background dark)) (:background "#303030"))))
      (font-lock-builtin-face ((t (:foreground "#c080d0"))))
