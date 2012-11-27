@@ -20,7 +20,7 @@
 
 (load "ledger")
 
-(when window-system (color-theme-inkpot))
+(color-theme-inkpot)
 (defun f-toggle-selective-display (column)
   (interactive "P")
   (set-selective-display
