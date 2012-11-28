@@ -165,8 +165,22 @@
 (setq org-enforce-todo-dependencies t)
 (setq org-agenda-dim-blocked-tasks t)
 (setq org-agenda-include-diary t)
-(setq org-clock-persist 'history)
-;; (org-clock-persistence-insiduate)
+
+(org-clock-persistence-insinuate)
+(setq org-clock-history-length 36)
+(setq org-clock-in-resume t)
+(setq org-clock-in-switch-to-state 'my-clock-in-to-next)
+(setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+(setq org-clock-into-drawer t)
+(setq org-clock-out-when-done t)
+(setq org-clock-persist t)
+(setq org-clock-persist-query-resume nil)
+(setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+(setq org-clock-report-include-clocking-task t)
+(defun my-clock-in-to-next (kw)
+  "Switch a task from TODO to NEXT when clocking in, except capture tasks"
+  (when (not (and (boundp 'org-capture-mode) org-capture-mode))
+    (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
 
 (setq org-agenda-custom-commands
       '(("h" "Daily habits" 
