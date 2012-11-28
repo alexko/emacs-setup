@@ -139,7 +139,10 @@
            "* %^{Title} :xclip:\nAdded: %U\n  %a\n  %x\n%?\n- - -"
            :prepend t :clock-in t :clock-resume t)
           ("y" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} yclip:\nAdded: %U\n  %a\n  %c\n%?\n- - -"
+           "* %^{Title} :yclip:\nAdded: %U\n  %a\n  %c\n%?\n- - -"
+           :prepend t :clock-in t :clock-resume t)
+          ("f" "Flagged.org" entry (file "~/org/flagged.org")
+           "* %^{Title}\nAdded: %U\n  %a\n  %x\n%?\n- - -"
            :prepend t :clock-in t :clock-resume t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %U %^g\n%?\n"
