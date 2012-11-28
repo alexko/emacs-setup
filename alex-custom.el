@@ -248,10 +248,10 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (require 'buffer-move)
-(global-set-key (kbd "<C-S-up>")     'buf-move-up)
-(global-set-key (kbd "<C-S-down>")   'buf-move-down)
-(global-set-key (kbd "<C-S-left>")   'buf-move-left)
-(global-set-key (kbd "<C-S-right>")  'buf-move-right)
+(global-set-key (kbd "<kp-up>")     'buf-move-up)
+(global-set-key (kbd "<kp-down>")   'buf-move-down)
+(global-set-key (kbd "<kp-left>")   'buf-move-left)
+(global-set-key (kbd "<kp-right>")  'buf-move-right)
 
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
