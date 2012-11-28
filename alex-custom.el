@@ -221,6 +221,12 @@
   (auto-fill-mode 1))
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
+;; Make windmove work in org-mode:
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
+
 ;; save/restore desktop sessions
 ;;(load "desktop")
 (desktop-load-default)
