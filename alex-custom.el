@@ -311,7 +311,7 @@
   (interactive (list last-nonmenu-event))
   (let ((pos
          (if (null event)
-             ;; Actually `event-end' works correctly with a nil argument as
+             ;; Actually 'event-end' works correctly with a nil argument as
              ;; well, so we could dispense with this test, but let's not
              ;; rely on this undocumented behavior.
              (occur-mode-find-occurrence)
