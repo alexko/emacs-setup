@@ -89,7 +89,7 @@
 (setq org-refile-targets '((nil :maxlevel . 4) ;; current buffer
                            (org-agenda-files :maxlevel . 4)))
 ; Use full outline paths for refile targets - we file directly with IDO
-(setq org-refile-use-outline-path t) 
+(setq org-refile-use-outline-path 'file)
 ; Targets complete directly with IDO
 (setq org-outline-path-complete-in-steps nil)
 ; Allow refile to create parent tasks with confirmation
