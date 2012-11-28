@@ -29,13 +29,6 @@
 
 (global-set-key [f1] 'f-toggle-selective-display)
 
-(defun insert-unixtime ()
-  (interactive)
-  (insert (format-time-string "%Y%m%d%H%M%S" (current-time))))
-
-(define-key global-map [(control c) (d)] 'insert-date)
-(define-key global-map [(control c) (t)] 'insert-unixtime)
-
 (setq ffip-patterns '("*.c", "*.h", "*.cc", "*.cpp", "*.cu",
                       "*.py", "*.el", "*.java", "*.js"))
 (put 'ffip-patterns 'safe-local-variable 'listp) ;; fixes ffip setting
