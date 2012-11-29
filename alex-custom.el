@@ -136,16 +136,16 @@
       (append
        (if (boundp 'org-capture-templates) org-capture-templates nil)
        '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-           "* TODO %^{Title} %^g\n  Added: %U\n  %a\n  %i\n%?"
+           "* TODO %^{Title} %^g\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("j" "Journal" entry (file "~/org/journal.org")
-           "* %^{Title} %^g\n  Added: %U\n  %a\n  %i\n%?"
+           "* %^{Title} %^g\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} :xclip:\n  Added: %U\n  %a\n  %x\n%?"
+           "* %^{Title} :xclip:\n  %a\n  %x\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("y" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} :yclip:\n  Added: %U\n  %a\n  %c\n%?"
+           "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("f" "Fast note" entry (file "~/org/flagged.org")
            "* %^{Title}\n  %a\n  %x\n%?"
