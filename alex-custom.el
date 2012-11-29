@@ -136,32 +136,39 @@
       (append
        (if (boundp 'org-capture-templates) org-capture-templates nil)
        '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-           "* TODO %^{Title} %^g\nAdded: %U\n  %a\n  %i\n%?\n- - -"
+           "* TODO %^{Title} %^g\n  Added: %U\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("j" "Journal" entry (file "~/org/journal.org")
-           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n%?\n- - -"
+           "* %^{Title} %^g\n  Added: %U\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} :xclip:\nAdded: %U\n  %a\n  %x\n%?\n- - -"
+           "* %^{Title} :xclip:\n  Added: %U\n  %a\n  %x\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("y" "Clip" entry (file "~/org/journal.org")
-           "* %^{Title} :yclip:\nAdded: %U\n  %a\n  %c\n%?\n- - -"
+           "* %^{Title} :yclip:\n  Added: %U\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("f" "Flagged.org" entry (file "~/org/flagged.org")
-           "* %^{Title}\nAdded: %U\n  %a\n  %x\n%?\n- - -"
+          ("f" "Fast note" entry (file "~/org/flagged.org")
+           "* %^{Title}\n  %a\n  %x\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("e" "Expenses" entry (file "~/org/finance.org")
-           "* %^{Title} %U %^g\n%?\n"
+           "* %^{Title} %U %^g\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("b" "Book" entry (file "~/org/journal.org")
-           "* %^{Title} %t :book:\n%[~/.emacs.d/org/.book.tmpl]\n"
+           "* %^{Title} %t :book:\n%[~/.emacs.d/org/.book.tmpl]"
            :prepend t :clock-in t :clock-resume t)
           ("a" "Review" entry (file "~/org/journal.org")
-           "* Daily review %T :review:\n%[~/.emacs.d/org/.review.tmpl]\n"
+           "* Daily review %T :review:\n%[~/.emacs.d/org/.review.tmpl]"
            :prepend t :clock-in t :clock-resume t)
           ("i" "Idea" entry (file+headline "~/org/journal.org" "Ideas")
-           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?\n- - -"
+           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?"
            :prepend t :clock-in t :clock-resume t))))
+
+;; override this to add empty line after capture w/o adding a line before
+(defun org-capture-empty-lines-after (&optional n)
+  "Add an empty line after capture"
+  (org-back-over-empty-lines)
+  (while (looking-at "[ \t]*\n") (replace-match ""))
+  (save-excursion (if (org-capture-get :prepend) (newline))))
 
 (setq org-log-done t)
 (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
