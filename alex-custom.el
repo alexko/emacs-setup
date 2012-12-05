@@ -75,6 +75,8 @@
 (setq org-refile-use-outline-path (quote file))
 (setq org-reverse-note-order t) ;; refiling puts item at the top
 (setq org-completion-use-ido t)
+(setq ido-use-filename-at-point 'guess)
+(setq ido-file-extensions-order '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
 (setq ido-everywhere t)
 (setq ido-max-directory-size 100000)
 (ido-mode (quote both))
