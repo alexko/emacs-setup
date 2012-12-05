@@ -194,9 +194,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 			  :annotation orglink
 			  :initial region)
     (if (equal template "w")
-        (let ((server-buf (current-buffer)))
-          (bury-buffer)
-          (switch-to-buffer-other-frame server-buf)))
+        (select-frame (make-frame '((name . "* url capture *"))))
+        ;; (let ((server-buf (current-buffer)))
+        ;;   (bury-buffer)
+        ;;   (switch-to-buffer-other-frame server-buf))
+        )
     (funcall capture-func nil template)
     (delete-other-windows)))
 
@@ -207,7 +209,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   "Advise capture-destroy to close the frame if it is the rememeber frame"
   (my-delete-capture-frame))
 (defun my-delete-capture-frame ()
-  (if (equal (substring (frame-parameter nil 'name) 0 8) "[CAPTURE")
+  (if (equal (frame-parameter nil 'name) "* url capture *")
       (delete-frame)))
 
 ;; override: add empty line after capture w/o adding a line before
