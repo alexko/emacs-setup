@@ -126,6 +126,7 @@
 (define-key global-map (kbd "C-x f") 'recentf-ido-find-file)
 (define-key global-map (kbd "C-x C-i") 'ido-imenu)
 
+(require 'org-protocol)
 ;; (setq org-capture-templates nil)
 (setq org-capture-templates
       (append
@@ -142,9 +143,12 @@
           ("y" "Clip" entry (file "~/org/journal.org")
            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("f" "Fast note" entry (file "~/org/flagged.org")
-           "* %^{Title}\n  %a\n  %x\n%?"
+          ("w" "org-protocol" entry (file "~/org/journal.org")
+           "* %^{Title} %^g\n\n  %c\n\n  %i\n%:link\n%?"
            :prepend t :clock-in t :clock-resume t)
+          ("u" "org-protocol imm" entry (file "~/org/journal.org")
+           "* %:description :url:\n  %i\n%:link"
+           :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %U %^g\n%?"
            :prepend t :clock-in t :clock-resume t)
@@ -158,7 +162,55 @@
            "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?"
            :prepend t :clock-in t :clock-resume t))))
 
-;; override this to add empty line after capture w/o adding a line before
+;; emacsclient opens new frame, closes when done
+(add-hook 'server-switch-hook
+              (lambda nil
+                (let ((server-buf (current-buffer)))
+                  (bury-buffer)
+                  (switch-to-buffer-other-frame server-buf))))
+(add-hook 'server-done-hook 'delete-frame)
+;; trying to do the above for org-protocol capture
+(defun org-protocol-do-capture (info capture-func)
+  "Support `org-capture' and `org-remember' alike.
+CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
+  (let* ((parts (org-protocol-split-data info t))
+	 (template (or (and (>= 2 (length (car parts))) (pop parts))
+		       org-protocol-default-template-key))
+	 (url (org-protocol-sanitize-uri (car parts)))
+	 (type (if (string-match "^\\([a-z]+\\):" url)
+		   (match-string 1 url)))
+	 (title (or (cadr parts) ""))
+	 (region (or (caddr parts) ""))
+	 (orglink (org-make-link-string
+		   url (if (string-match "[^[:space:]]" title) title url)))
+	 (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
+	 remember-annotation-functions)
+    (setq org-stored-links
+	  (cons (list url title) org-stored-links))
+    (kill-new orglink)
+    (org-store-link-props :type type
+			  :link url
+			  :description title
+			  :annotation orglink
+			  :initial region)
+    (if (equal template "w")
+        (let ((server-buf (current-buffer)))
+          (bury-buffer)
+          (switch-to-buffer-other-frame server-buf)))
+    (funcall capture-func nil template)
+    (delete-other-windows)))
+
+(defadvice org-capture-finalize (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame if it is the capture frame"
+  (my-delete-capture-frame))
+(defadvice org-capture-destroy (after delete-capture-frame activate)
+  "Advise capture-destroy to close the frame if it is the rememeber frame"
+  (my-delete-capture-frame))
+(defun my-delete-capture-frame ()
+  (if (equal (substring (frame-parameter nil 'name) 0 8) "[CAPTURE")
+      (delete-frame)))
+
+;; override: add empty line after capture w/o adding a line before
 (defun org-capture-empty-lines-after (&optional n)
   "Add an empty line after capture"
   (org-back-over-empty-lines)
