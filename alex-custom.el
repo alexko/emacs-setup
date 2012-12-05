@@ -217,6 +217,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   (while (looking-at "[ \t]*\n") (replace-match ""))
   (save-excursion (if (org-capture-get :prepend) (newline))))
 
+(setq org-special-ctrl-a/e t)
+(setq org-special-ctrl-k t)
+(setq org-yank-adjusted-subtrees t)
+(require 'org-table)
+
 (setq org-log-done t)
 (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
 (setq org-hide-leading-stars t)
