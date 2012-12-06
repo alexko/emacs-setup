@@ -126,6 +126,7 @@
 (define-key global-map (kbd "C-x f") 'recentf-ido-find-file)
 (define-key global-map (kbd "C-x C-i") 'ido-imenu)
 
+(require 'org-capture)
 (require 'org-protocol)
 ;; (setq org-capture-templates nil)
 (setq org-capture-templates
