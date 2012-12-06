@@ -145,10 +145,10 @@
            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("w" "org-protocol" entry (file "~/org/journal.org")
-           "* %^{Title} %^g\n\n  %c\n\n  %i\n%:link\n%?"
+           "* %^{Title} %^g\n\n  %c\n\n  %i\n\n  %:link\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("u" "org-protocol imm" entry (file "~/org/journal.org")
-           "* %:description :url:\n  %i\n%:link"
+           "* %:description :url:\n  %i\n\n  %:link"
            :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %U %^g\n%?"
