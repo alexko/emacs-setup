@@ -135,29 +135,26 @@
        '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
            "* TODO %^{Title} %^g\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("j" "Journal" entry (file "~/org/journal.org")
-           "* %^{Title} %^g\n  %a\n  %i\n%?"
+          ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
+           "* %^{Title} %^g\n  Added: %U\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("x" "Clip" entry (file "~/org/journal.org")
+          ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :xclip:\n  %a\n  %x\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("y" "Clip" entry (file "~/org/journal.org")
+          ("y" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("w" "org-protocol" entry (file "~/org/journal.org")
+          ("w" "org-protocol" entry (file "~/org/bookmarks.org")
            "* %^{Title} %^g\n\n  %c\n\n  %i\n\n  %:link\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("u" "org-protocol imm" entry (file "~/org/journal.org")
+          ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
            "* %:description :url:\n  %i\n\n  %:link"
            :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
-           "* %^{Title} %U %^g\n%?"
-           :prepend t :clock-in t :clock-resume t)
-          ("b" "Book" entry (file "~/org/journal.org")
-           "* %^{Title} %t :book:\n%[~/.emacs.d/org/.book.tmpl]"
+           "* %^{Title} %^g\n  Added: %U\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("a" "Review" entry (file "~/org/journal.org")
-           "* Daily review %T :review:\n%[~/.emacs.d/org/.review.tmpl]"
+           "* Daily review :review:\n  Added: %U\n%[~/.emacs.d/org/.review.tmpl]"
            :prepend t :clock-in t :clock-resume t)
           ("i" "Idea" entry (file+headline "~/org/journal.org" "Ideas")
            "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?"
