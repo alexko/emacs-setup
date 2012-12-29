@@ -66,7 +66,8 @@
 ;; the org-mobile-files are org-agenda-files by default
 (setq org-mobile-files '("~/org/notes.org"
                          "~/org/tasks.org"
-                         "~/org/journal.org"))
+                         "~/org/journal.org"
+                         "~/org/bookmarks.org"))
 (setq org-drawers-for-agenda nil)
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;;(setq org-mobile-use-encryption t)
