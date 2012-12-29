@@ -149,7 +149,7 @@
            "* %^{Title} %^g\n\n  %c\n\n  %i\n\n  %:link\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
-           "* %:description :url:\n  %i\n\n  %:link"
+           "* %:description\n  %i\n\n  %:link"
            :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %^g\n  Added: %U\n%?"
