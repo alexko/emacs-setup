@@ -201,11 +201,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 			  :annotation orglink
 			  :initial region)
     (if (equal template "w")
-        (select-frame (make-frame '((name . "* url capture *"))))
-        ;; (let ((server-buf (current-buffer)))
-        ;;   (bury-buffer)
-        ;;   (switch-to-buffer-other-frame server-buf))
-        )
+        (select-frame (make-frame '((name . "* url capture *")))))
     (funcall capture-func nil template)
     (if (equal template "w")
         (delete-other-windows))
