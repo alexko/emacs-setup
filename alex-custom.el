@@ -205,7 +205,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
         ;;   (switch-to-buffer-other-frame server-buf))
         )
     (funcall capture-func nil template)
-    (delete-other-windows)))
+    ;;(delete-other-windows)
+    ))
 
 (defadvice org-capture-finalize (after delete-capture-frame activate)
   "Advise capture-finalize to close the frame if it is the capture frame"
