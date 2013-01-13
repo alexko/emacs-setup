@@ -148,11 +148,14 @@
           ("y" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
-          ("w" "org-protocol" entry (file "~/org/bookmarks.org")
-           "* %^{Title} %^g\n\n  %c\n\n  %i\n\n  %:link\n%?"
+          ("w" "org-protocol tag" entry (file "~/org/bookmarks.org")
+           "* %:description %^g\n  %i\n  %:link\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
-           "* %:description\n  %i\n\n  %:link"
+           "* %:description\n  %i\n  %:link"
+           :prepend t :clock-in t :clock-resume t :immediate-finish t)
+          ("c" "org-protocol clk" entry (clock)
+           "* %:description\n  %i\n  %:link"
            :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %^g\n  Added: %U\n%?"
