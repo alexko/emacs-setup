@@ -255,6 +255,9 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (setq org-agenda-custom-commands
       '(("h" "Daily habits" 
+(setq org-stuck-projects
+      '("+LEVEL=2/!-DONE-CANCELLED" ("TODO" "NEXT") nil ""))
+
          ((agenda ""))
          ((org-agenda-show-log t)
           (org-agenda-ndays 7)
