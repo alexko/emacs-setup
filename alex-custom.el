@@ -192,8 +192,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 		   url (if (string-match "[^[:space:]]" title) title url)))
 	 (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
 	 remember-annotation-functions)
-    (setq org-stored-links
-	  (cons (list url title) org-stored-links))
+    ;; (setq org-stored-links
+    ;;       (cons (list url title) org-stored-links))
     (kill-new orglink)
     (org-store-link-props :type type
 			  :link url
