@@ -202,11 +202,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 			  :initial region)
     (if (equal template "w")
         (progn
-          (select-frame (make-frame '((name . "* url capture *"))))
+          (select-frame-set-input-focus
+           (make-frame '((name . "* url capture *"))))
           (funcall capture-func nil template)
           (delete-other-windows))
-      (funcall capture-func nil template))
-    ))
+      (funcall capture-func nil template))))
 
 (defadvice org-capture-finalize (after delete-capture-frame activate)
   "Advise capture-finalize to close the frame if it is the capture frame"
