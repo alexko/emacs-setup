@@ -467,6 +467,22 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (dotimes (i n)
       (insert (concat "[[~/dl/" (nth i rfiles) "]] ")))))
 
+(defun remove-blanklines-in-region ()
+  "Removes all empty lines in the region"
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (delete-blank-lines))))
+
+(defun remove-newlines-in-region ()
+  "Replaces all newlines with spaces"
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (replace-match " " nil t))))
+
 (defun convert-win-to-frame ()
   "makes frame out of window"
   (interactive)
