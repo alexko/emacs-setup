@@ -23,6 +23,8 @@
 ;;(add-to-list 'org-src-lang-modes (cons "cu" 'c))
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
 
+(add-to-list 'load-path "/usr/local/go/misc/emacs")
+(require 'go-mode-load)
 (load "ledger")
 
 (color-theme-inkpot)
