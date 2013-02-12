@@ -37,7 +37,7 @@
 (global-set-key [f1] 'f-toggle-selective-display)
 
 (setq ffip-patterns '("*.c", "*.h", "*.cc", "*.cpp", "*.cu",
-                      "*.py", "*.el", "*.java", "*.js"))
+                      "*.py", "*.el", "*.java", "*.js", "*.go"))
 (put 'ffip-patterns 'safe-local-variable 'listp) ;; fixes ffip setting
 
 ;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
