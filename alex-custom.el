@@ -44,7 +44,7 @@
 ;; (setq save-abbrevs t)
 (setq org-link-abbrev-alist
       '(("g"        . "https://www.google.com/search?q=")
-        ("gs"       . "https://encrypted.google.com/search?q=")
+        ("gs"       . "http://scholar.google.com/scholar?hl=en&q=")
         ("gb"       . "https://www.google.com/search?tbm=bks&q=")
         ("gfin"     . "http://www.google.com/finance?q=")
         ("gmap"     . "http://maps.google.com/maps?q=")
