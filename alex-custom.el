@@ -148,19 +148,19 @@
            "* %^{Title} %^g\n  Added: %U\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
-           "* %^{Title} :xclip:\n  %a\n  %x\n%?"
+           "* %^{Title} :xclip:\n  %a\n %x\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("y" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("w" "org-protocol tag" entry (file "~/org/bookmarks.org")
-           "* %:description %^g\n  %i\n  %:link\n%?"
+           "* %:description %^g\n  %i\n\n  %:link\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
-           "* %:description\n  %i\n  %:link"
+           "* %:description\n  %i\n\n  %:link"
            :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("c" "org-protocol clk" entry (clock)
-           "* %:description\n  %i\n  %:link"
+           "* %:description\n  %i\n\n  %:link"
            :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %^g\n  Added: %U\n%?"
