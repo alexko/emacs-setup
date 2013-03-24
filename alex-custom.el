@@ -46,6 +46,7 @@
       '(("g"        . "https://www.google.com/search?q=")
         ("gs"       . "http://scholar.google.com/scholar?hl=en&q=")
         ("gb"       . "https://www.google.com/search?tbm=bks&q=")
+        ("pat"      . "https://www.google.com/search?tbm=pts&q=")
         ("gfin"     . "http://www.google.com/finance?q=")
         ("gmap"     . "http://maps.google.com/maps?q=")
         ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")
