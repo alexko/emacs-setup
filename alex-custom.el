@@ -497,6 +497,16 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (define-key global-map (kbd "M-n") 'convert-win-to-frame)
 (define-key global-map (kbd "C-c n") nil)
 
+(require 'scim-bridge)
+(add-hook 'after-init-hook 'scim-mode-on)
+(scim-define-common-key (kbd "C-`") t)
+;; Use C-SPC for Set Mark command
+(scim-define-common-key ?\C-\s nil)
+;; Use C-/ for Undo command
+(scim-define-common-key ?\C-/ nil)
+;; Change cursor color depending on SCIM status
+(setq scim-cursor-color '("pink" "orange" "limegreen"))
+
 (require 'org-learn)
 (require 'command-frequency)
 (command-frequency-table-load)
