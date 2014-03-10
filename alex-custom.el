@@ -364,7 +364,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
               ("NEXT" :foreground "deepskyblue" :weight bold)
               ("DONE" :foreground "palegreen" :weight bold)
               ("WAITING" :foreground "orange" :weight bold)
-              ("HOLD" :foreground "magenta" :weight bold)
+              ("HOLD" :foreground "steel blue" :weight bold)
               ("CANCELLED" :foreground "forest green" :weight bold)
               ("PHONE" :foreground "forest green" :weight bold))))
 
