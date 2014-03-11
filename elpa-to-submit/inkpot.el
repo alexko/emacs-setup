@@ -48,4 +48,5 @@
      (font-lock-string-face ((t (:foreground "#ffcd8b" :background "#404040"))))
      (font-lock-type-face ((t (:foreground "#ff8bff"))))
      (font-lock-variable-name-face ((t nil)))
-     (font-lock-warning-face ((t (:foreground "#a02020")))))))
+     (font-lock-warning-face ((((class color) (background dark)) (:foreground "red"))))
+     (org-scheduled-previously ((((class color) (background dark)) (:foreground "rosy brown")))))))
