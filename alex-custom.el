@@ -290,8 +290,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
         ("d" "Upcoming deadlines" agenda ""
          ((org-agenda-time-grid nil)
           (org-deadline-warning-days 365)
-          (org-agenda-entry-types '(:deadline))
-          ))
+          (org-agenda-entry-types '(:deadline))))
         ("Q" . "Custom queries")
         ("Qa" "Search agenda archives" search ""
          ((org-agenda-text-search-extra-files '(agenda-archives))))
