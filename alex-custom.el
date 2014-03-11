@@ -62,10 +62,7 @@
         ("yelp"     . "http://www.yelp.com/search?find_desc=")))
 
 (defun find-preferred-browser ()
-  (let ((candidates (list
-                     "google-chrome"
-                     "chromium-browser"
-                     "firefox")))
+  (let ((candidates '("google-chrome" "chromium-browser" "firefox")))
     (car (delq nil (mapcar 'executable-find candidates)))))
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program (find-preferred-browser))
