@@ -70,11 +70,19 @@
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-mobile-directory "~/org.mobile")
-;; the org-mobile-files are org-agenda-files by default
-(setq org-mobile-files '("~/org/notes.org"
-                         "~/org/tasks.org"
-                         "~/org/journal.org"
-                         "~/org/bookmarks.org"))
+(setq org-mobile-files
+      '("~/org/notes.org"
+        "~/org/tasks.org"
+        "~/org/journal.org"
+        "~/org/bookmarks.org"))
+(setq org-agenda-files
+      '("~/org/notes.org"
+        "~/org/tasks.org"))
+(setq org-agenda-text-search-extra-files
+      '("~/org/journal.org"
+        "~/org/bookmarks.org"))
+;(setq org-agenda-files (list org-directory))
+(setq org-attach-directory (concat org-directory "/data"))
 (setq org-drawers-for-agenda nil)
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 ;;(setq org-mobile-use-encryption t)
@@ -104,9 +112,6 @@
 
 ; Save all org buffers every hour
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-
-(setq org-attach-directory (concat org-directory "/data"))
-(setq org-agenda-files (list org-directory))
 
 (setq org-sort-agenda-noeffort-is-high nil)
 (setq org-global-properties
