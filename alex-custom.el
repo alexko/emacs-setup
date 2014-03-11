@@ -281,6 +281,17 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
         ("w" "Waiting Tasks" todo "WAITING"
          ((org-tags-match-list-sublevels nil)))
         ("h" "Hold Tasks" todo "HOLD")
+        ("c" "Calendar" agenda ""
+         ((org-agenda-ndays 7)
+          (org-agenda-start-on-weekday 0)
+          (org-agenda-time-grid nil)
+          (org-agenda-repeating-timestamp-show-all t)
+          (org-agenda-entry-types '(:timestamp :sexp))))
+        ("d" "Upcoming deadlines" agenda ""
+         ((org-agenda-time-grid nil)
+          (org-deadline-warning-days 365)
+          (org-agenda-entry-types '(:deadline))
+          ))
         ("Q" . "Custom queries")
         ("Qa" "Search agenda archives" search ""
          ((org-agenda-text-search-extra-files '(agenda-archives))))
