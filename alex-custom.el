@@ -378,10 +378,10 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE"))))
 
 (setq org-todo-keyword-faces
-      (quote (("TODO" :foreground "pink" :weight bold)
-              ("NEXT" :foreground "deepskyblue" :weight bold)
+      (quote (("NEXT" :foreground "gold" :weight bold)
+              ("TODO" :foreground "pink" :weight bold)
               ("DONE" :foreground "palegreen" :weight bold)
-              ("WAITING" :foreground "orange" :weight bold)
+              ("WAITING" :foreground "deepskyblue" :weight bold)
               ("HOLD" :foreground "steel blue" :weight bold)
               ("CANCELLED" :foreground "forest green" :weight bold)
               ("PHONE" :foreground "forest green" :weight bold))))
