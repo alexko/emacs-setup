@@ -27,7 +27,6 @@
 (require 'go-mode-load)
 (load "ledger")
 
-(color-theme-inkpot)
 (defun f-toggle-selective-display (column)
   (interactive "P")
   (set-selective-display
@@ -564,6 +563,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (scim-define-common-key ?\C-/ nil)
 ;; Change cursor color depending on SCIM status
 (setq scim-cursor-color '("pink" "orange" "limegreen"))
+(color-theme-inkpot)
 
 (require 'org-learn)
 (require 'command-frequency)
