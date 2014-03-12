@@ -49,4 +49,5 @@
      (font-lock-type-face ((t (:foreground "#ff8bff"))))
      (font-lock-variable-name-face ((t nil)))
      (font-lock-warning-face ((((class color) (background dark)) (:foreground "red"))))
-     (org-scheduled-previously ((((class color) (background dark)) (:foreground "rosy brown")))))))
+     (org-scheduled-previously ((((class color) (background dark)) (:foreground "rosy brown"))))
+     (org-column ((((class color) (background dark)) (:background "grey20")))))))
