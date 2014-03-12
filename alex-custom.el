@@ -523,6 +523,16 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (narrow-to-region (point) (mark))
     (goto-char (point-min))
     (while (search-forward "\n" nil t) (delete-blank-lines))))
+(defun remove-ws-in-region (n)
+  "Removes trailing or leading whitespace in the region"
+  (interactive "p")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region (point) (mark))
+      (goto-char (point-min))
+      (while (re-search-forward
+              (if (= n 4) "^[ 	]+" "[ 	]+$") nil t)
+        (replace-match "" nil nil)))))
 
 (defun remove-newlines-in-region ()
   "Replaces all newlines with spaces"
