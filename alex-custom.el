@@ -405,8 +405,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   (when (fboundp 'set-face-attribute)
     (set-face-attribute 'org-column nil
                         :family (face-attribute 'default :family)
-                        :height 'unspecified
-                        :background "grey20")))
+                        :height 'unspecified)))
 (defun org-columns-with-font-fix ()
   (interactive) (fix-org-column-font) (org-columns))
 (define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-font-fix)
