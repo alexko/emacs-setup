@@ -340,10 +340,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 ;; save/restore desktop sessions
 ;;(load "desktop")
-(desktop-load-default)
 ;;(desktop-read) ;;-> spurious warning: file appears to be used by own pid
 (desktop-save-mode 1)
+(add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
+(desktop-load-default)
 
+;; this should be moved to inkpot.el? is it a face?
 (setq magit-item-highlight
       '((((class color) (background dark)) (:background "gray10"))))
 
