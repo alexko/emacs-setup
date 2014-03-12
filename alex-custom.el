@@ -268,38 +268,40 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq org-agenda-dim-blocked-tasks nil)
 (setq org-agenda-compact-blocks t)
 (setq org-agenda-custom-commands
-      '(("n" "Next Tasks" tags-todo "-WAITING-CANCELLED/!NEXT" ;; ??
-         ((org-agenda-overriding-header "Next Tasks")
-          (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
-          (org-agenda-todo-ignore-scheduled t)
-          (org-agenda-todo-ignore-deadlines t)
-          (org-agenda-todo-ignore-with-date t)
-          (org-tags-match-list-sublevels t)
-          (org-agenda-sorting-strategy
-           '(priority-down effort-up category-keep))) "~/org/next.html")
-        ("r" "Entries to refile" tags "REFILE|refile")
-        ("w" "Waiting Tasks" todo "WAITING"
-         ((org-tags-match-list-sublevels nil)))
-        ("h" "Hold Tasks" todo "HOLD")
-        ("c" "Calendar" agenda ""
-         ((org-agenda-ndays 7)
-          (org-agenda-start-on-weekday 0)
-          (org-agenda-time-grid nil)
-          (org-agenda-repeating-timestamp-show-all t)
-          (org-agenda-entry-types '(:timestamp :sexp))))
-        ("d" "Upcoming deadlines" agenda ""
-         ((org-agenda-time-grid nil)
-          (org-deadline-warning-days 365)
-          (org-agenda-entry-types '(:deadline))))
-        ("Q" . "Custom queries")
-        ("Qa" "Search agenda archives" search ""
-         ((org-agenda-text-search-extra-files '(agenda-archives))))
-        ("Qs" "All .org files search" search ""
-         ((org-agenda-files (file-expand-wildcards "~/org/*.org"))))
-        ("Q/" "All .org files occur" occur ""
-         ((org-agenda-files (file-expand-wildcards "~/org/*.org"))))
-        ("Qb" "Bookmarks search" search ""
-         ((org-agenda-files '("~/org/bookmarks.org")))) ))
+      (append
+       (and (boundp 'org-agenda-custom-commands) org-agenda-custom-commands)
+       '(("n" "Next Tasks" tags-todo "-WAITING-CANCELLED/!NEXT" ;; ??
+          ((org-agenda-overriding-header "Next Tasks")
+           (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
+           (org-agenda-todo-ignore-scheduled t)
+           (org-agenda-todo-ignore-deadlines t)
+           (org-agenda-todo-ignore-with-date t)
+           (org-tags-match-list-sublevels t)
+           (org-agenda-sorting-strategy
+            '(priority-down effort-up category-keep))) "~/org/next.html")
+         ("r" "Entries to refile" tags "REFILE|refile")
+         ("w" "Waiting Tasks" todo "WAITING"
+          ((org-tags-match-list-sublevels nil)))
+         ("h" "Hold Tasks" todo "HOLD")
+         ("c" "Calendar" agenda ""
+          ((org-agenda-ndays 7)
+           (org-agenda-start-on-weekday 0)
+           (org-agenda-time-grid nil)
+           (org-agenda-repeating-timestamp-show-all t)
+           (org-agenda-entry-types '(:timestamp :sexp))))
+         ("d" "Upcoming deadlines" agenda ""
+          ((org-agenda-time-grid nil)
+           (org-deadline-warning-days 365)
+           (org-agenda-entry-types '(:deadline))))
+         ("Q" . "Custom queries")
+         ("Qa" "Search agenda archives" search ""
+          ((org-agenda-text-search-extra-files '(agenda-archives))))
+         ("Qs" "All .org files search" search ""
+          ((org-agenda-files (file-expand-wildcards "~/org/*.org"))))
+         ("Q/" "All .org files occur" occur ""
+          ((org-agenda-files (file-expand-wildcards "~/org/*.org"))))
+         ("Qb" "Bookmarks search" search ""
+          ((org-agenda-files '("~/org/bookmarks.org")))) )))
 
 ;;(require 'org-collector)
 
