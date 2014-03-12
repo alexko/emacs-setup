@@ -506,6 +506,16 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (dotimes (i n)
       (insert (concat "[[~/dl/" (nth i rfiles) "]] ")))))
 
+(setq ido-max-directory-size 300000) ;; prevents ido [Too big]
+(defun recent-file (n dir)
+  "insert link to most recent files in a dir"
+  (interactive "p\nD")
+  (let ((rfiles
+         (split-string (shell-command-to-string
+                        (concat "ls -t " dir)) "\n")))
+    (dotimes (i n)
+      (insert (concat "[[" dir (nth i rfiles) "]] ")))))
+
 (defun remove-blanklines-in-region ()
   "Removes all empty lines in the region"
   (interactive)
