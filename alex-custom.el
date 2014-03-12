@@ -519,10 +519,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (defun remove-blanklines-in-region ()
   "Removes all empty lines in the region"
   (interactive)
-  (save-restriction
-    (narrow-to-region (point) (mark))
-    (goto-char (point-min))
-    (while (search-forward "\n" nil t) (delete-blank-lines))))
+  (save-excursion
+    (save-restriction
+      (narrow-to-region (point) (mark))
+      (goto-char (point-min))
+      (while (search-forward "\n" nil t) (delete-blank-lines)))))
+
 (defun remove-ws-in-region (n)
   "Removes trailing or leading whitespace in the region"
   (interactive "p")
@@ -537,10 +539,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (defun remove-newlines-in-region ()
   "Replaces all newlines with spaces"
   (interactive)
-  (save-restriction
-    (narrow-to-region (point) (mark))
-    (goto-char (point-min))
-    (while (search-forward "\n" nil t) (replace-match " " nil t))))
+  (save-excursion
+    (save-restriction
+      (narrow-to-region (point) (mark))
+      (goto-char (point-min))
+      (while (search-forward "\n" nil t) (replace-match " " nil t)))))
 
 (defun convert-win-to-frame ()
   "makes frame out of window"
