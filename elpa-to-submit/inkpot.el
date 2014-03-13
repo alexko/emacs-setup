@@ -37,8 +37,8 @@
      (diff-header ((((class color) (background dark)) (:background "#202020"))))
      (diff-file-header ((((class color) (background dark)) (:background "#303030"))))
      (font-lock-builtin-face ((t (:foreground "#c080d0"))))
-     (font-lock-comment-face ((t (:foreground "#708090")))) ; original inkpot: #cd8b00
-     (font-lock-constant-face ((t (:foreground "#506dbd"))))
+     (font-lock-comment-face ((t (:foreground "#90A0B0")))) ; original inkpot: #cd8b00
+     (font-lock-constant-face ((t (:foreground "#6080e0")))) ; original inkpot: #506dbd
      (font-lock-doc-face ((t (:foreground "#cd8b00"))))
      (font-lock-function-name-face ((t (:foreground "#87cefa"))))
      (font-lock-keyword-face ((t (:bold t :foreground "#c080d0"))))
