@@ -67,26 +67,21 @@
       browse-url-generic-program (find-preferred-browser))
 
 (setq org-directory "~/org")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-mobile-directory "~/org.mobile")
-(setq org-mobile-files
-      '("~/org/notes.org"
-        "~/org/tasks.org"
-        "~/org/journal.org"
-        "~/org/bookmarks.org"))
 (setq org-agenda-files
       '("~/org/notes.org"
         "~/org/tasks.org"))
+;(setq org-agenda-files (list org-directory))
 (setq org-agenda-text-search-extra-files
       '("~/org/journal.org"
         "~/org/bookmarks.org"))
-;(setq org-agenda-files (list org-directory))
+(setq org-mobile-directory "~/org.mobile")
+(setq org-mobile-files
+      (append org-agenda-files org-agenda-text-search-extra-files))
+(setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-attach-directory (concat org-directory "/data"))
 (setq org-drawers-for-agenda nil)
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
-;;(setq org-mobile-use-encryption t)
-;;(setq org-mobile-encryption-passpword "omega52")
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
+
 (setq org-refile-use-outline-path (quote file))
 (setq org-reverse-note-order t) ;; refiling puts item at the top
 (setq org-completion-use-ido t)
