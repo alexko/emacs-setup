@@ -22,6 +22,10 @@
 (org-babel-lob-ingest "~/org/lob.org")
 ;;(add-to-list 'org-src-lang-modes (cons "cu" 'c))
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
+(add-hook 'espresso-mode-hook 'idle-highlight)
+(setq espresso-indent-level 2)
 
 (add-to-list 'load-path "/usr/local/go/misc/emacs")
 (require 'go-mode-load)
