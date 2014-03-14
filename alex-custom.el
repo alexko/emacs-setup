@@ -339,10 +339,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
 (desktop-load-default)
 
-;; this should be moved to inkpot.el? is it a face?
-(setq magit-item-highlight
-      '((((class color) (background dark)) (:background "gray10"))))
-
 (require 'tramp)
 (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:"))
 (setq shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")

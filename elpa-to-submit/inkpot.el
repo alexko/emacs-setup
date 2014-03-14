@@ -49,5 +49,6 @@
      (font-lock-type-face ((t (:foreground "#ff8bff"))))
      (font-lock-variable-name-face ((t nil)))
      (font-lock-warning-face ((((class color) (background dark)) (:foreground "red"))))
+     (magit-item-highlight ((((class color) (background dark)) (:background "grey10"))))
      (org-scheduled-previously ((((class color) (background dark)) (:foreground "rosy brown"))))
      (org-column ((((class color) (background dark)) (:background "grey20")))))))
