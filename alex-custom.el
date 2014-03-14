@@ -396,14 +396,17 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
               ("CANCELLED" :foreground "forest green" :weight bold)
               ("PHONE" :foreground "forest green" :weight bold))))
 
-(defun fix-org-column-font ()
+(defun fix-org-column ()
+  (interactive)
   (when (fboundp 'set-face-attribute)
     (set-face-attribute 'org-column nil
                         :family (face-attribute 'default :family)
-                        :height 'unspecified)))
-(defun org-columns-with-font-fix ()
-  (interactive) (fix-org-column-font) (org-columns))
-(define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-font-fix)
+                        :height 'unspecified)
+    (set-face-foreground 'org-level-2 "default")))
+
+(defun org-columns-with-fix ()
+  (interactive) (fix-org-column) (org-columns))
+(define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-fix)
 
 (set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 (defun my-open-link (k)
