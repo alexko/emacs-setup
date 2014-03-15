@@ -25,7 +25,20 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 (add-hook 'espresso-mode-hook 'idle-highlight)
-(setq espresso-indent-level 2)
+(setq current-language-environment "UTF-8"
+      fill-column 80
+      espresso-indent-level 2
+      show-trailing-whitespace t
+      remote-shell-program "/usr/bin/ssh"
+      compile-command "cd . ; make -j4 -k"
+      ;frame-title-format "[%b] in %F, %f"
+      ;icon-title-format "%b"
+      ido-ignore-directories '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git")
+      ido-ignore-files '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`\\.DS_Store" "\\`\\.Icon" "\\`LICENSE")
+      auto-save-list-file-prefix "~/.emacs.cruft/auto-saves/.saves-"
+      backup-directory-alist (list (cons "." (expand-file-name "~/.emacs.cruft/backups/")))
+      tramp-auto-save-directory "~/.emacs.cruft/auto-saves/"
+      tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/")))
 
 (add-to-list 'load-path "/usr/local/go/misc/emacs")
 (require 'go-mode-load)
