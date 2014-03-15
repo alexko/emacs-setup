@@ -399,11 +399,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (defun fix-org-column ()
   (interactive)
   (when (fboundp 'set-face-attribute)
-    (set-face-attribute 'org-column nil
-                        :family (face-attribute 'default :family)
-                        :height 'unspecified)
-    (set-face-foreground 'org-level-2 "default")))
-
+    (let ((family (face-attribute 'default :family)))
+      (set-face-attribute 'org-column nil :family family
+                          :height 'unspecified)
+      (set-face-attribute 'header-line nil :family family
+                          :weight 'normal)
+      (set-face-foreground 'org-level-2 "default"))))
 (defun org-columns-with-fix ()
   (interactive) (fix-org-column) (org-columns))
 (define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-fix)
