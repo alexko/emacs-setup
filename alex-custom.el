@@ -251,6 +251,9 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (require 'org-table)
 
 (setq org-log-done t)
+;;(setq org-log-done (quote time))
+(setq org-log-into-drawer t)
+;;(setq org-log-state-notes-insert-after-drawers nil)
 (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
 (setq org-hide-leading-stars t)
 (setq org-enforce-todo-dependencies t)
