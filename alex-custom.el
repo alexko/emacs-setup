@@ -257,7 +257,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
 (setq org-hide-leading-stars t)
 (setq org-enforce-todo-dependencies t)
-(setq org-agenda-dim-blocked-tasks t)
+(setq org-treat-S-cursor-todo-selection-as-state-change nil)
 (setq org-agenda-include-diary t)
 
 (org-clock-persistence-insinuate)
