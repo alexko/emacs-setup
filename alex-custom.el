@@ -260,6 +260,10 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 (setq org-agenda-include-diary t)
 
+(add-to-list 'Info-default-directory-list "~/.emacs.d/org/doc")
+(setq org-list-allow-alphabetical t)
+(setq org-catch-invisible-edits 'error)
+(setq org-read-date-prefer-future 'time)
 (org-clock-persistence-insinuate)
 (setq org-clock-history-length 36)
 (setq org-clock-in-resume t)
