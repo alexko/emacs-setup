@@ -424,7 +424,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
                           :height 'unspecified)
       (set-face-attribute 'header-line nil :family family
                           :weight 'normal)
-      (set-face-foreground 'org-level-2 "default"))))
+      (set-face-foreground 'org-level-2
+                           (face-attribute 'default :foreground)))))
 (defun org-columns-with-fix ()
   (interactive) (fix-org-column) (org-columns))
 (define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-fix)
