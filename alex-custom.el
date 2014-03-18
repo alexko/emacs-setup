@@ -107,6 +107,7 @@
       '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
 (setq ido-everywhere t)
 (setq ido-max-directory-size 100000)
+(setq ido-default-buffer-method 'selected-window)
 (ido-mode (quote both))
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets '((nil :maxlevel . 4) ;; current buffer
