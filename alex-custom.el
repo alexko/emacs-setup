@@ -179,8 +179,8 @@
            "* %:description\n  %i\n\n  %:link"
            :prepend t :clock-in t :clock-resume t :immediate-finish t)
           ("c" "org-protocol clk" entry (clock)
-           "* %:description\n  %i\n\n  %:link"
-           :prepend t :clock-in t :clock-resume t :immediate-finish t)
+           "* %:description :url:\n  %i\n\n  %:link"
+           :prepend t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
            "* %^{Title} %^g\n  Added: %U\n%?"
            :prepend t :clock-in t :clock-resume t)
