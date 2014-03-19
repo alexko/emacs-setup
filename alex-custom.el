@@ -161,10 +161,10 @@
       (append
        (if (boundp 'org-capture-templates) org-capture-templates nil)
        '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-           "* TODO %^{Title} %^g\n  %a\n  %i\n%?"
+           "* TODO %(read-string \"Title: \" \"\") %(org-set-tags)\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
-           "* %^{Title} %^g\n  Added: %U\n  %a\n  %i\n%?"
+           "* %(read-string \"Title: \" \"\") %(org-set-tags)\n  Added: %U\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :xclip:\n  %a\n %x\n%?"
@@ -173,7 +173,7 @@
            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("w" "org-protocol tag" entry (file "~/org/bookmarks.org")
-           "* %:description %^g\n  %i\n\n  %:link\n%?"
+           "* %:description %(org-set-tags)\n  %i\n\n  %:link\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
            "* %:description\n  %i\n\n  %:link"
