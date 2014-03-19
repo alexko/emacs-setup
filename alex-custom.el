@@ -199,10 +199,15 @@
                   (switch-to-buffer-other-frame server-buf))))
 (add-hook 'server-done-hook 'delete-frame)
 ;; trying to do the above for org-protocol capture
-(defun org-protocol-do-capture (info capture-func)
+(defun org-protocol-do-capture (info &optional capture-func)
   "Support `org-capture' and `org-remember' alike.
 CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
-  (let* ((parts (org-protocol-split-data info t))
+  (print (org-protocol-split-data info t))
+  (let* ((cfunc (or capture-func 'org-capture))
+         (parts
+          (if (boundp 'org-protocol-data-separatorxxx)
+              (org-protocol-split-data info t org-protocol-data-separator)
+            (org-protocol-split-data info t)))
 	 (template (or (and (>= 2 (length (car parts))) (pop parts))
 		       org-protocol-default-template-key))
 	 (url (org-protocol-sanitize-uri (car parts)))
@@ -212,6 +217,10 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 	 (region (or (caddr parts) ""))
 	 (orglink (org-make-link-string
 		   url (if (string-match "[^[:space:]]" title) title url)))
+         (query
+          (or
+           (and (boundp 'org-protocol-convert-query-to-plist)
+                (org-protocol-convert-query-to-plist (cadddr parts))) ""))
 	 (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
 	 remember-annotation-functions)
     ;; (setq org-stored-links
@@ -221,14 +230,15 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 			  :link url
 			  :description title
 			  :annotation orglink
-			  :initial region)
+			  :initial region
+                          :query query)
     (if (equal template "w")
         (progn
           (select-frame-set-input-focus
            (make-frame '((name . "* url capture *"))))
-          (funcall capture-func nil template)
+          (funcall cfunc nil template)
           (delete-other-windows))
-      (funcall capture-func nil template))))
+      (funcall cfunc nil template))))
 
 (defadvice org-capture-finalize (after delete-capture-frame activate)
   "Advise capture-finalize to close the frame if it is the capture frame"
