@@ -32,8 +32,8 @@
       show-trailing-whitespace t
       remote-shell-program "/usr/bin/ssh"
       compile-command "cd . ; make -j4 -k"
-      ;frame-title-format "[%b] in %F, %f"
-      ;icon-title-format "%b"
+      frame-title-format "%b %+ %[%f%]"
+      icon-title-format "%b"
       ido-ignore-directories '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git")
       ido-ignore-files '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`\\.DS_Store" "\\`\\.Icon" "\\`LICENSE")
       auto-save-list-file-prefix "~/.emacs.cruft/auto-saves/.saves-"
