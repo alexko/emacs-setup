@@ -276,6 +276,9 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq org-list-allow-alphabetical t)
 (setq org-catch-invisible-edits 'error)
 (setq org-read-date-prefer-future 'time)
+(setq org-agenda-persistent-filter t)
+;; (setq org-tags-match-list-sublevels 'indented)
+
 (org-clock-persistence-insinuate)
 (setq org-clock-history-length 36)
 (setq org-clock-in-resume t)
