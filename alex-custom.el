@@ -534,10 +534,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (defun recent-dl (n)
   "insert link to a recently downloaded file"
   (interactive "p")
-  (let ((rfiles
-         (split-string (shell-command-to-string "ls -t ~/dl/") "\n")))
-    (dotimes (i n)
-      (insert (concat "[[~/dl/" (nth i rfiles) "]] ")))))
+  (recent-file n "~/dl/"))
 
 (setq ido-max-directory-size 300000) ;; prevents ido [Too big]
 (defun recent-file (n dir)
