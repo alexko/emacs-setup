@@ -161,10 +161,10 @@
       (append
        (if (boundp 'org-capture-templates) org-capture-templates nil)
        '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-           "* TODO %(read-string \"Title: \" \"\") %(org-set-tags)\n  %a\n  %i\n%?"
+           "* TODO %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
-           "* %(read-string \"Title: \" \"\") %(org-set-tags)\n  Added: %U\n  %a\n  %i\n%?"
+           "* %^{Title} :%^{Tags|notag}:\n  Added: %U\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :xclip:\n  %a\n %x\n%?"
