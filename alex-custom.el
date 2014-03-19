@@ -442,7 +442,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   (interactive) (fix-org-column) (org-columns))
 (define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-fix)
 
-(set-face-underline-p 'org-link t) ;; not underlined by default since org 7.5
 (defun my-open-link (k)
   (unless (equal (string-to-char k) ?*) (org-occur-in-agenda-files k) t))
 (add-hook 'org-open-link-functions 'my-open-link)
