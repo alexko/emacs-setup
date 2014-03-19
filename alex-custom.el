@@ -1,6 +1,7 @@
 ;; org-mode
 (setq load-path (cons "~/.emacs.d/org/lisp" load-path))
 (setq load-path (cons "~/.emacs.d/org/contrib/lisp" load-path))
+(require 'org)
 (require 'org-install)
 (org-babel-do-load-languages
  'org-babel-load-languages
