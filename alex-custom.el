@@ -34,10 +34,13 @@
       compile-command "cd . ; make -j4 -k"
       frame-title-format "%b %+ %[%f%]"
       icon-title-format "%b"
-      ido-ignore-directories '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git")
-      ido-ignore-files '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`\\.DS_Store" "\\`\\.Icon" "\\`LICENSE")
+      ido-ignore-directories
+        '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git")
+      ido-ignore-files
+        '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`LICENSE")
       auto-save-list-file-prefix "~/.emacs.cruft/auto-saves/.saves-"
-      backup-directory-alist (list (cons "." (expand-file-name "~/.emacs.cruft/backups/")))
+      backup-directory-alist
+        (list (cons "." (expand-file-name "~/.emacs.cruft/backups/")))
       tramp-auto-save-directory "~/.emacs.cruft/auto-saves/"
       tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/")))
 
@@ -107,10 +110,9 @@
 (setq ido-file-extensions-order
       '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
 (setq ido-everywhere t)
-(setq ido-max-directory-size 100000)
+(setq ido-max-directory-size 300000)
 (setq ido-default-buffer-method 'selected-window)
 (ido-mode (quote both))
-; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets '((nil :maxlevel . 4) ;; current buffer
                            (org-mobile-files :maxlevel . 4)))
 ; Use full outline paths for refile targets - we file directly with IDO
@@ -194,10 +196,10 @@
 
 ;; emacsclient opens new frame, closes when done
 (add-hook 'server-switch-hook
-              (lambda nil
-                (let ((server-buf (current-buffer)))
-                  (bury-buffer)
-                  (switch-to-buffer-other-frame server-buf))))
+          (lambda nil
+            (let ((server-buf (current-buffer)))
+              (bury-buffer)
+              (switch-to-buffer-other-frame server-buf))))
 (add-hook 'server-done-hook 'delete-frame)
 ;; trying to do the above for org-protocol capture
 (defun org-protocol-do-capture (info &optional capture-func)
@@ -209,29 +211,29 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
           (if (boundp 'org-protocol-data-separatorxxx)
               (org-protocol-split-data info t org-protocol-data-separator)
             (org-protocol-split-data info t)))
-	 (template (or (and (>= 2 (length (car parts))) (pop parts))
-		       org-protocol-default-template-key))
-	 (url (org-protocol-sanitize-uri (car parts)))
-	 (type (if (string-match "^\\([a-z]+\\):" url)
-		   (match-string 1 url)))
-	 (title (or (cadr parts) ""))
-	 (region (or (caddr parts) ""))
-	 (orglink (org-make-link-string
-		   url (if (string-match "[^[:space:]]" title) title url)))
+         (template (or (and (>= 2 (length (car parts))) (pop parts))
+                       org-protocol-default-template-key))
+         (url (org-protocol-sanitize-uri (car parts)))
+         (type (if (string-match "^\\([a-z]+\\):" url)
+                   (match-string 1 url)))
+         (title (or (cadr parts) ""))
+         (region (or (caddr parts) ""))
+         (orglink (org-make-link-string
+                   url (if (string-match "[^[:space:]]" title) title url)))
          (query
           (or
            (and (boundp 'org-protocol-convert-query-to-plist)
                 (org-protocol-convert-query-to-plist (cadddr parts))) ""))
-	 (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
-	 remember-annotation-functions)
+         (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
+         remember-annotation-functions)
     ;; (setq org-stored-links
     ;;       (cons (list url title) org-stored-links))
     (kill-new orglink)
     (org-store-link-props :type type
-			  :link url
-			  :description title
-			  :annotation orglink
-			  :initial region
+                          :link url
+                          :description title
+                          :annotation orglink
+                          :initial region
                           :query query)
     (if (equal template "w")
         (progn
@@ -304,9 +306,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq org-agenda-custom-commands
       (append
        (and (boundp 'org-agenda-custom-commands) org-agenda-custom-commands)
-       '(("n" "Next Tasks" tags-todo "-WAITING-CANCELLED/!NEXT" ;; ??
+       '(("n" "Next Tasks" tags-todo "-WAITING/!NEXT" ;; ??
           ((org-agenda-overriding-header "Next Tasks")
-           (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
            (org-agenda-todo-ignore-scheduled t)
            (org-agenda-todo-ignore-deadlines t)
            (org-agenda-todo-ignore-with-date t)
@@ -399,29 +400,30 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq ibuffer-show-empty-filter-groups nil)
 (setq ibuffer-saved-filter-groups
       '(("home"
-	 ("Org" (or (mode . org-mode)
-		    (filename . "OrgMode")))
+         ("Org" (or (mode . org-mode)
+                    (filename . "OrgMode")))
          ("Code" (or (mode . python-mode)
                      (mode . c-mode)
                      (mode . lua-mode)))
-	 ("Web Dev" (or (mode . html-mode)
-			(mode . css-mode)
+         ("Web Dev" (or (mode . html-mode)
+                        (mode . css-mode)
                         (mode . espresso-mode)))
-	 ("Emacs-config" (or (filename . ".emacs.d")
-			     (filename . "emacs-config")))
-	 ("Magit" (name . "\*magit"))
-	 ("ERC" (mode . erc-mode))
-	 ("Help" (or (name . "\*Help\*")
-		     (name . "\*Apropos\*")
-		     (name . "\*info\*"))))))
-(add-hook 'ibuffer-mode-hook 
-	  '(lambda ()
-	     (ibuffer-auto-mode 1)
-	     (ibuffer-switch-to-saved-filter-groups "home")))
+         ("Emacs-config" (or (filename . ".emacs.d")
+                             (filename . "emacs-config")))
+         ("Magit" (name . "\*magit"))
+         ("ERC" (mode . erc-mode))
+         ("Help" (or (name . "\*Help\*")
+                     (name . "\*Apropos\*")
+                     (name . "\*info\*"))))))
+(add-hook 'ibuffer-mode-hook
+          '(lambda ()
+             (ibuffer-auto-mode 1)
+             (ibuffer-switch-to-saved-filter-groups "home")))
 
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE"))))
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
+                        "CANCELLED(c@/!)" "PHONE"))))
 
 (setq org-todo-keyword-faces
       (quote (("NEXT" :foreground "gold" :weight bold)
@@ -508,7 +510,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (defun adb-org-mobile-sync ()
   "syncs with org-mobile android app via adb"
   (interactive)
-  (let ((adb  (expand-file-name "~/android/android-sdk-linux/platform-tools/adb"))
+  (let ((adb
+         (expand-file-name "~/android/android-sdk-linux/platform-tools/adb"))
         (org-mobile-remote-dir "/sdcard/org")
         (org-mobile-local-dir (expand-file-name org-mobile-directory)))
     (org-mobile-pull) ;; to prevent overwriting mobileorg.org
@@ -536,7 +539,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   (interactive "p")
   (recent-file n "~/dl/"))
 
-(setq ido-max-directory-size 300000) ;; prevents ido [Too big]
 (defun recent-file (n dir)
   "insert link to most recent files in a dir"
   (interactive "p\nD")
