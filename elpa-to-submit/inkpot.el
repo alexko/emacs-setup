@@ -51,6 +51,7 @@
      (font-lock-variable-name-face ((t nil)))
      (font-lock-warning-face ((((class color) (background dark)) (:foreground "orangered"))))
      (magit-item-highlight ((((class color) (background dark)) (:background "grey10"))))
+     (trailing-whitespace ( (((class color) (background dark)) (:background "grey30"))))
      (org-scheduled-previously ((((class color) (background dark)) (:foreground "rosy brown"))))
      (org-upcoming-deadlines ((((class color) (background dark)) (:foreground "orange"))))
      (org-column ((((class color) (background dark)) (:background "grey20")))))))
