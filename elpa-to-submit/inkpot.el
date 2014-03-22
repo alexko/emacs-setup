@@ -18,7 +18,7 @@
   (color-theme-install
    '(color-theme-inkpot
      ((foreground-color . "#cfbfad")
-      (background-color . "#1e1e27")
+      (background-color . "#1e1e22")
       (border-color . "#3e3e5e")
       (cursor-color . "#ccaa40")
       (background-mode . dark))
