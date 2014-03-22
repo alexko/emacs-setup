@@ -34,6 +34,7 @@
      (minibuffer-prompt ((t (:bold t :foreground "#708090"))))
      (ido-first-match ((t (:bold t :weight bold))))
      (ido-only-match ((t (:foreground "ForestGreen"))))
+     (compilation-info ((t (:foreground "Green3"))))
      (diff-header ((((class color) (background dark)) (:background "#202020"))))
      (diff-file-header ((((class color) (background dark)) (:background "#303030"))))
      (font-lock-builtin-face ((t (:foreground "#c080d0"))))
