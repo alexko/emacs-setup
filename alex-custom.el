@@ -283,6 +283,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (add-to-list 'Info-default-directory-list "~/.emacs.d/org/doc")
 (setq org-list-allow-alphabetical t)
+(setq org-cycle-include-plain-lists t)
 (setq org-catch-invisible-edits 'error)
 (setq org-read-date-prefer-future 'time)
 (setq org-agenda-persistent-filter t)
