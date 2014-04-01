@@ -21,6 +21,11 @@
 
 ;;(org-babel-lob-ingest "~/.emacs.d/org/contrib/babel/library-of-babel.org")
 (org-babel-lob-ingest "~/org/lob.org")
+(setq org-src-fontify-natively t)
+(dolist (x org-structure-template-alist)
+  (setf (cadr x) (downcase (cadr x)))) ;; make them lowercase
+(setq org-src-preserve-indentation nil)
+(setq org-edit-src-content-indentation 0)
 ;;(add-to-list 'org-src-lang-modes (cons "cu" 'c))
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
