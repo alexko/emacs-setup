@@ -43,7 +43,8 @@
         (list (cons "." (expand-file-name "~/.emacs.cruft/backups/")))
       tramp-auto-save-directory "~/.emacs.cruft/auto-saves/"
       tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/")))
-
+(setq org-format-latex-options
+      (plist-put org-format-latex-options :scale 2.0))
 (add-to-list 'load-path "/usr/local/go/misc/emacs")
 (require 'go-mode-load)
 (load "ledger")
