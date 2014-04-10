@@ -607,6 +607,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (require 'org-habit)
 (require 'org-learn)
+(require 'org-screen)
+(require 'org-bookmark)
 (require 'command-frequency)
 (command-frequency-table-load)
 (command-frequency-mode 1)
