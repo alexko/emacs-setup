@@ -602,6 +602,9 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 ;; Use C-/ for Undo command
 (scim-define-common-key ?\C-/ nil)
 ;; Change cursor color depending on SCIM status
+(setq ansi-term-color-vector
+      [unspecified "grey40" "red3" "green3" "yellow3"
+                   "#6080e0" "#b080d0" "cyan3" "white"])
 (setq scim-cursor-color '("pink" "orange" "limegreen"))
 (color-theme-inkpot)
 
