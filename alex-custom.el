@@ -82,6 +82,8 @@
         ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
         ("sd"       . "http://slickdeals.net/newsearch.php?firstonly=1&q=")
         ("cb"       . "http://crunchbase.com/search?query=")
+        ("usc"      . "http://www.law.cornell.edu/uscode/text/")
+        ("cfr"      . "http://www.law.cornell.edu/cfr/text/")
         ("ups"      . "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=")
         ("ontrack"  . "http://www.ontrac.com/trackres.asp?tracking_number=")
         ("wp"       . "http://en.wikipedia.org/w/index.php?title=Special:Search&search=")
