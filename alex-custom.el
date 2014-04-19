@@ -381,6 +381,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   (define-key org-mode-map [f12] 'org-make-dependency)
   (auto-fill-mode 1))
 (add-hook 'org-mode-hook 'my-org-mode-hook)
+(require 'org-id)
+(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 
 ;; Make windmove work in org-mode:
 (add-hook 'org-shiftup-final-hook 'windmove-up)
