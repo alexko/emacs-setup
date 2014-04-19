@@ -175,7 +175,7 @@
            "* TODO %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
-           "* %^{Title} :%^{Tags|notag}:\n  Added: %U\n  %a\n  %i\n%?"
+           "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :xclip:\n  %a\n %x\n%?"
@@ -193,14 +193,11 @@
            "* %:description :url:\n  %i\n\n  %:link"
            :prepend t :immediate-finish t)
           ("e" "Expenses" entry (file "~/org/finance.org")
-           "* %^{Title} %^g\n  Added: %U\n%?"
+           "* %^{Title} %^g\n  %?"
            :prepend t :clock-in t :clock-resume t)
           ("a" "Review" entry (file "~/org/journal.org")
-           "* Daily review :review:\n  Added: %U\n%[~/.emacs.d/org/.review.tmpl]"
-           :prepend t :clock-in t :clock-resume t)
-          ("i" "Idea" entry (file+headline "~/org/journal.org" "Ideas")
-           "* %^{Title} %^g\nAdded: %U\n  %a\n  %i\n  %x\n%?"
-           :prepend t :clock-in t :clock-resume t))))
+           "* Daily review :review:\n  %[~/.emacs.d/org/.review.tmpl]"
+           :prepend t :clock-in t :clock-resume t) )))
 
 ;; emacsclient opens new frame, closes when done
 (add-hook 'server-switch-hook
