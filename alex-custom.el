@@ -12,6 +12,7 @@
          (sh . t)
          (C . t)
          (R . t)
+         (js . t)
          (octave . t)
          (latex . t)
          (gnuplot . t)
@@ -26,7 +27,8 @@
   (setf (cadr x) (downcase (cadr x)))) ;; make them lowercase
 (setq org-src-preserve-indentation nil)
 (setq org-edit-src-content-indentation 0)
-;;(add-to-list 'org-src-lang-modes (cons "cu" 'c))
+(add-to-list 'org-src-lang-modes (cons "cu" 'c++))
+(add-to-list 'org-src-lang-modes (cons "js" 'espresso))
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
