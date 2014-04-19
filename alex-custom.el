@@ -301,8 +301,16 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq org-clock-report-include-clocking-task t)
 (defun my-clock-in-to-next (kw)
   "Switch a task from TODO to NEXT when clocking in, except capture tasks"
+  (my-x11idle-set)
   (when (not (and (boundp 'org-capture-mode) org-capture-mode))
     (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
+(defun my-x11idle-set ()
+  (setq org-x11idle-exists-p
+   (and (eq window-system 'x)
+        (eq (call-process-shell-command
+             "command" nil nil nil "-v" org-clock-x11idle-program-name) 0)
+        (eq (call-process-shell-command
+             org-clock-x11idle-program-name nil nil nil) 0))))
 
 (setq org-stuck-projects
       '("+LEVEL=2/!-DONE-CANCELLED" ("TODO" "NEXT") nil ""))
