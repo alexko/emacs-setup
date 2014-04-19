@@ -591,12 +591,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
       (goto-char (point-min))
       (while (search-forward "\n" nil t) (replace-match " " nil t)))))
 
-(defun convert-win-to-frame ()
+(defun convert-win-to-frame (arg)
   "makes frame out of window"
-  (interactive)
+  (interactive "P")
   (save-excursion
     (make-frame-command)
-    (delete-window)))
+    (if arg (delete-window))))
 
 (define-key global-map (kbd "M-n") 'convert-win-to-frame)
 (define-key global-map (kbd "C-c n") nil)
