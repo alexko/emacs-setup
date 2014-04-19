@@ -317,6 +317,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (setq org-agenda-dim-blocked-tasks nil)
 (setq org-agenda-compact-blocks t)
+; (setq org-agenda-custom-commands nil) ;; reset
 (setq org-agenda-custom-commands
       (append
        (and (boundp 'org-agenda-custom-commands) org-agenda-custom-commands)
