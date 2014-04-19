@@ -19,6 +19,7 @@
          (dot . t)
          (ditaa . t)
          (ledger . t))))
+(setq org-babel-results-keyword "results")
 
 ;;(org-babel-lob-ingest "~/.emacs.d/org/contrib/babel/library-of-babel.org")
 (org-babel-lob-ingest "~/org/lob.org")
