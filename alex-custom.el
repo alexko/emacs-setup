@@ -619,7 +619,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (require 'org-learn)
 (require 'org-screen)
 (require 'org-bookmark)
-(require 'org-git-link)
+;; (require 'org-git-link) ;; interferes with normal org linking
 (require 'command-frequency)
 (command-frequency-table-load)
 (command-frequency-mode 1)
