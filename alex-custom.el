@@ -31,7 +31,10 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 (add-hook 'espresso-mode-hook 'idle-highlight)
-(setq current-language-environment "UTF-8"
+(set-language-environment "UTF-8")
+(set-charset-priority 'unicode)
+(prefer-coding-system 'utf-8)
+(setq org-export-coding-system 'utf-8
       fill-column 80
       espresso-indent-level 2
       show-trailing-whitespace t
