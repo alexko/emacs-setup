@@ -624,6 +624,13 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq scim-cursor-color '("pink" "orange" "limegreen"))
 (color-theme-inkpot)
 
+(setq org-file-apps
+      '((auto-mode . emacs)
+        ("\\.mm\\'" . default)
+        ("\\.x?html?\\'" . default)
+        ("\\.pdf\\'" . default)
+        ("\\.epub\\'" . "fbreader %s")))
+
 (require 'org-habit)
 (require 'org-learn)
 (require 'org-screen)
