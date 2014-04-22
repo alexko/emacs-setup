@@ -550,10 +550,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   "calculates expression at the point using calc"
   (interactive)
   (set-mark (point))
-  (skip-chars-backward "^ ")
+  (skip-chars-backward "^ \n")
   (exchange-point-and-mark)
-  (let ((selection (buffer-substring-no-properties (mark) (point))))
-    (insert (concat " = " (calc-eval selection)))))
+  (let* ((selection (buffer-substring-no-properties (mark) (point)))
+         (result (calc-eval selection)))
+    (insert (concat " = " result))))
 
 (global-set-key (kbd "C-=") 'my-calc-eval)
 
