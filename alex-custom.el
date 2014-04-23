@@ -183,6 +183,9 @@
           ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
            :prepend t :clock-in t :clock-resume t)
+          ("m" "Meeting" entry (file "~/org/journal.org" "Entries")
+           "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
+           :prepend t :clock-in t :clock-resume t)
           ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
            "* %^{Title} :xclip:\n  %a\n %x\n%?"
            :prepend t :clock-in t :clock-resume t)
@@ -446,7 +449,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
-                        "CANCELLED(c@/!)" "PHONE"))))
+                        "CANCELLED(c@/!)" "MEETING(m@/!)"))))
 
 (setq org-todo-keyword-faces
       (quote (("NEXT" :foreground "gold" :weight bold)
