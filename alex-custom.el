@@ -7,30 +7,21 @@
 (use-package org
   :config
   (progn
+    (setq org-babel-results-keyword "results")
     (org-babel-do-load-languages
      'org-babel-load-languages
-     (quote ((emacs-lisp . t)
-             (python . t)
-             (ruby . t)
-             (lua . t)
-             (sh . t)
-             (C . t)
-             (R . t)
-             (js . t)
-             (octave . t)
-             (latex . t)
-             (gnuplot . t)
-             (dot . t)
-             (ditaa . t)
-             (ledger . t))))
-    (setq org-babel-results-keyword "results")
-    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
-
-    ;;(org-babel-lob-ingest "~/.emacs.d/org/contrib/babel/library-of-babel.org")
+     '((emacs-lisp . t) (python . t) (ruby . t) (lua . t) (sh . t)
+       (C . t) (R . t) (js . t) (octave . t) (ledger . t)
+       (latex . t) (gnuplot . t) (dot . t) (ditaa . t)))
+    (add-hook 'org-babel-after-execute-hook
+              'org-display-inline-images 'append)
+    ;; (org-babel-lob-ingest
+    ;;   "~/.emacs.d/org/contrib/babel/library-of-babel.org")
     (org-babel-lob-ingest "~/org/lob.org")
     (setq org-src-fontify-natively t)
     (dolist (x org-structure-template-alist)
       (setf (cadr x) (downcase (cadr x)))) ;; make them lowercase
+
     (setq org-src-preserve-indentation nil)
     (setq org-edit-src-content-indentation 0)
     (add-to-list 'org-src-lang-modes (cons "cu" 'c++))
@@ -76,10 +67,10 @@
             ("yelp"     . "http://www.yelp.com/search?find_desc=")))
 
     (setq org-directory "~/org")
+    ;; (setq org-agenda-files (list org-directory))
     (setq org-agenda-files
           '("~/org/notes.org"
             "~/org/tasks.org"))
-                                        ;(setq org-agenda-files (list org-directory))
     (setq org-agenda-text-search-extra-files
           '("~/org/journal.org"
             "~/org/bookmarks.org"))
@@ -103,18 +94,18 @@
     (setq org-completion-use-ido t)
     (setq org-refile-targets '((nil :maxlevel . 4) ;; current buffer
                                (org-mobile-files :maxlevel . 4)))
-                                        ; Use full outline paths for refile targets - we file directly with IDO
+    ;; Use full outline paths for refile targets - we file directly with IDO
     (setq org-refile-use-outline-path 'file)
-                                        ; Targets complete directly with IDO
+    ;; Targets complete directly with IDO
     (setq org-outline-path-complete-in-steps nil)
-                                        ; Allow refile to create parent tasks with confirmation
+    ;; Allow refile to create parent tasks with confirmation
     (setq org-refile-allow-creating-parent-nodes (quote confirm))
     (defun verify-refile-target ()
       "Exclude todo keywords with a done state from refile targets"
       (not (member (nth 2 (org-heading-components)) org-done-keywords)))
     (setq org-refile-target-verify-function 'verify-refile-target)
 
-                                        ; Save all org buffers every hour
+    ;; Save all org buffers every hour
     (run-at-time "00:59" 3600 'org-save-all-org-buffers)
 
     (setq org-sort-agenda-noeffort-is-high nil)
