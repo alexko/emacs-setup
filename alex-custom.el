@@ -5,7 +5,7 @@
 (add-to-list 'load-path "~/.emacs.d/org/contrib/lisp")
 (use-package org)
 (use-package org-install
-  :init
+  :config
   (progn
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -277,7 +277,7 @@
          ("C-c l" . org-store-link)))
 
 (use-package org-capture
-  :init
+  :config
   (progn
     ;; (setq org-capture-templates nil)
     (setq org-capture-templates
@@ -334,47 +334,47 @@
   :bind ("C-c c" . org-capture))
 
 (use-package org-protocol
-  (progn
-    (defun org-protocol-do-capture (info &optional capture-func)
-      "Support `org-capture' and `org-remember' alike.
+  :config
+  (defun org-protocol-do-capture (info &optional capture-func)
+    "Support `org-capture' and `org-remember' alike.
 CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
-      (print (org-protocol-split-data info t))
-      (let* ((cfunc (or capture-func 'org-capture))
-             (parts
-              (if (boundp 'org-protocol-data-separatorxxx)
-                  (org-protocol-split-data info t org-protocol-data-separator)
-                (org-protocol-split-data info t)))
-             (template (or (and (>= 2 (length (car parts))) (pop parts))
-                           org-protocol-default-template-key))
-             (url (org-protocol-sanitize-uri (car parts)))
-             (type (if (string-match "^\\([a-z]+\\):" url)
-                       (match-string 1 url)))
-             (title (or (cadr parts) ""))
-             (region (or (caddr parts) ""))
-             (orglink (org-make-link-string
-                       url (if (string-match "[^[:space:]]" title) title url)))
-             (query
-              (or
-               (and (boundp 'org-protocol-convert-query-to-plist)
-                    (org-protocol-convert-query-to-plist (cadddr parts))) ""))
-             (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
-             remember-annotation-functions)
-        ;; (setq org-stored-links
-        ;;       (cons (list url title) org-stored-links))
-        (kill-new orglink)
-        (org-store-link-props :type type
-                              :link url
-                              :description title
-                              :annotation orglink
-                              :initial region
-                              :query query)
-        (if (equal template "w")
-            (progn
-              (select-frame-set-input-focus
-               (make-frame '((name . "* url capture *"))))
-              (funcall cfunc nil template)
-              (delete-other-windows))
-          (funcall cfunc nil template))))))
+    (print (org-protocol-split-data info t))
+    (let* ((cfunc (or capture-func 'org-capture))
+           (parts
+            (if (boundp 'org-protocol-data-separatorxxx)
+                (org-protocol-split-data info t org-protocol-data-separator)
+              (org-protocol-split-data info t)))
+           (template (or (and (>= 2 (length (car parts))) (pop parts))
+                         org-protocol-default-template-key))
+           (url (org-protocol-sanitize-uri (car parts)))
+           (type (if (string-match "^\\([a-z]+\\):" url)
+                     (match-string 1 url)))
+           (title (or (cadr parts) ""))
+           (region (or (caddr parts) ""))
+           (orglink (org-make-link-string
+                     url (if (string-match "[^[:space:]]" title) title url)))
+           (query
+            (or
+             (and (boundp 'org-protocol-convert-query-to-plist)
+                  (org-protocol-convert-query-to-plist (cadddr parts))) ""))
+           (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
+           remember-annotation-functions)
+      ;; (setq org-stored-links
+      ;;       (cons (list url title) org-stored-links))
+      (kill-new orglink)
+      (org-store-link-props :type type
+                            :link url
+                            :description title
+                            :annotation orglink
+                            :initial region
+                            :query query)
+      (if (equal template "w")
+          (progn
+            (select-frame-set-input-focus
+             (make-frame '((name . "* url capture *"))))
+            (funcall cfunc nil template)
+            (delete-other-windows))
+        (funcall cfunc nil template)))))
 
 (use-package org-table)
 ;;(use-package 'org-collector)
@@ -384,7 +384,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 ;; if invoked with C-u C-u it sets the previously pushed id as a BLOCKER
 ;; see org-depend for explanation of the TRIGGER and BLOCKER properties
 (use-package org-depend
-  :init
+  :config
   (progn
     (defun org-make-dependency (arg)
       (interactive
@@ -422,7 +422,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (use-package org-sample
   :init
   (define-key org-mode-map [f11] 'org-task-sample))
-
 
 (use-package ido
   :init
@@ -472,17 +471,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (use-package idle-highlight
   :init (add-hook 'espresso-mode-hook 'idle-highlight))
 
-
-
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
-(define-key global-map (kbd "C-x C-b") 'ibuffer)
-(define-key global-map (kbd "M-g") 'goto-line)
-(define-key global-map (kbd "M-/") 'hippie-expand)
-(define-key global-map (kbd "<C-f9>") 'compile)
-(define-key global-map (kbd "<f9>") 'next-error)
-
-
 (set-language-environment "UTF-8")
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)
@@ -503,26 +491,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 ;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 ;; (setq save-abbrevs t)
 
-(when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
-  (add-to-list 'load-path "/usr/local/go/misc/emacs")
-  (require 'go-mode-load))
-
-(load "ledger")
-
-(defun f-toggle-selective-display (column)
-  (interactive "P")
-  (set-selective-display
-   (if selective-display nil
-     (or column (+ 1 (current-column))))))
-
-(global-set-key [f1] 'f-toggle-selective-display)
-
-(defun find-preferred-browser ()
-  (let ((candidates '("google-chrome" "chromium-browser" "firefox")))
-    (car (delq nil (mapcar 'executable-find candidates)))))
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program (find-preferred-browser))
-
 ;; emacsclient opens new frame, closes when done
 (add-hook 'server-switch-hook
           (lambda nil
@@ -538,52 +506,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
 (desktop-load-default)
 
-(use-package tramp
-  :init
-  (progn
-    (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:"))
-    (setq shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")))
-
-(use-package smex
-  :init
-  (smex-initialize)
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c C-c M-x" . execute-extended-command)))
-
-(use-package scim-bridge
-  :init
-  (progn
-    (add-hook 'after-init-hook 'scim-mode-on)
-    (scim-define-common-key (kbd "C-`") t)
-    ;; Use C-SPC for Set Mark command
-    (scim-define-common-key ?\C-\s nil)
-    ;; Use C-/ for Undo command
-    (scim-define-common-key ?\C-/ nil)
-    ;; Change cursor color depending on SCIM status
-    (setq scim-cursor-color '("pink" "orange" "limegreen"))))
-
-(use-package color-theme
-  :init
-  (progn
-    (color-theme-inkpot)
-    (setq ansi-term-color-vector
-          [unspecified "grey40" "red3" "green3" "yellow3"
-                       "#6080e0" "#b080d0" "cyan3" "white"])))
-
-(use-package command-frequency
-  :idle
-  (progn
-    (command-frequency-table-load)
-    (command-frequency-mode 1)
-    (command-frequency-autosave-mode 1)))
-
-(use-package buffer-move
-  :bind
-  (("<kp-up>"     . buf-move-up)
-   ("<kp-down>"   . buf-move-down)
-   ("<kp-left>"   . buf-move-left)
-   ("<kp-right>"  . buf-move-right)))
+(add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:"))
+(setq shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
 
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
@@ -609,29 +533,77 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
              (ibuffer-auto-mode 1)
              (ibuffer-switch-to-saved-filter-groups "home")))
 
-
+(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C--") 'text-scale-decrease)
+(define-key global-map (kbd "C-x C-b") 'ibuffer)
+(define-key global-map (kbd "M-g") 'goto-line)
+(define-key global-map (kbd "M-/") 'hippie-expand)
+(define-key global-map (kbd "<C-f9>") 'compile)
+(define-key global-map (kbd "<f9>") 'next-error)
+(defube-key global-map (kbd "C-c o") 'occur)
 (define-key occur-mode-map (kbd "q") 'delete-window)
 
-(global-set-key (kbd "C-c o") 'occur)
-(defun occur-mode-goto-occurrence (&optional event)
-  "Go to the occurrence the current line describes."
-  (interactive (list last-nonmenu-event))
-  (let ((pos
-         (if (null event)
-             ;; Actually 'event-end' works correctly with a nil argument as
-             ;; well, so we could dispense with this test, but let's not
-             ;; rely on this undocumented behavior.
-             (occur-mode-find-occurrence)
-           (with-current-buffer (window-buffer (posn-window (event-end event)))
-             (save-excursion
-               (goto-char (posn-point (event-end event)))
-               (occur-mode-find-occurrence)))))
-        same-window-buffer-names
-        same-window-regexps)
-    ;;(pop-to-buffer (marker-buffer pos))
-    (switch-to-buffer (marker-buffer pos)) ;; stay in the same window
-    (goto-char pos)
-    (run-hooks 'occur-mode-find-occurrence-hook)))
+(use-package ledger)
+
+(use-package smex
+  :config
+  (smex-initialize)
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)
+         ("C-c C-c M-x" . execute-extended-command)))
+
+(use-package scim-bridge
+  :config
+  (progn
+    (add-hook 'after-init-hook 'scim-mode-on)
+    (scim-define-common-key (kbd "C-`") t)
+    ;; Use C-SPC for Set Mark command
+    (scim-define-common-key ?\C-\s nil)
+    ;; Use C-/ for Undo command
+    (scim-define-common-key ?\C-/ nil)
+    ;; Change cursor color depending on SCIM status
+    (setq scim-cursor-color '("pink" "orange" "limegreen"))))
+
+(use-package color-theme
+  :config
+  (progn
+    (color-theme-inkpot)
+    (setq ansi-term-color-vector
+          [unspecified "grey40" "red3" "green3" "yellow3"
+                       "#6080e0" "#b080d0" "cyan3" "white"])))
+
+(use-package command-frequency
+  :config
+  (progn
+    (command-frequency-table-load)
+    (command-frequency-mode 1)
+    (command-frequency-autosave-mode 1)))
+
+(use-package buffer-move
+  :config
+  (("<kp-up>"     . buf-move-up)
+   ("<kp-down>"   . buf-move-down)
+   ("<kp-left>"   . buf-move-left)
+   ("<kp-right>"  . buf-move-right)))
+
+(when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
+  (add-to-list 'load-path "/usr/local/go/misc/emacs")
+  (use-package go-mode-load))
+
+
+(defun f-toggle-selective-display (column)
+  (interactive "P")
+  (set-selective-display
+   (if selective-display nil
+     (or column (+ 1 (current-column))))))
+
+(global-set-key [f1] 'f-toggle-selective-display)
+
+(defun find-preferred-browser ()
+  (let ((candidates '("google-chrome" "chromium-browser" "firefox")))
+    (car (delq nil (mapcar 'executable-find candidates)))))
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program (find-preferred-browser))
 
 (defun my-calc-eval ()
   "calculates expression at the point using calc"
@@ -697,5 +669,25 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (define-key global-map (kbd "M-n") 'convert-win-to-frame)
 (define-key global-map (kbd "C-c n") nil)
+
+(defun occur-mode-goto-occurrence (&optional event)
+  "Go to the occurrence the current line describes."
+  (interactive (list last-nonmenu-event))
+  (let ((pos
+         (if (null event)
+             ;; Actually 'event-end' works correctly with a nil argument as
+             ;; well, so we could dispense with this test, but let's not
+             ;; rely on this undocumented behavior.
+             (occur-mode-find-occurrence)
+           (with-current-buffer (window-buffer (posn-window (event-end event)))
+             (save-excursion
+               (goto-char (posn-point (event-end event)))
+               (occur-mode-find-occurrence)))))
+        same-window-buffer-names
+        same-window-regexps)
+    ;;(pop-to-buffer (marker-buffer pos))
+    (switch-to-buffer (marker-buffer pos)) ;; stay in the same window
+    (goto-char pos)
+    (run-hooks 'occur-mode-find-occurrence-hook)))
 
 (provide 'alex-custom)
