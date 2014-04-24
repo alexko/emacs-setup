@@ -3,8 +3,8 @@
 (require 'use-package)
 (add-to-list 'load-path "~/.emacs.d/org/lisp")
 (add-to-list 'load-path "~/.emacs.d/org/contrib/lisp")
-(use-package org)
-(use-package org-install
+(use-package org-install)
+(use-package org
   :config
   (progn
     (org-babel-do-load-languages
