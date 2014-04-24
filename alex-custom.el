@@ -196,7 +196,7 @@
            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("w" "org-protocol tag" entry (file "~/org/bookmarks.org")
-           "* %:description %(org-set-tags)\n  %i\n\n  %:link\n%?"
+           "* %:description :%^{Tags|notag}:\n  %i\n\n  %:link\n%?"
            :prepend t :clock-in t :clock-resume t)
           ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
            "* %:description\n  %i\n\n  %:link"
