@@ -20,6 +20,7 @@
          (ditaa . t)
          (ledger . t))))
 (setq org-babel-results-keyword "results")
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
 ;;(org-babel-lob-ingest "~/.emacs.d/org/contrib/babel/library-of-babel.org")
 (org-babel-lob-ingest "~/org/lob.org")
