@@ -148,32 +148,6 @@
     (setq org-agenda-persistent-filter t)
     ;; (setq org-tags-match-list-sublevels 'indented)
 
-    (setq timestamp-entries t)
-    (defun toggle-timestamp-entries ()
-      (interactive)
-      (message
-       (if (setq timestamp-entries (not timestamp-entries)) "on" "off")))
-    (defun timestamp-entry ()
-      (when timestamp-entries
-        (save-excursion
-          (org-return)
-          (org-cycle)
-          (org-insert-time-stamp nil t t))))
-    (add-hook 'org-insert-heading-hook 'timestamp-entry 'append)
-
-    (defun my-clock-in-to-next (kw)
-      "Switch a task from TODO to NEXT when clocking in, except capture tasks"
-      (my-x11idle-set)
-      (when (not (and (boundp 'org-capture-mode) org-capture-mode))
-        (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
-    (defun my-x11idle-set ()
-      (setq org-x11idle-exists-p
-            (and (eq window-system 'x)
-                 (eq (call-process-shell-command
-                      "command" nil nil nil "-v" org-clock-x11idle-program-name) 0)
-                 (eq (call-process-shell-command
-                      org-clock-x11idle-program-name nil nil nil) 0))))
-
     (org-clock-persistence-insinuate)
     (setq org-clock-history-length 36)
     (setq org-clock-in-resume t)
@@ -227,6 +201,58 @@
              ("Qb" "Bookmarks search" search ""
               ((org-agenda-files '("~/org/bookmarks.org")))) )))
 
+    (setq timestamp-entries t)
+    (defun toggle-timestamp-entries ()
+      (interactive)
+      (message
+       (if (setq timestamp-entries (not timestamp-entries)) "on" "off")))
+    (defun timestamp-entry ()
+      (when timestamp-entries
+        (save-excursion
+          (org-return)
+          (org-cycle)
+          (org-insert-time-stamp nil t t))))
+    (add-hook 'org-insert-heading-hook 'timestamp-entry 'append)
+
+    (defun my-clock-in-to-next (kw)
+      "Switch a task from TODO to NEXT when clocking in, except capture tasks"
+      (my-x11idle-set)
+      (when (not (and (boundp 'org-capture-mode) org-capture-mode))
+        (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
+
+    (defun my-x11idle-set ()
+      (setq org-x11idle-exists-p
+            (and (eq window-system 'x)
+                 (eq (call-process-shell-command
+                      "command" nil nil nil "-v" org-clock-x11idle-program-name) 0)
+                 (eq (call-process-shell-command
+                      org-clock-x11idle-program-name nil nil nil) 0))))
+
+    (defun org-toggle-eval-confirmation ()
+      (interactive)
+      (let ((state (if org-confirm-babel-evaluate nil t)))
+        (setq org-confirm-babel-evaluate state
+              org-confirm-shell-link-function state
+              org-confirm-elisp-link-function state)
+        (message
+         (concat "org eval confirmation is " (if state "on" "off")))))
+
+    (defun adb-org-mobile-sync ()
+      "syncs with org-mobile android app via adb"
+      (interactive)
+      (let ((adb
+             (expand-file-name "~/android/android-sdk-linux/platform-tools/adb"))
+            (org-mobile-remote-dir "/sdcard/org")
+            (org-mobile-local-dir (expand-file-name org-mobile-directory)))
+        (org-mobile-pull) ;; to prevent overwriting mobileorg.org
+        (call-process adb nil "*adb*" nil "-d" "pull"
+                      (concat org-mobile-remote-dir "/mobileorg.org")
+                      org-mobile-local-dir)
+        (org-mobile-pull)
+        (org-mobile-push)
+        (call-process adb nil "*adb*" nil "-d" "push"
+                      org-mobile-local-dir org-mobile-remote-dir)))
+
     (defun fix-org-column ()
       (interactive)
       (when (fboundp 'set-face-attribute)
@@ -244,12 +270,11 @@
     (defun my-open-link (k)
       (unless (equal (string-to-char k) ?*) (org-occur-in-agenda-files k) t))
     (add-hook 'org-open-link-functions 'my-open-link)
-    (add-to-list 'org-link-frame-setup '(file . find-file-other-frame))
+    (add-to-list 'org-link-frame-setup '(file . find-file-other-frame)))
 
-    (define-key global-map "\C-ca" 'org-agenda)
-    (define-key global-map "\C-cb" 'org-ido-switchb)
-    (define-key global-map "\C-cc" 'org-capture)
-    (define-key global-map "\C-cl" 'org-store-link)))
+  :bind (("C-c a" . org-agenda)
+         ("C-c b" . org-ido-switchb)
+         ("C-c l" . org-store-link)))
 
 (use-package org-capture
   :init
@@ -304,7 +329,9 @@
       "Add an empty line after capture"
       (org-back-over-empty-lines)
       (while (looking-at "[ \t]*\n") (replace-match ""))
-      (save-excursion (if (org-capture-get :prepend) (newline))))))
+      (save-excursion (if (org-capture-get :prepend) (newline)))))
+
+  :bind ("C-c c" . org-capture))
 
 (use-package org-protocol
   (progn
@@ -392,15 +419,76 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   :init ;; prevent interference with normal org linking
   (setq org-store-link-functions
         (delq 'org-git-store-link org-store-link-functions)))
+(use-package org-sample
+  :init
+  (define-key org-mode-map [f11] 'org-task-sample))
 
-;; Make windmove work in org-mode:
-(add-hook 'org-shiftup-final-hook 'windmove-up)
-(add-hook 'org-shiftleft-final-hook 'windmove-left)
-(add-hook 'org-shiftdown-final-hook 'windmove-down)
-(add-hook 'org-shiftright-final-hook 'windmove-right)
+
+(use-package ido
+  :init
+  (progn
+    (setq ido-ignore-directories
+          '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git"))
+    (setq ido-ignore-files
+          '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`LICENSE"))
+    (setq ido-file-extensions-order
+          '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
+    (setq ido-use-filename-at-point 'guess)
+    (setq ido-everywhere t)
+    (setq ido-max-directory-size 300000)
+    (setq ido-default-buffer-method 'selected-window)
+    (ido-mode (quote both)))
+  :bind (("C-x C-f" . ido-find-file)
+         ("C-x f" . recentf-ido-find-file)
+         ("C-x M-f" . ido-find-file-other-window)
+         ("C-x C-i" . ido-imenu)))
+
+(use-package find-file-in-project
+  :init
+  (progn
+    (setq ffip-patterns '("*.c", "*.h", "*.cc", "*.cpp", "*.cu",
+                          "*.py", "*.el", "*.java", "*.js", "*.go"))
+    (put 'ffip-patterns 'safe-local-variable 'listp))
+  :bind ("C-x C-M-f" . find-file-in-project))
+
+(use-package magit
+  :bind ("C-x g" . magit-status))
+
+(use-package windmove
+  :init
+  (progn ;; Make windmove work in org-mode:
+    (add-hook 'org-shiftup-final-hook 'windmove-up)
+    (add-hook 'org-shiftleft-final-hook 'windmove-left)
+    (add-hook 'org-shiftdown-final-hook 'windmove-down)
+    (add-hook 'org-shiftright-final-hook 'windmove-right)))
+
+(use-package espresso-mode
+  :init
+  (progn
+    (setq espresso-indent-level 2)
+    (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+    (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))))
+
+(use-package idle-highlight
+  :init (add-hook 'espresso-mode-hook 'idle-highlight))
+
+
+
+(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C--") 'text-scale-decrease)
+(define-key global-map (kbd "C-x C-b") 'ibuffer)
+(define-key global-map (kbd "M-g") 'goto-line)
+(define-key global-map (kbd "M-/") 'hippie-expand)
+(define-key global-map (kbd "<C-f9>") 'compile)
+(define-key global-map (kbd "<f9>") 'next-error)
+
+
+(set-language-environment "UTF-8")
+(set-charset-priority 'unicode)
+(prefer-coding-system 'utf-8)
+(add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
 
 (setq fill-column 80
-      espresso-indent-level 2
       show-trailing-whitespace t
       remote-shell-program "/usr/bin/ssh"
       compile-command "cd . ; make -j4 -k"
@@ -412,25 +500,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
       tramp-auto-save-directory "~/.emacs.cruft/auto-saves/"
       tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/")))
 
-(add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
-(add-hook 'espresso-mode-hook 'idle-highlight)
-(set-language-environment "UTF-8")
-(set-charset-priority 'unicode)
-(prefer-coding-system 'utf-8)
-
-(setq ido-ignore-directories
-      '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git"))
-(setq ido-ignore-files
-      '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`LICENSE"))
-(setq ido-file-extensions-order
-      '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
-(setq ido-use-filename-at-point 'guess)
-(setq ido-everywhere t)
-(setq ido-max-directory-size 300000)
-(setq ido-default-buffer-method 'selected-window)
-(ido-mode (quote both))
+;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
+;; (setq save-abbrevs t)
 
 (when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
   (add-to-list 'load-path "/usr/local/go/misc/emacs")
@@ -446,32 +517,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (global-set-key [f1] 'f-toggle-selective-display)
 
-(setq ffip-patterns '("*.c", "*.h", "*.cc", "*.cpp", "*.cu",
-                      "*.py", "*.el", "*.java", "*.js", "*.go"))
-(put 'ffip-patterns 'safe-local-variable 'listp) ;; fixes ffip setting
-
-;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
-;; (setq save-abbrevs t)
-
 (defun find-preferred-browser ()
   (let ((candidates '("google-chrome" "chromium-browser" "firefox")))
     (car (delq nil (mapcar 'executable-find candidates)))))
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program (find-preferred-browser))
-
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
-(define-key global-map (kbd "C-x C-b") 'ibuffer)
-(define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window)
-(define-key global-map (kbd "C-x C-M-f") 'find-file-in-project)
-(define-key global-map (kbd "C-x g") 'magit-status)
-(define-key global-map (kbd "M-g") 'goto-line)
-(define-key global-map (kbd "M-/") 'hippie-expand)
-(define-key global-map (kbd "<C-f9>") 'compile)
-(define-key global-map (kbd "<f9>") 'next-error)
-
-(define-key global-map (kbd "C-x f") 'recentf-ido-find-file)
-(define-key global-map (kbd "C-x C-i") 'ido-imenu)
 
 ;; emacsclient opens new frame, closes when done
 (add-hook 'server-switch-hook
@@ -496,19 +546,44 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (use-package smex
   :init
-  (progn
-    (smex-initialize)
-    (global-set-key (kbd "M-x") 'smex)
-    (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)))
+  (smex-initialize)
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)
+         ("C-c C-c M-x" . execute-extended-command)))
 
-(use-package buffer-move
+(use-package scim-bridge
   :init
   (progn
-    (global-set-key (kbd "<kp-up>")     'buf-move-up)
-    (global-set-key (kbd "<kp-down>")   'buf-move-down)
-    (global-set-key (kbd "<kp-left>")   'buf-move-left)
-    (global-set-key (kbd "<kp-right>")  'buf-move-right)))
+    (add-hook 'after-init-hook 'scim-mode-on)
+    (scim-define-common-key (kbd "C-`") t)
+    ;; Use C-SPC for Set Mark command
+    (scim-define-common-key ?\C-\s nil)
+    ;; Use C-/ for Undo command
+    (scim-define-common-key ?\C-/ nil)
+    ;; Change cursor color depending on SCIM status
+    (setq scim-cursor-color '("pink" "orange" "limegreen"))))
+
+(use-package color-theme
+  :init
+  (progn
+    (color-theme-inkpot)
+    (setq ansi-term-color-vector
+          [unspecified "grey40" "red3" "green3" "yellow3"
+                       "#6080e0" "#b080d0" "cyan3" "white"])))
+
+(use-package command-frequency
+  :idle
+  (progn
+    (command-frequency-table-load)
+    (command-frequency-mode 1)
+    (command-frequency-autosave-mode 1)))
+
+(use-package buffer-move
+  :bind
+  (("<kp-up>"     . buf-move-up)
+   ("<kp-down>"   . buf-move-down)
+   ("<kp-left>"   . buf-move-left)
+   ("<kp-right>"  . buf-move-right)))
 
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
@@ -557,54 +632,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (switch-to-buffer (marker-buffer pos)) ;; stay in the same window
     (goto-char pos)
     (run-hooks 'occur-mode-find-occurrence-hook)))
-
-(setq org-task-sample-time nil)
-
-(defun org-task-sample (&optional match)
-  "Random sampling of todos from the org file"
-  (interactive)
-  (let ((rpos
-         (save-excursion
-           (outline-up-heading 1)
-           (skip-chars-forward "*") ;; to get level of the parent entry
-           (let* ((level (current-column))
-                  (extract
-                   (lambda () (cons (point) (org-entry-get nil "Effort" t))))
-                  (match (format "+TODO=\"TODO\"+LEVEL=%d" (+ 1 level)))
-                  (scope 'tree)
-                  (candidates
-                   (org-map-entries extract match scope))
-                  (pick (random (length candidates))))
-             (car (nth pick candidates))))))
-    (when (and rpos (/= rpos (point)))
-      (push-mark) (goto-char rpos))))
-
-(define-key org-mode-map [f11] 'org-task-sample)
-
-(defun org-toggle-eval-confirmation ()
-  (interactive)
-  (let ((state (if org-confirm-babel-evaluate nil t)))
-    (setq org-confirm-babel-evaluate state
-          org-confirm-shell-link-function state
-          org-confirm-elisp-link-function state)
-    (message
-     (concat "org eval confirmation is " (if state "on" "off")))))
-
-(defun adb-org-mobile-sync ()
-  "syncs with org-mobile android app via adb"
-  (interactive)
-  (let ((adb
-         (expand-file-name "~/android/android-sdk-linux/platform-tools/adb"))
-        (org-mobile-remote-dir "/sdcard/org")
-        (org-mobile-local-dir (expand-file-name org-mobile-directory)))
-    (org-mobile-pull) ;; to prevent overwriting mobileorg.org
-    (call-process adb nil "*adb*" nil "-d" "pull"
-                  (concat org-mobile-remote-dir "/mobileorg.org")
-                  org-mobile-local-dir)
-    (org-mobile-pull)
-    (org-mobile-push)
-    (call-process adb nil "*adb*" nil "-d" "push"
-                  org-mobile-local-dir org-mobile-remote-dir)))
 
 (defun my-calc-eval ()
   "calculates expression at the point using calc"
@@ -662,7 +689,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
       (while (search-forward "\n" nil t) (replace-match " " nil t)))))
 
 (defun convert-win-to-frame (arg)
-  "makes frame out of window"
+  "makes frame out of window, deletes window with prefix"
   (interactive "P")
   (save-excursion
     (make-frame-command)
@@ -670,29 +697,5 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (define-key global-map (kbd "M-n") 'convert-win-to-frame)
 (define-key global-map (kbd "C-c n") nil)
-
-(use-package scim-bridge
-  :init
-  (progn
-    (add-hook 'after-init-hook 'scim-mode-on)
-    (scim-define-common-key (kbd "C-`") t)
-    ;; Use C-SPC for Set Mark command
-    (scim-define-common-key ?\C-\s nil)
-    ;; Use C-/ for Undo command
-    (scim-define-common-key ?\C-/ nil)
-    ;; Change cursor color depending on SCIM status
-    (setq scim-cursor-color '("pink" "orange" "limegreen"))))
-
-(color-theme-inkpot)
-(setq ansi-term-color-vector
-      [unspecified "grey40" "red3" "green3" "yellow3"
-                   "#6080e0" "#b080d0" "cyan3" "white"])
-
-(use-package command-frequency
-  :init
-  (progn
-    (command-frequency-table-load)
-    (command-frequency-mode 1)
-    (command-frequency-autosave-mode 1)))
 
 (provide 'alex-custom)
