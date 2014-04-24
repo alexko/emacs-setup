@@ -484,9 +484,15 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
       icon-title-format "%b"
       auto-save-list-file-prefix "~/.emacs.cruft/auto-saves/.saves-"
       backup-directory-alist
-      (list (cons "." (expand-file-name "~/.emacs.cruft/backups/")))
-      tramp-auto-save-directory "~/.emacs.cruft/auto-saves/"
-      tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/")))
+      (list (cons "." (expand-file-name "~/.emacs.cruft/backups/"))))
+
+(use-package tramp
+  :init
+  (setq tramp-auto-save-directory "~/.emacs.cruft/auto-saves/"
+        tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/"))
+        shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
+  :config
+  (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:")))
 
 ;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 ;; (setq save-abbrevs t)
@@ -505,9 +511,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (desktop-save-mode 1)
 (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
 (desktop-load-default)
-
-(add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:"))
-(setq shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
 
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
@@ -540,7 +543,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (define-key global-map (kbd "M-/") 'hippie-expand)
 (define-key global-map (kbd "<C-f9>") 'compile)
 (define-key global-map (kbd "<f9>") 'next-error)
-(defube-key global-map (kbd "C-c o") 'occur)
+(define-key global-map (kbd "C-c o") 'occur)
 (define-key occur-mode-map (kbd "q") 'delete-window)
 
 (use-package ledger)
@@ -580,7 +583,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (command-frequency-autosave-mode 1)))
 
 (use-package buffer-move
-  :config
+  :bind
   (("<kp-up>"     . buf-move-up)
    ("<kp-down>"   . buf-move-down)
    ("<kp-left>"   . buf-move-left)
@@ -589,7 +592,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
   (add-to-list 'load-path "/usr/local/go/misc/emacs")
   (use-package go-mode-load))
-
 
 (defun f-toggle-selective-display (column)
   (interactive "P")
