@@ -56,8 +56,11 @@
       tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/")))
 (setq org-format-latex-options
       (plist-put org-format-latex-options :scale 2.0))
-(add-to-list 'load-path "/usr/local/go/misc/emacs")
-(require 'go-mode-load)
+
+(when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
+  (add-to-list 'load-path "/usr/local/go/misc/emacs")
+  (require 'go-mode-load))
+
 (load "ledger")
 
 (defun f-toggle-selective-display (column)
