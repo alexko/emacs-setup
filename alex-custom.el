@@ -306,10 +306,10 @@
                :prepend t :clock-in t :clock-resume t) )))
 
     (defadvice org-capture-finalize (after delete-capture-frame activate)
-      "Advise capture-finalize to close the frame if it is the capture frame"
+      "Advise capture-finalize to close the frame if it is a capture frame"
       (my-delete-capture-frame))
     (defadvice org-capture-destroy (after delete-capture-frame activate)
-      "Advise capture-destroy to close the frame if it is the rememeber frame"
+      "Advise capture-destroy to close the frame if it is a capture frame"
       (my-delete-capture-frame))
     (defun my-delete-capture-frame ()
       (if (equal (frame-parameter nil 'name) "* url capture *")
