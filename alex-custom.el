@@ -1,10 +1,10 @@
 ;; org-mode
 (add-to-list 'load-path "~/.emacs.d/vendor/use-package")
 (require 'use-package)
-(add-to-list 'load-path "~/.emacs.d/org/lisp")
-(add-to-list 'load-path "~/.emacs.d/org/contrib/lisp")
-(use-package org-install)
+(use-package org-install
+  :load-path "org/lisp")
 (use-package org
+  :load-path "org/contrib/lisp"
   :config
   (progn
     (setq org-babel-results-keyword "results")
