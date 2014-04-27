@@ -454,10 +454,9 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (use-package espresso-mode
   :init
-  (progn
     (setq espresso-indent-level 2)
-    (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-    (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))))
+  :mode
+    (("\\.js$" . espresso-mode) ("\\.json$" . espresso-mode)))
 
 (use-package idle-highlight
   :init (add-hook 'espresso-mode-hook 'idle-highlight))
