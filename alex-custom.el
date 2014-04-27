@@ -541,10 +541,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (use-package smex
   :config
-  (smex-initialize)
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c C-c M-x" . execute-extended-command)))
+  (progn
+    (smex-initialize)
+    (define-key global-map (kbd "M-x") 'smex)
+    (define-key global-map (kbd "M-X") 'smex-major-mode-commands)
+    (define-key global-map (kbd "C-c C-c M-x") 'execute-extended-command)))
 
 (use-package scim-bridge
   :config
