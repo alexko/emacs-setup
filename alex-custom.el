@@ -496,6 +496,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (add-hook 'server-done-hook 'delete-frame)
 
 ;; save/restore desktop sessions
+(defadvice desktop-load-default
+  (around my-desktop-load-default-advice)
+  "Be non-interactive while starting a daemon."
+  (if (daemonp) (let ((noninteractive t)) ad-do-it)
+    ad-do-it))
+(ad-activate 'desktop-load-default)
 ;;(load "desktop")
 ;;(desktop-read) ;;-> spurious warning: file appears to be used by own pid
 (desktop-save-mode 1)
