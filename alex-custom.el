@@ -496,17 +496,16 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (add-hook 'server-done-hook 'delete-frame)
 
 ;; save/restore desktop sessions
-(defadvice desktop-load-default
-  (around my-desktop-load-default-advice)
+;; work around emacs bug#5645 (read-event blocks in batch mode)
+(defadvice sit-for
+  (around my-sit-for)
   "Be non-interactive while starting a daemon."
-  (if (daemonp) (let ((noninteractive t)) ad-do-it)
-    ad-do-it))
-(ad-activate 'desktop-load-default)
-;;(load "desktop")
-;;(desktop-read) ;;-> spurious warning: file appears to be used by own pid
-(desktop-save-mode 1)
+  (if (and (daemonp) (not (boundp 'server-process)))
+           (let ((noninteractive t)) ad-do-it) ad-do-it))
+(ad-activate 'sit-for)
+;; this sets after-init-hook
 (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
-(desktop-load-default)
+(desktop-save-mode 1)
 
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
