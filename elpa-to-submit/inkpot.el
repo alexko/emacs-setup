@@ -37,6 +37,8 @@
      (compilation-info ((t (:foreground "Green3"))))
      (diff-header ((((class color) (background dark)) (:background "#202020"))))
      (diff-file-header ((((class color) (background dark)) (:background "#303030"))))
+     (diff-added ((((class color) (background dark)) (:foreground "green3"))))
+     (diff-removed ((((class color) (background dark)) (:foreground "red3"))))
      (font-lock-builtin-face ((t (:foreground "#c080d0"))))
      (font-lock-comment-face ((t (:foreground "#90A0B0")))) ; original inkpot: #cd8b00
      (font-lock-constant-face ((t (:foreground "#6080e0")))) ; original inkpot: #506dbd
