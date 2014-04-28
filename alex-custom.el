@@ -465,6 +465,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
+(show-paren-mode 1)
 
 (setq fill-column 80
       show-trailing-whitespace t
