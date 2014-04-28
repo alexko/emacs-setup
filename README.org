@@ -44,6 +44,8 @@ if __name__ == '__main__':
 * Org-protocol setup
 ** Bookmarklets
 
-[["javascript:location.href='org-protocol://capture://c/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title)+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection())"][Org bookmark to clocked entry]]
-[[javascript:location.href='org-protocol://capture://w/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||document.getElementsByTagName('h1')[0].innerText||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection()+'\n')][Org bookmark]]
+#+begin_src html
+<a href="javascript:location.href='org-protocol://capture://w/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||document.getElementsByTagName('h1')[0].innerText||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection()+'\n')">Org bookmark</a>
+<a href="javascript:location.href='org-protocol://capture://c/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title)+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection())">Org bookmark to clocked entry</a>
+#+end_src
 
