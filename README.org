@@ -47,6 +47,6 @@ if __name__ == '__main__':
    the current page into your bookmarks.org file. Another adds it to
    the currently clocked item:
 #+BEGIN_HTML
-<a href="javascript:location.href='org-protocol://capture://w/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||document.getElementsByTagName('h1')[0].innerText||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection()+'\n')">&> bookmark.org</a>
-<a href="javascript:location.href='org-protocol://capture://c/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title)+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection())">&lt;>clocked</a>
+<a href="javascript:location.href='org-protocol://capture://w/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||document.getElementsByTagName('h1')[0].innerText||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection()+'\n')">&lt; bookmark.org</a>
+<a href="javascript:location.href='org-protocol://capture://c/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title)+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection())">&lt; clocked</a>
 #+END_HTML
