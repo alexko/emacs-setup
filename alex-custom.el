@@ -496,11 +496,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 ;; save/restore desktop sessions
 ;; work around emacs bug#5645 (read-event blocks in batch mode)
 (defadvice sit-for
-  (around my-sit-for)
+  (around my-sit-for activate)
   "Be non-interactive while starting a daemon."
   (if (and (daemonp) (not (boundp 'server-process)))
            (let ((noninteractive t)) ad-do-it) ad-do-it))
-(ad-activate 'sit-for)
+
 ;; this sets after-init-hook
 (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
 (desktop-save-mode 1)
