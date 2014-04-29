@@ -324,6 +324,7 @@
 
   :bind ("C-c c" . org-capture))
 
+;; see README.org for bookmarklets to use with this setup of org-protocol
 (use-package org-protocol
   :config
   (defun org-protocol-do-capture (info &optional capture-func)
