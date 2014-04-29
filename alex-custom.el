@@ -244,8 +244,7 @@
         (call-process adb nil "*adb*" nil "-d" "push"
                       org-mobile-local-dir org-mobile-remote-dir)))
 
-    (defun fix-org-column ()
-      (interactive)
+    (defadvice org-columns (before ak-fix-org-columns activate)
       (when (fboundp 'set-face-attribute)
         (let ((family (face-attribute 'default :family)))
           (set-face-attribute 'org-column nil :family family
@@ -254,9 +253,6 @@
                               :weight 'normal)
           (set-face-foreground 'org-level-2
                                (face-attribute 'default :foreground)))))
-    (defun org-columns-with-fix ()
-      (interactive) (fix-org-column) (org-columns))
-    (define-key org-mode-map (kbd "C-c C-x C-c") 'org-columns-with-fix)
 
     (defun my-open-link (k)
       (unless (equal (string-to-char k) ?*) (org-occur-in-agenda-files k) t))
