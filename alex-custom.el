@@ -36,15 +36,6 @@
                   (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
                             "CANCELLED(c@/!)" "MEETING(m@/!)"))))
 
-    (setq org-todo-keyword-faces
-          (quote (("NEXT" :foreground "gold" :weight bold)
-                  ("TODO" :foreground "pink" :weight bold)
-                  ("DONE" :foreground "palegreen" :weight bold)
-                  ("WAITING" :foreground "deepskyblue" :weight bold)
-                  ("HOLD" :foreground "steel blue" :weight bold)
-                  ("CANCELLED" :foreground "forest green" :weight bold)
-                  ("PHONE" :foreground "forest green" :weight bold))))
-
     (setq org-link-abbrev-alist
           '(("g"        . "https://www.google.com/search?q=")
             ("gs"       . "http://scholar.google.com/scholar?hl=en&q=")
