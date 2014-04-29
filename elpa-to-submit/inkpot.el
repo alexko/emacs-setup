@@ -7,7 +7,7 @@
 ;; (color-theme-initialize)
 ;; (load-file "~/.emacs.d/themes/color-theme-inkpot.el")
 ;;
-;; And then (color-theme-inkpot) to activate it.
+;; And then (color-theme-blackboard) to activate it.
 
 (require 'color-theme)
 
@@ -18,13 +18,12 @@
   (color-theme-install
    '(color-theme-inkpot
      ((foreground-color . "#cfbfad")
-      (background-color . "#1e1e22")
+      (background-color . "#1e1e27")
       (border-color . "#3e3e5e")
-      (cursor-color . "#ccaa40")
+      (cursor-color . "#404040")
       (background-mode . dark))
      (region ((t (:background "#404040"))))
-     (highlight ((t (:background "grey20")))) ; original inkpot: #404040
-     (secondary-selection ((t (:background "#303030"))))
+     (highlight ((t (:background "#404040"))))
      (fringe ((t (:background "#16161b"))))
      (show-paren-match-face ((t (:background "#606060"))))
      (isearch ((t (:bold t :foreground "#303030" :background "#cd8b60"))))
@@ -32,29 +31,15 @@
      (modeline-inactive ((t (:foreground "#708090" :background "#3e3e5e"))))
      (modeline-buffer-id ((t (:bold t :foreground "#b9b9b9" :background "#3e3e5e"))))
      (minibuffer-prompt ((t (:bold t :foreground "#708090"))))
-     (ido-first-match ((t (:bold t :weight bold))))
-     (ido-only-match ((t (:foreground "ForestGreen"))))
-     (compilation-info ((t (:foreground "Green3"))))
-     (diff-header ((((class color) (background dark)) (:background "#202020"))))
-     (diff-file-header ((((class color) (background dark)) (:background "#303030"))))
-     (diff-added ((((class color) (background dark)) (:foreground "green3"))))
-     (diff-removed ((((class color) (background dark)) (:foreground "red3"))))
      (font-lock-builtin-face ((t (:foreground "#c080d0"))))
-     (font-lock-comment-face ((t (:foreground "#90A0B0")))) ; original inkpot: #cd8b00
-     (font-lock-constant-face ((t (:foreground "#6080e0")))) ; original inkpot: #506dbd
+     (font-lock-comment-face ((t (:foreground "#708090")))) ; original inkpot: #cd8b00
+     (font-lock-constant-face ((t (:foreground "#506dbd"))))
      (font-lock-doc-face ((t (:foreground "#cd8b00"))))
      (font-lock-function-name-face ((t (:foreground "#87cefa"))))
-     (font-lock-keyword-face ((t (:bold t :foreground "#b080d0"))))
+     (font-lock-keyword-face ((t (:bold t :foreground "#c080d0"))))
      (font-lock-preprocessor-face ((t (:foreground "309090"))))
      (font-lock-reference-face ((t (:bold t :foreground "#808bed"))))
-     (font-lock-negation-char-face ((t (:background "#7B0000"))))
      (font-lock-string-face ((t (:foreground "#ffcd8b" :background "#404040"))))
      (font-lock-type-face ((t (:foreground "#ff8bff"))))
      (font-lock-variable-name-face ((t nil)))
-     (font-lock-warning-face ((((class color) (background dark)) (:foreground "orangered"))))
-     (magit-item-highlight ((((class color) (background dark)) (:background "grey10"))))
-     (trailing-whitespace ( (((class color) (background dark)) (:background "grey30"))))
-     (show-paren-match ( (((class color) (background dark)) (:background "steelblue4"))))
-     (org-scheduled-previously ((((class color) (background dark)) (:foreground "rosy brown"))))
-     (org-upcoming-deadlines ((((class color) (background dark)) (:foreground "orange"))))
-     (org-column ((((class color) (background dark)) (:background "grey20")))))))
+     (font-lock-warning-face ((t (:foreground "#ffffff" :background "#ff0000")))))))
