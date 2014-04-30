@@ -292,11 +292,11 @@
                "* Daily review :review:\n  %[~/.emacs.d/org/.review.tmpl]"
                :prepend t :clock-in t :clock-resume t) )))
 
-    (defun org-capture-empty-lines-after (&optional n)
-      "Add an empty line after capture w/o adding a line before"
-      (org-back-over-empty-lines)
-      (while (looking-at "[ \t]*\n") (replace-match ""))
-      (save-excursion (if (org-capture-get :prepend) (newline))))
+    (defadvice org-capture-empty-lines-after
+      (around my-extra-empty-line (&optional n) activate)
+      "Add an extra line after capture w/o adding a line before"
+      (if (org-capture-get :prepend)
+          (let ((n (+ 1 n))) ad-do-it) ad-do-it))
     (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
       "prevents org-capture-fill-template from moving point"
       (save-excursion ad-do-it))
