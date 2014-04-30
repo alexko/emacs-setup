@@ -292,6 +292,11 @@
                "* Daily review :review:\n  %[~/.emacs.d/org/.review.tmpl]"
                :prepend t :clock-in t :clock-resume t) )))
 
+    (defun org-capture-empty-lines-after (&optional n)
+      "Add an empty line after capture w/o adding a line before"
+      (org-back-over-empty-lines)
+      (while (looking-at "[ \t]*\n") (replace-match ""))
+      (save-excursion (if (org-capture-get :prepend) (newline))))
     (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
       "prevents org-capture-fill-template from moving point"
       (save-excursion ad-do-it))
@@ -303,14 +308,7 @@
       (my-delete-capture-frame))
     (defun my-delete-capture-frame ()
       (if (equal (frame-parameter nil 'name) "* url capture *")
-          (delete-frame)))
-
-    ;; override: add empty line after capture w/o adding a line before
-    (defun org-capture-empty-lines-after (&optional n)
-      "Add an empty line after capture"
-      (org-back-over-empty-lines)
-      (while (looking-at "[ \t]*\n") (replace-match ""))
-      (save-excursion (if (org-capture-get :prepend) (newline)))))
+          (delete-frame))))
 
   :bind ("C-c c" . org-capture))
 
