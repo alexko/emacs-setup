@@ -569,9 +569,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
    ("<kp-left>"   . buf-move-left)
    ("<kp-right>"  . buf-move-right)))
 
-(when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
-  (add-to-list 'load-path "/usr/local/go/misc/emacs")
-  (use-package go-mode-load))
+;; (when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
+;;   (add-to-list 'load-path "/usr/local/go/misc/emacs")
+;;   (use-package go-mode-load))
+
+(use-package go-mode-load
+  :load-path "/usr/local/go/misc/emacs")
 
 (defun f-toggle-selective-display (column)
   (interactive "P")
