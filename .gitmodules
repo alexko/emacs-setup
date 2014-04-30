@@ -16,3 +16,6 @@
 [submodule "vendor/use-package"]
 	path = vendor/use-package
 	url = https://github.com/jwiegley/use-package
+[submodule "vendor/ess"]
+	path = vendor/ess
+	url = https://github.com/emacs-ess/ESS

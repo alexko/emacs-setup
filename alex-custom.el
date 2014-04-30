@@ -570,9 +570,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
    ("<kp-left>"   . buf-move-left)
    ("<kp-right>"  . buf-move-right)))
 
-;; (when (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
-;;   (add-to-list 'load-path "/usr/local/go/misc/emacs")
-;;   (use-package go-mode-load))
+(use-package ess-site
+  :load-path "vendor/ess")
 
 (use-package go-mode-load
   :load-path "/usr/local/go/misc/emacs")
