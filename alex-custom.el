@@ -263,40 +263,36 @@
            (if (boundp 'org-capture-templates) org-capture-templates nil)
            '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
                "* TODO %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
-               :prepend t :clock-in t :clock-resume t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
                "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
-               :prepend t :clock-in t :clock-resume t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("m" "Meeting" entry (file "~/org/journal.org" "Entries")
                "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
-               :prepend t :clock-in t :clock-resume t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
                "* %^{Title} :xclip:\n  %a\n %x\n%?"
-               :prepend t :clock-in t :clock-resume t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("y" "Clip" entry (file+headline "~/org/journal.org" "Entries")
                "* %^{Title} :yclip:\n  %a\n  %c\n%?"
-               :prepend t :clock-in t :clock-resume t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("w" "org-protocol tag" entry (file "~/org/bookmarks.org")
                "* %:description :%^{Tags|notag}:\n  %i\n\n  %:link\n%?"
-               :prepend t :clock-in t :clock-resume t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
                "* %:description\n  %i\n\n  %:link"
-               :prepend t :clock-in t :clock-resume t :immediate-finish t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t
+               :immediate-finish t)
               ("c" "org-protocol clk" entry (clock)
                "* %:description :url:\n  %i\n\n  %:link"
-               :prepend t :immediate-finish t)
+               :prepend t :empty-lines-after 1 :immediate-finish t)
               ("e" "Expenses" entry (file "~/org/finance.org")
                "* %^{Title} %^g\n  %?"
-               :prepend t :clock-in t :clock-resume t)
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("a" "Review" entry (file "~/org/journal.org")
                "* Daily review :review:\n  %[~/.emacs.d/org/.review.tmpl]"
-               :prepend t :clock-in t :clock-resume t) )))
+               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t) )))
 
-    (defadvice org-capture-empty-lines-after
-      (around my-extra-empty-line (&optional n) activate)
-      "Add an extra line after capture w/o adding a line before"
-      (if (org-capture-get :prepend)
-          (let ((n (+ 1 n))) ad-do-it) ad-do-it))
     (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
       "prevents org-capture-fill-template from moving point"
       (save-excursion ad-do-it))
