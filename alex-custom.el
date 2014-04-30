@@ -655,24 +655,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (define-key global-map (kbd "M-n") 'convert-win-to-frame)
 (define-key global-map (kbd "C-c n") nil)
 
-(defun occur-mode-goto-occurrence (&optional event)
-  "Go to the occurrence the current line describes."
-  (interactive (list last-nonmenu-event))
-  (let ((pos
-         (if (null event)
-             ;; Actually 'event-end' works correctly with a nil argument as
-             ;; well, so we could dispense with this test, but let's not
-             ;; rely on this undocumented behavior.
-             (occur-mode-find-occurrence)
-           (with-current-buffer (window-buffer (posn-window (event-end event)))
-             (save-excursion
-               (goto-char (posn-point (event-end event)))
-               (occur-mode-find-occurrence)))))
-        same-window-buffer-names
-        same-window-regexps)
-    ;;(pop-to-buffer (marker-buffer pos))
-    (switch-to-buffer (marker-buffer pos)) ;; stay in the same window
-    (goto-char pos)
-    (run-hooks 'occur-mode-find-occurrence-hook)))
+(defadvice occur-mode-goto-occurrence (around my-occur activate)
+  "Open occurrences in the same window if occur window is active"
+  (let ((pop-to-buffer-save (symbol-function 'pop-to-buffer)))
+    (fset 'pop-to-buffer 'switch-to-buffer)
+    ad-do-it
+    (fset 'pop-to-buffer pop-to-buffer-save)))
 
 (provide 'alex-custom)
