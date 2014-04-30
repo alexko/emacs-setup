@@ -292,6 +292,9 @@
                "* Daily review :review:\n  %[~/.emacs.d/org/.review.tmpl]"
                :prepend t :clock-in t :clock-resume t) )))
 
+    (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
+      "prevents org-capture-fill-template from moving point"
+      (save-excursion ad-do-it))
     (defadvice org-capture-finalize (after delete-capture-frame activate)
       "Advise capture-finalize to close the frame if it is a capture frame"
       (my-delete-capture-frame))
