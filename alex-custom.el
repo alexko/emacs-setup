@@ -416,9 +416,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (setq ido-default-buffer-method 'selected-window)
     (ido-mode (quote both)))
   :bind (("C-x C-f" . ido-find-file)
-         ("C-x f" . recentf-ido-find-file)
-         ("C-x M-f" . ido-find-file-other-window)
-         ("C-x C-i" . ido-imenu)))
+         ("C-x M-f" . ido-find-file-other-window)))
 
 (use-package find-file-in-project
   :init

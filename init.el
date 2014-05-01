@@ -62,24 +62,20 @@
 
 ;; Load up starter kit customizations
 
-(require 'starter-kit-defuns)
+;; (require 'starter-kit-defuns)
 ;;(require 'starter-kit-bindings)
-(require 'starter-kit-misc)
-(require 'starter-kit-registers)
-(require 'starter-kit-eshell)
-(require 'starter-kit-lisp)
-(require 'starter-kit-perl)
-(require 'starter-kit-ruby)
+;; (require 'starter-kit-misc)
+;; (require 'starter-kit-registers)
+;; (require 'starter-kit-eshell)
+;; (require 'starter-kit-lisp)
+;; (require 'starter-kit-perl)
+;; (require 'starter-kit-ruby)
 ;; (require 'starter-kit-js)
-;; (require 'mrflip-faces)
-;; (require 'mrflip-modes)
-;; (require 'mrflip-dot-emacs)
-;; (require 'mrflip-defuns)
-;; (require 'mrflip-bindings)
 (require 'setup-erc)
 
 
-(regen-autoloads)
+;;(regen-autoloads)
+(load autoload-file)
 (load custom-file 'noerror)
 
 ;; You can keep system- or user-specific customizations here
