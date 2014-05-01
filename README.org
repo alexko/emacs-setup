@@ -1,3 +1,14 @@
+* Intro
+  This is my emacs setup. I use it coding and project management (using
+  org-mode).
+* Installation
+  from your home directory
+#+begin_src sh :eval never
+  git clone https://github.com/alexko/emacs-setup .emacs.d
+  cd .emacs.d
+  git submodule update --init
+  make
+#+end_src
 * Org-capture
 ** Global capture
    System > Preferences > Keyboard shortcuts > Custom Shortcuts > F12
@@ -42,6 +53,7 @@ if __name__ == '__main__':
 #+end_src
 
 * Org-protocol setup
+  I use org-protocol to bookmark pages from browser.
 ** Bookmarklets
    You can drag these links to your browser toolbar. One is boomarking
    the current page into your bookmarks.org file. Another adds it to
