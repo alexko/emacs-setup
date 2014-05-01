@@ -203,6 +203,8 @@
         (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
 
     (defun my-x11idle-set ()
+      (unless (boundp 'org-clock-x11idle-program-name)
+        (setq org-clock-x11idle-program-name "x11idle"))
       (setq org-x11idle-exists-p
             (and (eq window-system 'x)
                  (eq (call-process-shell-command
