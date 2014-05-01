@@ -269,7 +269,7 @@
               ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
                "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("m" "Meeting" entry (file "~/org/journal.org" "Entries")
+              ("m" "Meeting" entry (file+headline "~/org/journal.org" "Entries")
                "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
