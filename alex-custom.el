@@ -288,7 +288,7 @@
                :immediate-finish t)
               ("c" "org-protocol clk" entry (clock)
                "* %:description :url:\n  %i\n\n  %:link"
-               :prepend t :empty-lines-after 1 :immediate-finish t)
+               :prepend t :empty-lines 1 :immediate-finish t)
               ("e" "Expenses" entry (file "~/org/finance.org")
                "* %^{Title} %^g\n  %?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
