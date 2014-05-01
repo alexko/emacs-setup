@@ -83,6 +83,7 @@
     (setq org-refile-use-outline-path (quote file))
     (setq org-reverse-note-order t) ;; refiling puts item at the top
     (setq org-completion-use-ido t)
+    (setq org-imenu-depth 3)                       ; default is 2
     (setq org-refile-targets '((nil :maxlevel . 4) ;; current buffer
                                (org-mobile-files :maxlevel . 4)))
     ;; Use full outline paths for refile targets - we file directly with IDO
