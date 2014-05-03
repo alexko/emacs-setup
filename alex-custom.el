@@ -296,6 +296,9 @@
                "* Daily review :review:\n  %[~/.emacs.d/org/.review.tmpl]"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t) )))
 
+    ;; this fixes "The mark is not set now, so there is no region" error
+    (defadvice org-capture-steal-local-variables (around donot-steal activate))
+
     (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
       "prevents org-capture-fill-template from moving point"
       (save-excursion ad-do-it))
