@@ -61,7 +61,7 @@ if __name__ == '__main__':
 #+BEGIN_HTML
 <p>
 <a
-href="javascript:for(var l=1,ht=0;l<10&&!ht;ht=document.getElementsByTagName('h'+l++)[0]);location.href='org-protocol://capture://w/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||ht.innerText||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection()+'\n')">&gt;B</a> save page to bookmarks.org
+href="javascript:for(var l=1,ht=0;l<10&&!ht;ht=document.getElementsByTagName('h'+l++)[0]);location.href='org-protocol://capture://w/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||(ht&&ht.innerText)||location.pathname.split('/').pop()||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection()+'\n')">&gt;B</a> save page to bookmarks.org
 <p>
-<a href="javascript:for(var l=1,ht=0;l<10&&!ht;ht=document.getElementsByTagName('h'+l++)[0]);location.href='org-protocol://capture://c/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||ht.innerText||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection())">&gt;C</a> append the page to the currently clocked item
+<a href="javascript:for(var l=1,ht=0;l<10&&!ht;ht=document.getElementsByTagName('h'+l++)[0]);location.href='org-protocol://capture://c/'+encodeURIComponent(location.href)+'/'+encodeURIComponent(document.title||(ht&&ht.innerText)||location.pathname.split('/').pop()||'noname')+'/'+encodeURIComponent('via: '+document.referrer+'\n\n'+window.getSelection())">&gt;C</a> append the page to the currently clocked item
 #+END_HTML
