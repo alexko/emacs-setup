@@ -460,6 +460,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (setq fill-column 80
       show-trailing-whitespace t
+      initial-scratch-message ""
+      initial-major-mode 'org-mode
+      spell-command "aspell"
+      visible-bell t
+      text-mode-hook '(turn-on-auto-fill text-mode-hook-identify)
       remote-shell-program "/usr/bin/ssh"
       compile-command "cd . ; make -j4 -k"
       frame-title-format "%b %+ %[%f%]"
