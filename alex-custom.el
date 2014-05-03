@@ -402,6 +402,10 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   :init
   (define-key org-mode-map [f11] 'org-task-sample))
 
+(use-package recentf
+  :config (recentf-mode 1)
+  :bind ("C-x f" . recentf-open-files))
+
 (use-package ido
   :init
   (progn
