@@ -1,5 +1,5 @@
 * Intro
-  This is my emacs setup. I use it coding and project management (using
+  This is my emacs setup. I use it for coding and project management (using
   org-mode).
 * Installation
   from your home directory
