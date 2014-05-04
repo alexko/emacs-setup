@@ -314,7 +314,10 @@ FILE-NAME is nil uses `command-frequency-table-file'."
                (insert-file-contents file-name)
                (goto-char (point-min))
                (read (current-buffer)))))
-      (message (prin1-to-string l))
+      ;; (message (prin1-to-string l))
+      (message
+       (format "command-frequency-table %s (%d rows)"
+               command-frequency-table-file (length l)))
 
       ; Was it valid sexp?
       (if (or (not (listp l)) (null l))
