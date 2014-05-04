@@ -21,6 +21,10 @@
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
 
+(let ((default-directory (concat dotfiles-dir "vendor/")))
+  (normal-top-level-add-subdirs-to-load-path))
+(require 'use-package)
+
 (require 'cl)
 (require 'saveplace)
 (require 'ffap)

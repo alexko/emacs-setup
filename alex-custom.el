@@ -1,7 +1,4 @@
 ;; org-mode
-(let ((default-directory (concat dotfiles-dir "vendor/")))
-  (normal-top-level-add-subdirs-to-load-path))
-(require 'use-package)
 (use-package org-install
   :load-path "org/lisp")
 (use-package org
