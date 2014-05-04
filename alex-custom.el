@@ -401,6 +401,13 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   :init ;; prevent interference with normal org linking
   (setq org-store-link-functions
         (delq 'org-git-store-link org-store-link-functions)))
+(use-package org-player
+  :if window-system
+  :commands org-player-start/stop
+  :init
+  (use-package bongo
+    :load-path "vendor/bongo"
+    :commands bongo))
 (use-package org-sample
   :init
   (define-key org-mode-map [f11] 'org-task-sample))
