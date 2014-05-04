@@ -1,5 +1,5 @@
 ;; org-mode
-(let ((default-directory "~/.emacs.d/vendor/"))
+(let ((default-directory (concat dotfiles-dir "vendor/")))
   (normal-top-level-add-subdirs-to-load-path))
 (require 'use-package)
 (use-package org-install
@@ -124,7 +124,8 @@
     (setq org-treat-S-cursor-todo-selection-as-state-change nil)
     (setq org-agenda-include-diary t)
 
-    (add-to-list 'Info-default-directory-list "~/.emacs.d/org/doc")
+    (add-to-list 'Info-default-directory-list
+                 (concat dotfiles-dir "/org/doc"))
     (setq org-list-allow-alphabetical t)
     (setq org-cycle-include-plain-lists t)
     (setq org-catch-invisible-edits 'error)
@@ -294,7 +295,8 @@
                "* %^{Title} %^g\n  %?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("a" "Review" entry (file "~/org/journal.org")
-               "* Daily review :review:\n  %[~/.emacs.d/org/.review.tmpl]"
+               (concat
+                "* Daily review :review:\n  %[.review.tmpl]")
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t) )))
 
     ;; this fixes "The mark is not set now, so there is no region" error
@@ -482,6 +484,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (fset 'yes-or-no-p 'y-or-n-p)
 (show-paren-mode 1)
 
+(setq cruft-dir "~/.emacs.cruft/")
 (setq fill-column 80
       show-trailing-whitespace t
       initial-scratch-message ""
@@ -493,19 +496,19 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
       compile-command "cd . ; make -j4 -k"
       frame-title-format "%b %+ %[%f%]"
       icon-title-format "%b"
-      auto-save-list-file-prefix "~/.emacs.cruft/auto-saves/.saves-"
+      auto-save-list-file-prefix (concat cruft-dir "auto-saves/.saves-")
       backup-directory-alist
-      (list (cons "." (expand-file-name "~/.emacs.cruft/backups/"))))
+      (list (cons "." (concat cruft-dir "backups/"))))
 
 (use-package tramp
   :init
-  (setq tramp-auto-save-directory "~/.emacs.cruft/auto-saves/"
-        tramp-backup-directory-alist '((".*" . "~/.emacs.cruft/backups/"))
+  (setq tramp-auto-save-directory (concat cruft-dir "auto-saves/")
+        tramp-backup-directory-alist backup-directory-alist
         shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
   :config
   (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:")))
 
-;; (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
+;; (setq abbrev-file-name (concat dotfiles-dir ".abbrev_defs"))
 ;; (setq save-abbrevs t)
 
 ;; emacsclient opens new frame, closes when done
