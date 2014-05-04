@@ -429,13 +429,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (defun recentf-ido-find-file ()
       "Find a recent file using ido."
       (interactive)
-      (let ((file
-             (ido-completing-read "Choose recent file: " recentf-list nil t)))
+      (let ((file (ido-completing-read "Recent files: " recentf-list nil t)))
         (when file (find-file file)))))
   
   :bind (("C-x C-f" . ido-find-file)
          ("C-x M-f" . ido-find-file-other-window)
-         ("C-x f" . recentf-ido-find-file)))
+         ("C-x f"   . recentf-ido-find-file)))
 
 (use-package find-file-in-project
   :init
