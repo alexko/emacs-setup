@@ -420,8 +420,9 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
           '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`LICENSE"))
     (setq ido-file-extensions-order
           '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
-    (setq ido-use-filename-at-point 'guess)
+    ;; (setq ido-use-filename-at-point 'guess)
     (setq ido-everywhere t)
+    (setq ido-enable-flex-matching t)
     (setq ido-max-directory-size 300000)
     (setq ido-default-buffer-method 'selected-window))
     (ido-mode (quote both))
