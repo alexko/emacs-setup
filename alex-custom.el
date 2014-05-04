@@ -592,6 +592,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (use-package command-frequency
   :config
   (progn
+    (setq command-frequency-table-file
+          (concat cruft-dir ".emacs.frequencies"))
     (command-frequency-table-load)
     (command-frequency-mode 1)
     (command-frequency-autosave-mode 1)))
