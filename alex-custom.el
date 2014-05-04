@@ -429,19 +429,23 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (setq ido-everywhere t)
     (setq ido-max-directory-size 300000)
     (setq ido-default-buffer-method 'selected-window))
-
-  :config
-  (progn
     (ido-mode (quote both))
-    (defun recentf-ido-find-file ()
+    (defun ido-recentf-find-file ()
       "Find a recent file using ido."
       (interactive)
       (let ((file (ido-completing-read "Recent files: " recentf-list nil t)))
-        (when file (find-file file)))))
-  
-  :bind (("C-x C-f" . ido-find-file)
-         ("C-x M-f" . ido-find-file-other-window)
-         ("C-x f"   . recentf-ido-find-file)))
+        (when file (find-file file))))
+    (defun ido-execute-extended-command ()
+      (interactive)
+      (call-interactively
+       (intern
+        (ido-completing-read
+         "M-x "
+         (all-completions "" obarray 'commandp)))))
+    (define-key global-map (kbd "M-x") 'ido-execute-extended-command)
+    (define-key global-map (kbd "C-x f") 'ido-recentf-find-file)
+    (define-key global-map (kbd "C-x C-f") 'ido-find-file)
+    (define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window))
 
 (use-package find-file-in-project
   :init
