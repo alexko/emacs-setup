@@ -49,9 +49,6 @@
 (require 'ansi-color)
 (require 'recentf)
 
-;; backport some functionality to Emacs 22 if needed
-(require 'dominating-file)
-
 ;; Load up ELPA, the package manager
 
 (require 'package)
