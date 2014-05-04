@@ -491,7 +491,9 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 (use-package ess-site)
 
 (use-package go-mode-load
-  :load-path "/usr/local/go/misc/emacs")
+  :load-path "/usr/local/go/misc/emacs"
+  :mode ("\\.go\\'" . go-mode)
+  :interpreter ("go" . go-mode))
 
 (defun f-toggle-selective-display (column)
   (interactive "P")
