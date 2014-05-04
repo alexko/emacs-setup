@@ -1,5 +1,6 @@
 ;; org-mode
-(add-to-list 'load-path "~/.emacs.d/vendor/use-package")
+(let ((default-directory "~/.emacs.d/vendor/"))
+  (normal-top-level-add-subdirs-to-load-path))
 (require 'use-package)
 (use-package org-install
   :load-path "org/lisp")
@@ -406,7 +407,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   :commands org-player-start/stop
   :init
   (use-package bongo
-    :load-path "vendor/bongo"
     :commands bongo))
 (use-package org-sample
   :init
@@ -599,8 +599,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
    ("<kp-left>"   . buf-move-left)
    ("<kp-right>"  . buf-move-right)))
 
-(use-package ess-site
-  :load-path "vendor/ess")
+(use-package ess-site)
 
 (use-package go-mode-load
   :load-path "/usr/local/go/misc/emacs")
