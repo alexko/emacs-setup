@@ -433,6 +433,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
       auto-save-list-file-prefix (concat cruft-dir "auto-saves/.saves-")
       backup-directory-alist
       (list (cons "." (concat cruft-dir "backups/"))))
+;; (setq tab-width 2)
+;; (setq-default indent-tabs-mode nil)
 
 ;; (setq abbrev-file-name (concat dotfiles-dir ".abbrev_defs"))
 ;; (setq save-abbrevs t)
@@ -580,5 +582,17 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (fset 'pop-to-buffer 'switch-to-buffer)
     ad-do-it
     (fset 'pop-to-buffer pop-to-buffer-save)))
+
+(when (equal system-type 'darwin)
+  ;; from tim_custom.el
+  ;; When started from Emacs.app or similar, ensure $PATH
+  ;; is the same the user would see in Terminal.app
+  (defun path-from-shell-PATH ()
+    (let ((path-from-shell
+           (shell-command-to-string "$SHELL -c 'echo $PATH'")))
+      (split-string path-from-shell path-separator)))
+  (when window-system
+      (setenv "PATH" path-from-shell)
+      (setq exec-path (path-from-shell-PATH))))
 
 (provide 'alex-custom)

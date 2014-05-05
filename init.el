@@ -105,6 +105,33 @@
   :mode
     (("\\.js$" . espresso-mode) ("\\.json$" . espresso-mode)))
 
+;; begin from tim-custom
+(use-package pymacs
+  :load-path "vendor/"
+  :init (progn
+          (autoload 'pymacs-apply "pymacs")
+          (autoload 'pymacs-call "pymacs"))
+  :commands (pymacs-eval pymacs-exec pymacs-load))
+
+(use-package mmm-mako
+  :load-path "vendor/mmm-mode"
+  :mode ("\\.mako\\'" . html-mode)
+  :config
+  (mmm-add-mode-ext-class 'html-mode "\\.mako\\'" 'mako))
+
+(use-package gccsense)
+
+(use-package google-c-style
+  :config
+  (progn
+    (add-hook 'c-mode-common-hook 'google-set-c-style)
+    (add-hook 'c-mode-common-hook 'google-make-newline-indent)))
+
+(use-package py-indent
+  :disabled t
+  :init (setq-default py-indent-offset 2))
+;; end from tim-custom
+
 (use-package idle-highlight
   :init (add-hook 'espresso-mode-hook 'idle-highlight))
 
