@@ -415,91 +415,12 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   :init
   (define-key org-mode-map (kbd "<F11>") 'org-task-sample))
 
-
-(set-language-environment "UTF-8")
-(set-charset-priority 'unicode)
-(prefer-coding-system 'utf-8)
-(add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
-(fset 'yes-or-no-p 'y-or-n-p)
-(show-paren-mode 1)
-
-(setq fill-column 80
-      show-trailing-whitespace t
-      initial-scratch-message ""
-      initial-major-mode 'org-mode
-      spell-command "aspell"
-      visible-bell t
-      text-mode-hook '(turn-on-auto-fill text-mode-hook-identify)
-      remote-shell-program "/usr/bin/ssh"
-      compile-command "cd . ; make -j4 -k"
-      frame-title-format "%b %+ %[%f%]"
-      icon-title-format "%b"
-      auto-save-list-file-prefix (concat cruft-dir "auto-saves/.saves-")
-      backup-directory-alist
-      (list (cons "." (concat cruft-dir "backups/"))))
-;; (setq tab-width 2)
-;; (setq-default indent-tabs-mode nil)
-
-;; (setq abbrev-file-name (concat dotfiles-dir ".abbrev_defs"))
-;; (setq save-abbrevs t)
-
-;; emacsclient opens new frame, closes when done
-(add-hook 'server-switch-hook
-          (lambda nil
-            (let ((server-buf (current-buffer)))
-              (bury-buffer)
-              (switch-to-buffer-other-frame server-buf))))
-(add-hook 'server-done-hook 'delete-frame)
-
-;; save/restore desktop sessions
 ;; work around emacs bug#5645 (read-event blocks in batch mode)
 (defadvice sit-for
   (around my-sit-for activate)
   "Be non-interactive while starting a daemon."
   (if (and (daemonp) (not (boundp 'server-process)))
            (let ((noninteractive t)) ad-do-it) ad-do-it))
-
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
-;;(define-key global-map (kbd "C-x C-b") 'ibuffer)
-(define-key global-map (kbd "M-g") 'goto-line)
-(define-key global-map (kbd "M-/") 'hippie-expand)
-(define-key global-map (kbd "<f5>") 'edebug-defun)
-(define-key global-map (kbd "<C-f9>") 'compile)
-(define-key global-map (kbd "<f9>") 'next-error)
-(define-key global-map (kbd "C-c o") 'occur)
-(define-key global-map (kbd "C-h /") 'find-function)
-(define-key occur-mode-map (kbd "q") 'delete-window)
-
-
-(use-package color-theme
-  :config
-  (when (fboundp 'color-theme-lilacs)
-    (color-theme-lilacs)))
-
-(use-package command-frequency
-  :init
-  (setq command-frequency-table-file
-        (concat cruft-dir ".emacs.frequencies"))
-  :config
-  (progn
-    (command-frequency-table-load)
-    (command-frequency-mode 1)
-    (command-frequency-autosave-mode 1)))
-
-(use-package buffer-move
-  :bind
-  (("<kp-up>"     . buf-move-up)
-   ("<kp-down>"   . buf-move-down)
-   ("<kp-left>"   . buf-move-left)
-   ("<kp-right>"  . buf-move-right)))
-
-(use-package ess-site)
-
-(use-package go-mode-load
-  :load-path "/usr/local/go/misc/emacs"
-  :mode ("\\.go\\'" . go-mode)
-  :interpreter ("go" . go-mode))
 
 (defun f-toggle-selective-display (column)
   (interactive "P")
