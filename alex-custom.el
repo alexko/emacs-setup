@@ -30,30 +30,31 @@
           (plist-put org-format-latex-options :scale 2.0))
 
     (setq org-todo-keywords
-          (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
-                  (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
-                            "CANCELLED(c@/!)" "MEETING(m@/!)"))))
+          '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
+            (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
+                      "CANCELLED(c@/!)" "MEETING(m@/!)")))
 
-    (setq org-link-abbrev-alist
-          '(("g"        . "https://www.google.com/search?q=")
-            ("gs"       . "http://scholar.google.com/scholar?hl=en&q=")
-            ("gb"       . "https://www.google.com/search?tbm=bks&q=")
-            ("gt"       . "http://translate.google.com/#auto/en/")
-            ("pat"      . "https://www.google.com/search?tbm=pts&q=")
-            ("gfin"     . "http://www.google.com/finance?q=")
-            ("gmap"     . "http://maps.google.com/maps?q=")
-            ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")
-            ("tw"       . "http://twitter.com/")
-            ("d"        . "http://www.duckduckgo.com/?q=")
-            ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
-            ("sd"       . "http://slickdeals.net/newsearch.php?firstonly=1&q=")
-            ("cb"       . "http://crunchbase.com/search?query=")
-            ("usc"      . "http://www.law.cornell.edu/uscode/text/")
-            ("cfr"      . "http://www.law.cornell.edu/cfr/text/")
-            ("ups"      . "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=")
-            ("ontrack"  . "http://www.ontrac.com/trackres.asp?tracking_number=")
-            ("wp"       . "http://en.wikipedia.org/w/index.php?title=Special:Search&search=")
-            ("yelp"     . "http://www.yelp.com/search?find_desc=")))
+    (setq
+     org-link-abbrev-alist
+     '(("g"        . "https://www.google.com/search?q=")
+       ("gs"       . "http://scholar.google.com/scholar?hl=en&q=")
+       ("gb"       . "https://www.google.com/search?tbm=bks&q=")
+       ("gt"       . "http://translate.google.com/#auto/en/")
+       ("pat"      . "https://www.google.com/search?tbm=pts&q=")
+       ("gfin"     . "http://www.google.com/finance?q=")
+       ("gmap"     . "http://maps.google.com/maps?q=")
+       ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")
+       ("tw"       . "http://twitter.com/")
+       ("d"        . "http://www.duckduckgo.com/?q=")
+       ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
+       ("sd"       . "http://slickdeals.net/newsearch.php?firstonly=1&q=")
+       ("cb"       . "http://crunchbase.com/search?query=")
+       ("usc"      . "http://www.law.cornell.edu/uscode/text/")
+       ("cfr"      . "http://www.law.cornell.edu/cfr/text/")
+       ("ups"      . "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=")
+       ("ontrack"  . "http://www.ontrac.com/trackres.asp?tracking_number=")
+       ("wp"       . "http://en.wikipedia.org/w/index.php?title=Special:Search&search=")
+       ("yelp"     . "http://www.yelp.com/search?find_desc=")))
 
     (setq org-directory "~/org")
     ;; (setq org-agenda-files (list org-directory))
@@ -78,18 +79,18 @@
             ("\\.pdf\\'" . default)
             ("\\.epub\\'" . "fbreader %s")))
 
-    (setq org-refile-use-outline-path (quote file))
-    (setq org-reverse-note-order t) ;; refiling puts item at the top
+    (setq org-refile-use-outline-path 'file)
+    (setq org-reverse-note-order t)    ; refiling puts item at the top
     (setq org-completion-use-ido t)
     (setq org-imenu-depth 3)                       ; default is 2
-    (setq org-refile-targets '((nil :maxlevel . 4) ;; current buffer
+    (setq org-refile-targets '((nil :maxlevel . 4) ; current buffer
                                (org-mobile-files :maxlevel . 4)))
     ;; Use full outline paths for refile targets - we file directly with IDO
     (setq org-refile-use-outline-path 'file)
     ;; Targets complete directly with IDO
     (setq org-outline-path-complete-in-steps nil)
     ;; Allow refile to create parent tasks with confirmation
-    (setq org-refile-allow-creating-parent-nodes (quote confirm))
+    (setq org-refile-allow-creating-parent-nodes 'confirm)
     (defun verify-refile-target ()
       "Exclude todo keywords with a done state from refile targets"
       (not (member (nth 2 (org-heading-components)) org-done-keywords)))
@@ -112,10 +113,10 @@
     (setq org-yank-adjusted-subtrees t)
 
     (setq org-log-done t)
-    ;;(setq org-log-done (quote time))
+    ;;(setq org-log-done 'time)
     (setq org-log-into-drawer t)
     ;;(setq org-log-state-notes-insert-after-drawers nil)
-    (setq org-odd-levels-only nil) ;; org.mobile gets confused if it is enabled
+    (setq org-odd-levels-only nil) ; org.mobile gets confused if it is enabled
     (setq org-hide-leading-stars t)
     (setq org-enforce-todo-dependencies t)
     (setq org-treat-S-cursor-todo-selection-as-state-change nil)
@@ -134,12 +135,12 @@
     (setq org-clock-history-length 36)
     (setq org-clock-in-resume t)
     (setq org-clock-in-switch-to-state 'my-clock-in-to-next)
-    (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+    (setq org-drawers '("PROPERTIES" "LOGBOOK"))
     (setq org-clock-into-drawer t)
     (setq org-clock-out-when-done t)
     (setq org-clock-persist t)
     (setq org-clock-persist-query-resume nil)
-    (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+    (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
     (setq org-clock-report-include-clocking-task t)
 
     (setq org-stuck-projects
@@ -147,7 +148,7 @@
 
     (setq org-agenda-dim-blocked-tasks nil)
     (setq org-agenda-compact-blocks t)
-                                        ; (setq org-agenda-custom-commands nil) ;; reset
+    ;; (setq org-agenda-custom-commands nil) ; reset
     (setq org-agenda-custom-commands
           (append
            (and (boundp 'org-agenda-custom-commands) org-agenda-custom-commands)
@@ -208,7 +209,8 @@
       (setq org-x11idle-exists-p
             (and (eq window-system 'x)
                  (eq (call-process-shell-command
-                      "command" nil nil nil "-v" org-clock-x11idle-program-name) 0)
+                      "command" nil nil nil "-v"
+                      org-clock-x11idle-program-name) 0)
                  (eq (call-process-shell-command
                       org-clock-x11idle-program-name nil nil nil) 0))))
 
@@ -225,7 +227,8 @@
       "syncs with org-mobile android app via adb"
       (interactive)
       (let ((adb
-             (expand-file-name "~/android/android-sdk-linux/platform-tools/adb"))
+             (expand-file-name
+              "~/android/android-sdk-linux/platform-tools/adb"))
             (org-mobile-remote-dir "/sdcard/org")
             (org-mobile-local-dir (expand-file-name org-mobile-directory)))
         (org-mobile-pull) ;; to prevent overwriting mobileorg.org
@@ -339,7 +342,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
             (or
              (and (boundp 'org-protocol-convert-query-to-plist)
                   (org-protocol-convert-query-to-plist (cadddr parts))) ""))
-           (org-capture-link-is-already-stored t) ;; avoid call to org-store-link
+           (org-capture-link-is-already-stored t) ; avoid call to org-store-link
            remember-annotation-functions)
       ;; (setq org-stored-links
       ;;       (cons (list url title) org-stored-links))
@@ -371,16 +374,17 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (defun org-make-dependency (arg)
       (interactive
        (if (= (prefix-numeric-value current-prefix-arg) 1)
-           (list
-            (format "ID %s" (kill-new (org-id-get (point) t)))) ;; push item id on the kill ring
+           (list                       ; push item id on the kill ring
+            (format "ID %s" (kill-new (org-id-get (point) t))))
          (let*
-             ((id (current-kill 0)) ;; pop item id from the kill ring
+             ((id (current-kill 0))   ; pop item id from the kill ring
               (pos (point))
               (tup
                (if (= (prefix-numeric-value current-prefix-arg) 4)
                    (cons "TRIGGER"
                          (format "%s(%s)" id
-                                 (read-from-minibuffer "TRIGGER STATUS: " "TODO")))
+                                 (read-from-minibuffer
+                                  "TRIGGER STATUS: " "TODO")))
                  (cons "BLOCKER" id))))
            (org-entry-add-to-multivalued-property pos (car tup) (cdr tup))
            (list (format "%s = %s" (car tup) (cdr tup))))))
