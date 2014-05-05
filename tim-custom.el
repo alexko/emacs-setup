@@ -1,2 +1,0 @@
-(provide 'tim-custom)
-

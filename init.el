@@ -215,7 +215,6 @@
 (if (file-exists-p user-specific-dir)
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
-(use-package tim-custom)
 (use-package alex-custom)
 (use-package setup-erc)
 ;;; init.el ends here
