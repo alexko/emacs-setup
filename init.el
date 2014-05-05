@@ -291,5 +291,6 @@
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
 (use-package alex-custom)
+(use-package org-custom)
 (use-package setup-erc)
 ;;; init.el ends here
