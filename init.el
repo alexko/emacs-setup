@@ -88,9 +88,7 @@
   :init (setq uniquify-buffer-name-style 'forward))
 
 (use-package recentf
-  :config (recentf-mode 1)
-  :commands recentf-list
-  :bind ("C-x f" . recentf-open-files))
+  :config (recentf-mode 1))
 
 (use-package ido
   :init
