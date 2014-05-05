@@ -507,7 +507,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
    (if selective-display nil
      (or column (+ 1 (current-column))))))
 
-(global-set-key [f1] 'f-toggle-selective-display)
+(define-key global-map (kbd "<F1>") 'f-toggle-selective-display)
 
 (defun find-preferred-browser ()
   (let ((candidates '("google-chrome" "chromium-browser" "firefox")))
@@ -525,7 +525,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
          (result (calc-eval selection)))
     (insert (concat " = " result))))
 
-(global-set-key (kbd "C-=") 'my-calc-eval)
+(define-key global-map (kbd "C-=") 'my-calc-eval)
 
 (defun recent-dl (n)
   "insert link to a recently downloaded file"
