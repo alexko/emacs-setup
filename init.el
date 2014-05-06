@@ -156,6 +156,7 @@
   :commands (pymacs-eval pymacs-exec pymacs-load))
 
 (use-package mmm-mako
+  :disabled t
   :load-path "vendor/mmm-mode"
   :mode ("\\.mako\\'" . html-mode)
   :config
