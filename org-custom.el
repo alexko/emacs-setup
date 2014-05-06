@@ -292,7 +292,7 @@
                "* %:description :url:\n  %i\n\n  %:link"
                :prepend t :empty-lines 1 :immediate-finish t)
               ("d" "org-protocol desktop tag" entry (file "~/org/journal.org")
-               "* %:description :%^{Tags|notag}:\n  %i\n\n  %:link\n%?"
+               "* %:description :dtp:%^{Tags|notags}:\n  %i\n\n  %:link\n%?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("e" "Expenses" entry (file "~/org/finance.org")
                "* %^{Title} %^g\n  %?"
@@ -356,7 +356,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
                             :annotation orglink
                             :initial region
                             :query query)
-      (if (equal template "w")
+      (if (member template '("w" "d"))
           (progn
             (select-frame-set-input-focus
              (make-frame '((name . "* url capture *"))))
