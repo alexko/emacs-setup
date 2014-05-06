@@ -281,18 +281,18 @@
               ("y" "Clip" entry (file+headline "~/org/journal.org" "Entries")
                "* %^{Title} :yclip:\n  %a\n  %c\n%?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("w" "org-protocol tag" entry (file "~/org/bookmarks.org")
+              ("w" "op tag bookmark" entry (file "~/org/bookmarks.org")
                "* %:description :%^{Tags|notag}:\n  %i\n\n  %:link\n%?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("u" "org-protocol imm" entry (file "~/org/bookmarks.org")
+              ("u" "op imm bookmark" entry (file "~/org/bookmarks.org")
                "* %:description\n  %i\n\n  %:link"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t
                :immediate-finish t)
-              ("c" "org-protocol clk" entry (clock)
+              ("c" "op to clocked" entry (clock)
                "* %:description :url:\n  %i\n\n  %:link"
                :prepend t :empty-lines 1 :immediate-finish t)
-              ("d" "org-protocol desktop tag" entry (file "~/org/journal.org")
-               "* %:description :dtp:%^{Tags|notags}:\n  %i\n\n  %:link\n%?"
+              ("s" "op system" entry (file+headline "~/org/journal.org" "Entries")
+               "* %:description :dtp:%^{Tags|notags}:\n  %i\n\n%?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("e" "Expenses" entry (file "~/org/finance.org")
                "* %^{Title} %^g\n  %?"
@@ -323,7 +323,7 @@
 ;; see README.org for bookmarklets to use with this setup of org-protocol
 (use-package org-protocol
   :init
-  (setq my-org-protocol-override-templates '("w" "d"))
+  (setq my-org-protocol-override-templates '("w" "s"))
   :config
   (defadvice org-protocol-do-capture
     (around my-capture-frame (info &optional capture-func) activate)
