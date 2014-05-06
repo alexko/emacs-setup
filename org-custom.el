@@ -322,8 +322,25 @@
 
 ;; see README.org for bookmarklets to use with this setup of org-protocol
 (use-package org-protocol
+  :init
+  (setq my-org-protocol-override-templates '("w" "d"))
   :config
-  (defun org-protocol-do-capture (info &optional capture-func)
+  (defadvice org-protocol-do-capture
+    (around my-capture-frame (info &optional capture-func) activate)
+    "Support `org-capture' and `org-remember' alike.
+CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
+    (print (org-protocol-split-data info t))
+    (let* ((parts
+            (if (boundp 'org-protocol-data-separator)
+                (org-protocol-split-data info t org-protocol-data-separator)
+              (org-protocol-split-data info t)))
+           (template (or (and (>= 2 (length (car parts))) (pop parts))
+                         org-protocol-default-template-key)))
+      (if (member template my-org-protocol-override-templates)
+          (org-protocol-do-capture-frame info capture-func)
+      ad-do-it)))
+
+  (defun org-protocol-do-capture-frame (info &optional capture-func)
     "Support `org-capture' and `org-remember' alike.
 CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (print (org-protocol-split-data info t))
