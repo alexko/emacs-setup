@@ -249,8 +249,8 @@
 
 (use-package color-theme
   :config
-  (when (fboundp 'color-theme-lilacs)
-    (color-theme-lilacs)))
+  (use-package lilacs
+    :config (color-theme-lilacs)))
 
 (use-package command-frequency
   :init
