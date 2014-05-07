@@ -294,7 +294,7 @@
               ("s" "op system" entry (file+headline "~/org/journal.org" "Entries")
                "* %:description :dtp:%^{Tags|notags}:\n  %i\n\n%?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("e" "Expenses" entry (file "~/org/finance.org")
+              ("e" "Expenses" entry (file+headline "~/org/finance.org" "Log")
                "* %^{Title} %^g\n  %?"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
               ("a" "Review" entry (file "~/org/journal.org")
