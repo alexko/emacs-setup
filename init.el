@@ -141,7 +141,7 @@
     (add-hook 'org-shiftdown-final-hook 'windmove-down)
     (add-hook 'org-shiftright-final-hook 'windmove-right)))
 
-(use-package espresso-mode
+(use-package espresso
   :init
     (setq espresso-indent-level 2)
   :mode
