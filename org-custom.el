@@ -1,8 +1,7 @@
 ;; org-mode setup
-(use-package org-install
-  :load-path "org/lisp")
 (use-package org
-  :load-path "org/contrib/lisp"
+  :load-path "org/lisp"
+  :init (use-package org-install)
   :config
   (progn
     (setq org-babel-results-keyword "results")
