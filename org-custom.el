@@ -329,19 +329,25 @@
   (setq my-org-protocol-override-templates '("w" "s"))
   :config
   (defadvice org-protocol-do-capture
-    (around my-capture-frame (info &optional capture-func) activate)
-    "Support `org-capture' and `org-remember' alike.
-CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
-    (print (org-protocol-split-data info t))
-    (let* ((parts
-            (if (boundp 'org-protocol-data-separator)
-                (org-protocol-split-data info t org-protocol-data-separator)
-              (org-protocol-split-data info t)))
-           (template (or (and (>= 2 (length (car parts))) (pop parts))
-                         org-protocol-default-template-key)))
-      (if (member template my-org-protocol-override-templates)
-          (org-protocol-do-capture-frame info capture-func)
-      ad-do-it)))
+    (before my-raise-frame (info &optional capture-func) activate)
+    "raise-frame that org-protocol-do-capture calls doesn't
+raise the frame above non-emacs windows, this advice does"
+      (select-frame-set-input-focus (selected-frame)))
+
+;;   (defadvice org-protocol-do-capture
+;;     (around my-capture-frame (info &optional capture-func) activate)
+;;     "Support `org-capture' and `org-remember' alike.
+;; CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
+;;     (print (org-protocol-split-data info t))
+;;     (let* ((parts
+;;             (if (boundp 'org-protocol-data-separator)
+;;                 (org-protocol-split-data info t org-protocol-data-separator)
+;;               (org-protocol-split-data info t)))
+;;            (template (or (and (>= 2 (length (car parts))) (pop parts))
+;;                          org-protocol-default-template-key)))
+;;       (if (member template my-org-protocol-override-templates)
+;;           (org-protocol-do-capture-frame info capture-func)
+;;       ad-do-it)))
 
   (defun org-protocol-do-capture-frame (info &optional capture-func)
     "Support `org-capture' and `org-remember' alike.
