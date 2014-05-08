@@ -15,7 +15,7 @@
 	url = git://github.com/alexko/org-mode.git
 [submodule "vendor/use-package"]
 	path = vendor/use-package
-	url = https://github.com/alexko/use-package
+	url = git://github.com/alexko/use-package.git
 [submodule "vendor/ess"]
 	path = vendor/ess
 	url = https://github.com/emacs-ess/ESS
