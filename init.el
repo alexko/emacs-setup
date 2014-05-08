@@ -73,6 +73,7 @@
 (load custom-file 'noerror)
 
 (require 'use-package)
+(setq use-package-verbose t)
 (require 'cl)
 (use-package ansi-color)
 
