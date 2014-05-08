@@ -61,7 +61,7 @@
           ns-command-modifier 'meta))
 
 (let ((default-directory (concat dotfiles-dir "vendor/")))
-  (normal-top-level-add-subdirs-to-load-path))
+  (normal-top-level-add-subdirs-to-load-path)) ; this appends
 
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
