@@ -77,17 +77,6 @@
 (require 'cl)
 (use-package ansi-color)
 
-(defadvice require
-  (before my-trace (name &optional filename noerror) activate)
-  (message "req %s loadpath %s %s ..." name (car load-path) (cadr load-path)))
-
-;; (add-to-list 'load-path "~/.emacs.d/vendor/xxx.old")
-(use-package xxx
-   :load-path "vendor/xxx.new"
-   :config (message xxx-version))
-(message "loadpath %s %s ..." (car load-path) (cadr load-path))
-(ad-deactivate 'require)
-
 (use-package package
   :init (package-initialize))
 
