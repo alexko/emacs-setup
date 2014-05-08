@@ -436,6 +436,11 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     :commands bongo))
 (use-package org-sample
   :init
-  (define-key org-mode-map (kbd "<f11>") 'org-task-sample))
+  (define-key org-mode-map (kbd "<f11>") 'org-sample)
+  (define-key org-mode-map (kbd "<f10>") 'org-sample-all)
+  (defun org-sample-all (arg)
+    (interactive "p")
+    (let ((org-sample-match ""))
+      (org-sample arg))))
 
 (provide 'org-custom)
