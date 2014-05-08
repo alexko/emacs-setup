@@ -286,8 +286,10 @@
               ("u" "op imm bookmark" entry (file "~/org/bookmarks.org")
                "* %:description\n  %i\n\n  %:link"
                :prepend t :empty-lines-after 1 :clock-in t :clock-resume t
-               :immediate-finish t)
-              ("c" "op to clocked" entry (clock)
+               :immediate-finish t) 
+              ("c" "op to clocked" plain (clock) "  %i\n  - %:link"
+               :prepend nil :empty-lines 1 :immediate-finish t)
+              ("C" "op to clocked" entry (clock)
                "* %:description :url:\n  %i\n\n  %:link"
                :prepend t :empty-lines 1 :immediate-finish t)
               ("s" "op system" entry (file+headline "~/org/journal.org" "Entries")
