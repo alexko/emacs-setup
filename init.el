@@ -69,7 +69,7 @@
 (add-to-list 'load-path (concat dotfiles-dir "/vendor"))
 
 ;;(regen-autoloads)
-(load autoload-file)
+;;(load autoload-file)
 (load custom-file 'noerror)
 
 (require 'use-package)
