@@ -281,6 +281,10 @@
   :init (setq abbrev-file-name (concat dotfiles-dir ".abbrev_defs"))
   :config (setq save-abbrevs t))
 
+(use-package jabber
+  :load-path "vendor/jabber"
+  :commands (jabber-connect jabber-connect-all))
+
 ;; System and user specific configs
 (setq system-specific-config (concat dotfiles-dir system-name ".el")
       user-specific-config (concat dotfiles-dir user-login-name ".el")
