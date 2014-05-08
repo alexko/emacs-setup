@@ -392,6 +392,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 ;; if invoked with C-u C-u it sets the previously pushed id as a BLOCKER
 ;; see org-depend for explanation of the TRIGGER and BLOCKER properties
 (use-package org-depend
+  :load-path "org/contrib/lisp"
   :config
   (progn
     (defun org-make-dependency (arg)
