@@ -1,8 +1,8 @@
-;;; ob-python.el --- org-babel functions for python evaluation
+;;; ob-lua.el --- org-babel functions for lua evaluation
 
 ;; Copyright (C) 2009, 2010  Free Software Foundation
 
-;; Author: Eric Schulte, Dan Davison
+;; Author: Eric Schulte, Dan Davison, Alex Kosorukoff
 ;; Keywords: literate programming, reproducible research
 ;; Homepage: http://orgmode.org
 ;; Version: 7.4
