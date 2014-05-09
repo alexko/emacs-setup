@@ -16,7 +16,6 @@
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
-(setq package-user-dir (concat dotfiles-dir "elpa"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
 (setq cruft-dir "~/.emacs.cruft/")
 
@@ -78,7 +77,11 @@
 (use-package ansi-color)
 
 (use-package package
-  :init (package-initialize))
+  :init (setq package-user-dir (concat dotfiles-dir "elpa")
+              package-archives
+              '(("melpa" . "http://melpa.milkbox.net/packages/")
+               ("gnu" . "http://elpa.gnu.org/packages/")))
+  :config (package-initialize))
 
 (use-package ffap
 ;; :init (ffap-bindings) ; these conflict with ido bindings
