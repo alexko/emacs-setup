@@ -156,12 +156,18 @@
           (autoload 'pymacs-call "pymacs"))
   :commands (pymacs-eval pymacs-exec pymacs-load))
 
-(use-package mmm-mako
-  :disabled t
+(use-package sgml-mode
+  :mode (("\\.html\\'" . html-mode) ("\\.mako\\'" . html-mode)))
+
+(use-package mmm-auto
   :load-path "vendor/mmm-mode"
-  :mode ("\\.mako\\'" . html-mode)
+  :config (setq mmm-global-mode 'maybe))
+
+(use-package mmm-mako
+  :load-path "vendor/mmm-mako"
   :config
-  (mmm-add-mode-ext-class 'html-mode "\\.mako\\'" 'mako))
+  (when (functionp 'mmm-add-mode-ext-class)
+    (mmm-add-mode-ext-class 'html-mode "\\.mako\\'" 'mako)))
 
 (use-package gccsense)
 
