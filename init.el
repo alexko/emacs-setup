@@ -289,6 +289,9 @@
   :init (setq abbrev-file-name (concat dotfiles-dir ".abbrev_defs"))
   :config (setq save-abbrevs t))
 
+(use-package bookmark
+  :config (setq bookmark-default-file (concat dotfiles-dir ".emacs.bmk"))) 
+
 (use-package jabber
   :load-path "vendor/jabber"
   :commands (jabber-connect jabber-connect-all))
