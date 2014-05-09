@@ -204,9 +204,8 @@
 
 (use-package saveplace
   "saves the cursor position for every opem file"
-  :disabled t ; desktop saves these as well
   :init
-  (setq save-place-file (concat user-emacs-directory "saveplace.el"))
+  (setq save-place-file (concat user-emacs-directory ".emacs-places"))
   (setq-default save-place t))
 
 (use-package ibuf-ext
