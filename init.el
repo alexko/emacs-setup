@@ -199,8 +199,16 @@
 (use-package desktop
   :init
   (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
-  :config ; this sets after-init hook
-  (desktop-save-mode 1))
+  :config
+  (progn
+    (desktop-save-mode 1) ; this sets after-init hook
+    (add-hook 'desktop-after-read-hook 'org-show-context-in-buffers)
+    (defun org-show-context-in-buffers ()
+      (save-current-buffer
+        (dolist (buffer (buffer-list))
+          (when (string-match "\\.org\\'" (buffer-file-name buffer))
+            (switch-to-buffer buffer) (org-show-context)))))))
+
 
 (use-package saveplace
   "saves the cursor position for every opem file"
