@@ -275,7 +275,8 @@
    ("<kp-left>"   . buf-move-left)
    ("<kp-right>"  . buf-move-right)))
 
-(use-package ess-site)
+(use-package ess-site
+  :commands (R ess-eval-buffer ess-make-buffer-current))
 
 (use-package go-mode-load
   :load-path "/usr/local/go/misc/emacs"
