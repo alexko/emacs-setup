@@ -55,10 +55,6 @@
 (define-key global-map (kbd "C-h /") 'find-function)
 (define-key occur-mode-map (kbd "q") 'delete-window)
 
-(if (equal system-type 'darwin)
-    (setq ns-option-modifier  'super
-          ns-command-modifier 'meta))
-
 (let ((default-directory (concat dotfiles-dir "vendor/")))
   (normal-top-level-add-subdirs-to-load-path)) ; this appends
 
