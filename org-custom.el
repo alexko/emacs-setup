@@ -396,7 +396,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
             (delete-other-windows))
         (funcall cfunc nil template)))))
 
-(use-package org-table)
 ;;(use-package 'org-collector)
 
 ;; this pushes id of current entry into the kill ring (crreates id if needed)
