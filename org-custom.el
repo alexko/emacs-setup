@@ -306,22 +306,22 @@
                   (if (boundp 'org-capture-templates) org-capture-templates))))
   :config
   (progn
-    ;; this fixes "The mark is not set now, so there is no region" error
-    (defadvice org-capture-steal-local-variables (around donot-steal activate))
-    ;; (defadvice org-capture-steal-local-variables ; alt minimal fix
-    ;;   (after fix-org-steal activate) (setq mark-active nil))
+    ;; (defun my-delete-capture-frame ()
+    ;;   (if (equal (frame-parameter nil 'name) "* url capture *")
+    ;;       (delete-frame)))
+    ;; (defadvice org-capture-finalize (after delete-capture-frame activate)
+    ;;   "Advise capture-finalize to close the frame if it is a capture frame"
+    ;;   (my-delete-capture-frame))
+    ;; (defadvice org-capture-destroy (after delete-capture-frame activate)
+    ;;   "Advise capture-destroy to close the frame if it is a capture frame"
+    ;;   (my-delete-capture-frame))
     (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
       "prevents org-capture-fill-template from moving point"
       (save-excursion ad-do-it))
-    (defadvice org-capture-finalize (after delete-capture-frame activate)
-      "Advise capture-finalize to close the frame if it is a capture frame"
-      (my-delete-capture-frame))
-    (defadvice org-capture-destroy (after delete-capture-frame activate)
-      "Advise capture-destroy to close the frame if it is a capture frame"
-      (my-delete-capture-frame))
-    (defun my-delete-capture-frame ()
-      (if (equal (frame-parameter nil 'name) "* url capture *")
-          (delete-frame))))
+    ;; this fixes "The mark is not set now, so there is no region" error
+    ;; (defadvice org-capture-steal-local-variables ; alt minimal fix
+    ;;   (after fix-org-steal activate) (setq mark-active nil))
+    (defadvice org-capture-steal-local-variables (around donot-steal activate)))
 
   :bind ("C-c c" . org-capture))
 
