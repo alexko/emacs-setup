@@ -1,39 +1,49 @@
 ;;; init.el --- Where all the magic begins
 
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode 0))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 
 (set-language-environment "UTF-8")
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq-default indent-tabs-mode nil)
-(add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
-(show-paren-mode 1)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
 
 ;; should it just use user-emacs-directory instead of dotfiles-dir?
 (setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
-(setq autoload-file (concat dotfiles-dir "loaddefs.el"))
-(setq custom-file (concat dotfiles-dir "custom.el"))
-(setq cruft-dir "~/.emacs.cruft/")
+                    (or (buffer-file-name) load-file-name))
+      autoload-file (concat dotfiles-dir "loaddefs.el")
+      custom-file (concat dotfiles-dir "custom.el")
+      saves-dir (expand-file-name ".saves/" dotfiles-dir)
+      backup-directory-alist `((".*" . ,(concat saves-dir "backups/")))
+      auto-save-list-file-prefix (concat saves-dir "auto-saves/.saves-")
+      ;; auto-save-file-name-transforms `((".*" ,saves-dir t))
+      version-control t
+      kept-new-versions 5
+      delete-old-versions t
+      backup-by-copying t)
 
-(setq fill-column 80
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
       show-trailing-whitespace t
-      initial-scratch-message ""
       initial-major-mode 'org-mode
       spell-command "aspell"
       visible-bell t
+      fill-column 80
       tab-width 2
       text-mode-hook '(turn-on-auto-fill text-mode-hook-identify)
       remote-shell-program "/usr/bin/ssh"
       compile-command "cd . ; make -j4 -k"
       frame-title-format "%b %+ %[%f%]"
-      icon-title-format "%b"
-      auto-save-list-file-prefix (concat cruft-dir "auto-saves/.saves-")
-      backup-directory-alist
-      (list (cons "." (concat cruft-dir "backups/"))))
+      icon-title-format "%b")
+
+(fset 'yes-or-no-p 'y-or-n-p)
+(setq-default indent-tabs-mode nil) ; use spaces
+(add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
+(show-paren-mode 1)
 
 ;; emacsclient opens new frame, closes when done
 (add-hook 'server-switch-hook
@@ -193,7 +203,7 @@
 
 (use-package tramp
   :init
-  (setq tramp-auto-save-directory (concat cruft-dir "auto-saves/")
+  (setq tramp-auto-save-directory (concat saves-dir "auto-saves/")
         tramp-backup-directory-alist backup-directory-alist
         shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
   :config
@@ -261,7 +271,7 @@
 (use-package command-frequency
   :init
   (setq command-frequency-table-file
-        (concat cruft-dir ".emacs.frequencies"))
+        (concat saves-dir ".emacs.frequencies"))
   :config
   (progn
     (command-frequency-table-load)
