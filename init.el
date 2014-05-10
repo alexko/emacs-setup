@@ -126,6 +126,9 @@
     (define-key global-map (kbd "C-x C-f") 'ido-find-file)
     (define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window))
 
+(use-package imenu
+  :commands imenu--make-index-alist)
+
 (use-package find-file-in-project
   :init
   (progn
