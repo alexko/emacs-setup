@@ -199,20 +199,6 @@
   :config
   (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:")))
 
-(use-package desktop
-  :init
-  (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
-  :config
-  (progn
-    (desktop-save-mode 1) ; this sets after-init hook
-    (add-hook 'desktop-after-read-hook 'org-show-context-in-buffers)
-    (defun org-show-context-in-buffers ()
-      (save-current-buffer
-        (dolist (buffer (buffer-list))
-          (when (string-match "\\.org\\'" (buffer-file-name buffer))
-            (switch-to-buffer buffer) (org-show-context)))))))
-
-
 (use-package saveplace
   "saves the cursor position for every opem file"
   :init
@@ -307,6 +293,25 @@
   :load-path "vendor/jabber"
   :commands (jabber-connect jabber-connect-all))
 
+(use-package alex-custom)
+(use-package org-custom)
+(use-package setup-erc)
+
+(use-package desktop
+;;  :disabled t
+  :init
+  (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
+  :config
+  (progn
+    (desktop-save-mode 1) ; this sets after-init hook
+    ;; (add-hook 'desktop-after-read-hook 'org-show-context-in-buffers)
+    (defun org-show-context-in-buffers ()
+      (interactive)
+      (save-current-buffer
+        (dolist (buffer (buffer-list))
+          (when (string-match "\\.org\\'" (buffer-file-name buffer))
+            (switch-to-buffer buffer) (org-show-context)))))))
+
 ;; System and user specific configs
 (setq system-specific-config (concat dotfiles-dir system-name ".el")
       user-specific-config (concat dotfiles-dir user-login-name ".el")
@@ -317,8 +322,4 @@
 (if (file-exists-p user-specific-config) (load user-specific-config))
 (if (file-exists-p user-specific-dir)
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
-
-(use-package alex-custom)
-(use-package org-custom)
-(use-package setup-erc)
 ;;; init.el ends here
