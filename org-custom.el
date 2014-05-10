@@ -147,10 +147,7 @@
 
     (setq org-agenda-dim-blocked-tasks nil)
     (setq org-agenda-compact-blocks t)
-    ;; (setq org-agenda-custom-commands nil) ; reset
-    (setq org-agenda-custom-commands
-          (append
-           (and (boundp 'org-agenda-custom-commands) org-agenda-custom-commands)
+    (let ((my-agenda-commands
            '(("n" "Next Tasks" tags-todo "-WAITING/!NEXT" ;; ??
               ((org-agenda-overriding-header "Next Tasks")
                (org-agenda-todo-ignore-scheduled t)
@@ -181,7 +178,12 @@
              ("Q/" "All .org files occur" occur ""
               ((org-agenda-files (file-expand-wildcards "~/org/*.org"))))
              ("Qb" "Bookmarks search" search ""
-              ((org-agenda-files '("~/org/bookmarks.org")))) )))
+              ((org-agenda-files '("~/org/bookmarks.org")))))))
+      ;; (setq org-agenda-custom-commands nil) ; reset
+      (setq org-agenda-custom-commands
+            (append my-agenda-commands
+             (if (boundp 'org-agenda-custom-commands)
+                 org-agenda-custom-commands))))
 
     (setq timestamp-entries t)
     (defun toggle-timestamp-entries ()
@@ -259,55 +261,55 @@
          ("C-c l" . org-store-link)))
 
 (use-package org-capture
-  :config
-  (progn
+  :init
+  (let ((my-templates
+         '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
+            "* TODO %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
+            "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("m" "Meeting" entry (file+headline "~/org/journal.org" "Entries")
+            "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
+            "* %^{Title} :xclip:\n  %a\n %x\n%?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("y" "Clip" entry (file+headline "~/org/journal.org" "Entries")
+            "* %^{Title} :yclip:\n  %a\n  %c\n%?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("w" "op tag bookmark" entry (file "~/org/bookmarks.org")
+            "* %:description :%^{Tags|notag}:\n  %i\n\n  %:link\n%?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("u" "op imm bookmark" entry (file "~/org/bookmarks.org")
+            "* %:description\n  %i\n\n  %:link"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t
+            :immediate-finish t) 
+           ("c" "op to clocked" plain (clock) "  %i\n  - %:link"
+            :prepend nil :empty-lines 1 :immediate-finish t)
+           ("C" "op to clocked" entry (clock)
+            "* %:description :url:\n  %i\n\n  %:link"
+            :prepend t :empty-lines 1 :immediate-finish t)
+           ("s" "op system" entry (file+headline "~/org/journal.org" "Entries")
+            "* %:description :dtp:%^{Tags|notags}:\n  %i\n\n%?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("e" "Expenses" entry (file+headline "~/org/finance.org" "Log")
+            "* %^{Title} %^g\n  %?"
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("a" "Review" entry (file "~/org/journal.org")
+            (concat
+             "* Daily review :review:\n  %[.review.tmpl]")
+            :prepend t :empty-lines-after 1 :clock-in t :clock-resume t))))
     ;; (setq org-capture-templates nil)
     (setq org-capture-templates
-          (append
-           (if (boundp 'org-capture-templates) org-capture-templates nil)
-           '( ("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-               "* TODO %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("j" "Journal" entry (file+headline "~/org/journal.org" "Entries")
-               "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("m" "Meeting" entry (file+headline "~/org/journal.org" "Entries")
-               "* %^{Title} :%^{Tags|notag}:\n  %a\n  %i\n%?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("x" "Clip" entry (file+headline "~/org/journal.org" "Entries")
-               "* %^{Title} :xclip:\n  %a\n %x\n%?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("y" "Clip" entry (file+headline "~/org/journal.org" "Entries")
-               "* %^{Title} :yclip:\n  %a\n  %c\n%?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("w" "op tag bookmark" entry (file "~/org/bookmarks.org")
-               "* %:description :%^{Tags|notag}:\n  %i\n\n  %:link\n%?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("u" "op imm bookmark" entry (file "~/org/bookmarks.org")
-               "* %:description\n  %i\n\n  %:link"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t
-               :immediate-finish t) 
-              ("c" "op to clocked" plain (clock) "  %i\n  - %:link"
-               :prepend nil :empty-lines 1 :immediate-finish t)
-              ("C" "op to clocked" entry (clock)
-               "* %:description :url:\n  %i\n\n  %:link"
-               :prepend t :empty-lines 1 :immediate-finish t)
-              ("s" "op system" entry (file+headline "~/org/journal.org" "Entries")
-               "* %:description :dtp:%^{Tags|notags}:\n  %i\n\n%?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("e" "Expenses" entry (file+headline "~/org/finance.org" "Log")
-               "* %^{Title} %^g\n  %?"
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
-              ("a" "Review" entry (file "~/org/journal.org")
-               (concat
-                "* Daily review :review:\n  %[.review.tmpl]")
-               :prepend t :empty-lines-after 1 :clock-in t :clock-resume t) )))
-
+          (append my-templates
+                  (if (boundp 'org-capture-templates) org-capture-templates))))
+  :config
+  (progn
     ;; this fixes "The mark is not set now, so there is no region" error
     (defadvice org-capture-steal-local-variables (around donot-steal activate))
     ;; (defadvice org-capture-steal-local-variables ; alt minimal fix
     ;;   (after fix-org-steal activate) (setq mark-active nil))
-
     (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
       "prevents org-capture-fill-template from moving point"
       (save-excursion ad-do-it))
@@ -325,8 +327,12 @@
 
 ;; see README.org for bookmarklets to use with this setup of org-protocol
 (use-package org-protocol
+  :defer t
   :init
-  (setq my-org-protocol-override-templates '("w" "s"))
+  (progn
+    (setq my-org-protocol-override-templates '("w" "s"))
+    (defadvice server-start (after op-load activate)
+      (use-package org-protocol))) ; advices server-visit-files
   :config
   (defadvice org-protocol-do-capture
     (before my-raise-frame (info &optional capture-func) activate)
