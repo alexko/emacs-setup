@@ -296,7 +296,6 @@
 
 (use-package alex-custom)
 (use-package org-custom)
-(use-package setup-erc)
 
 (use-package desktop
 ;;  :disabled t
