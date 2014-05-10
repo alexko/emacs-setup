@@ -98,12 +98,16 @@
   :init
   (progn
     (setq ido-ignore-directories
-          '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git"))
+          '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn" "\\`\\.git"
+            "\\`\\.saves"))
     (setq ido-ignore-files
-          '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`LICENSE"))
+          '("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./"
+            "\\`LICENSE" "\\`COPYING" "\\`.emacs.desktop" "\\`.emacs-places"
+            "\\`.emacs.bmk" "\\`\\.org-id-locations" "\\`org-clock-save.el"
+            "\\`.histfile"))
     (setq ido-file-extensions-order
           '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
-    ;; (setq ido-use-filename-at-point 'guess)
+    (setq ido-use-filename-at-point 'guess)
     (setq ido-everywhere t)
     (setq ido-enable-flex-matching t)
     (setq ido-max-directory-size 300000)
