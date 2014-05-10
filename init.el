@@ -132,8 +132,8 @@
 (use-package find-file-in-project
   :init
   (progn
-    (setq ffip-patterns '("*.c", "*.h", "*.cc", "*.cpp", "*.cu",
-                          "*.py", "*.el", "*.java", "*.js", "*.go"))
+    (setq ffip-patterns '("*.c" "*.h" "*.cc" "*.cpp" "*.cu"
+                          "*.py" "*.el" "*.java" "*.js" "*.go"))
     (put 'ffip-patterns 'safe-local-variable 'listp))
   :bind ("C-x C-M-f" . find-file-in-project))
 
