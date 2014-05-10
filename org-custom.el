@@ -405,7 +405,8 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 ;; see org-depend for explanation of the TRIGGER and BLOCKER properties
 (use-package org-depend
   :load-path "org/contrib/lisp"
-  :config
+  :commands (org-depend-trigger-todo org-depend-block-todo)
+  :init
   (progn
     (defun org-make-dependency (arg)
       (interactive
@@ -426,19 +427,28 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
            (list (format "%s = %s" (car tup) (cdr tup))))))
       (message arg))
     (defun my-org-mode-hook ()
-      (define-key org-mode-map [f12] 'org-make-dependency)
+      (define-key org-mode-map (kbd "<f12>") 'org-make-dependency)
       (auto-fill-mode 1))
-    (add-hook 'org-mode-hook 'my-org-mode-hook)))
+    (add-hook 'org-mode-hook 'my-org-mode-hook)
+    (add-hook 'org-trigger-hook 'org-depend-trigger-todo)
+    (add-hook 'org-blocker-hook 'org-depend-block-todo)))
 
-(use-package org-habit)
-(use-package org-learn)
-(use-package org-screen)
-(use-package org-bookmark)
+(use-package org-habit
+  :commands org-is-habit-p)
+(use-package org-learn
+  :commands org-smart-reschedule)
+(use-package org-screen
+  :commands org-screen)
+(use-package org-bookmark
+  :commands (org-bookmark-open org-bookmark-store-link))
 (use-package org-id
   :init
-  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+  :commands (org-id-get-create org-id-find-id-file org-id-store-link))
 (use-package org-git-link
-  :init ;; prevent interference with normal org linking
+  :commands org-git-open
+  :idle (org-add-link-type "git" 'org-git-open) ;; org-link-types
+  :config ;; this prevents interference with normal org linking
   (setq org-store-link-functions
         (delq 'org-git-store-link org-store-link-functions)))
 (use-package org-player
@@ -448,12 +458,15 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   (use-package bongo
     :commands bongo))
 (use-package org-sample
+  :commands org-sample
   :init
-  (define-key org-mode-map (kbd "<f11>") 'org-sample)
-  (define-key org-mode-map (kbd "<f10>") 'org-sample-all)
+  (defun org-sample-setup ()
+    (define-key org-mode-map (kbd "<f11>") 'org-sample)
+    (define-key org-mode-map (kbd "<f10>") 'org-sample-all))
   (defun org-sample-all (arg)
     (interactive "p")
     (let ((org-sample-match ""))
-      (org-sample arg))))
+      (org-sample arg)))
+  (add-hook 'org-mode-hook 'org-sample-setup))
 
 (provide 'org-custom)
