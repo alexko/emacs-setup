@@ -68,7 +68,7 @@
 (let ((default-directory (concat dotfiles-dir "vendor/")))
   (normal-top-level-add-subdirs-to-load-path)) ; this appends
 
-(add-to-list 'load-path dotfiles-dir)
+;; (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit/jabber"))
 (add-to-list 'load-path (concat dotfiles-dir "/vendor"))
@@ -167,6 +167,7 @@
 ;; begin from tim-custom
 (use-package pymacs
   :load-path "vendor/"
+  :defines pymacs-python-reference
   :init (progn
           (autoload 'pymacs-apply "pymacs")
           (autoload 'pymacs-call "pymacs"))
@@ -305,32 +306,37 @@
   :load-path "vendor/jabber"
   :commands (jabber-connect jabber-connect-all))
 
-(use-package alex-custom)
-(use-package org-custom)
+;; System, host and user specific configuration
+(setq my-configs
+      (list "init"
+            (if (eq system-type 'gnu/linux) "linux" (symbol-name system-type))
+            system-name user-login-name
+            "ext-custom" "org-custom"))
+(setq my-config-files
+      (mapcar (lambda (x) (expand-file-name x dotfiles-dir))
+              my-configs))
+(dolist (config (cdr my-config-files)) ; skip init.el
+  (load config 'noerror))
+
+(defvar user-specific-config (expand-file-name user-login-name dotfiles-dir))
+(when (file-exists-p user-specific-config)
+  (add-to-list 'load-path user-specific-config)
+  (dolist (file (directory-files user-specific-config 'noerror ".*el$"))
+    (or (load (concat file "c")) (load file))))
 
 (use-package desktop
-;;  :disabled t
   :init
   (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
   :config
-  (progn
-    (desktop-save-mode 1) ; this sets after-init hook
-    ;; (add-hook 'desktop-after-read-hook 'org-show-context-in-buffers)
-    (defun org-show-context-in-buffers ()
-      (interactive)
-      (save-current-buffer
-        (dolist (buffer (buffer-list))
-          (when (string-match "\\.org\\'" (buffer-file-name buffer))
-            (switch-to-buffer buffer) (org-show-context)))))))
+  (desktop-save-mode 1)) ; this sets after-init hook
 
-;; System and user specific configs
-(setq system-specific-config (concat dotfiles-dir system-name ".el")
-      user-specific-config (concat dotfiles-dir user-login-name ".el")
-      user-specific-dir (concat dotfiles-dir user-login-name))
-(add-to-list 'load-path user-specific-dir)
+;; if everything went ok, compile all startup files to start faster next time
+(dolist (file my-config-files)
+  (let ((elfile (concat file ".el"))
+        (elcfile (concat file ".elc")))
+    (when (file-exists-p elfile)
+      (unless (and (file-exists-p elcfile)
+                   (file-newer-than-file-p elcfile elfile)) 
+        (byte-compile-file elfile)))))
 
-(if (file-exists-p system-specific-config) (load system-specific-config))
-(if (file-exists-p user-specific-config) (load user-specific-config))
-(if (file-exists-p user-specific-dir)
-  (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 ;;; init.el ends here
