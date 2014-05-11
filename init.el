@@ -204,6 +204,7 @@
 (use-package tramp
   :init
   (setq tramp-auto-save-directory (concat saves-dir "auto-saves/")
+        tramp-persistency-file-name (expand-file-name "tramp" saves-dir)
         tramp-backup-directory-alist backup-directory-alist
         shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
   :config
