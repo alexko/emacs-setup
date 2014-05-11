@@ -93,16 +93,4 @@
     ad-do-it
     (fset 'pop-to-buffer pop-to-buffer-save)))
 
-(when (equal system-type 'darwin)
-  ;; from tim_custom.el
-  ;; When started from Emacs.app or similar, ensure $PATH
-  ;; is the same the user would see in Terminal.app
-  (defun path-from-shell-PATH ()
-    (let ((path-from-shell
-           (shell-command-to-string "$SHELL -c 'echo $PATH'")))
-      (split-string path-from-shell path-separator)))
-  (when window-system
-      (setenv "PATH" path-from-shell)
-      (setq exec-path (path-from-shell-PATH))))
-
 (provide 'alex-custom)
