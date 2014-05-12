@@ -1,4 +1,4 @@
-;;; init.el --- Where all the magic begins
+;;; init.el
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 0))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
@@ -12,12 +12,8 @@
 (set-selection-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
 
-;; should it just use user-emacs-directory instead of dotfiles-dir?
-(setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name))
-      autoload-file (concat dotfiles-dir "loaddefs.el")
-      custom-file (concat dotfiles-dir "custom.el")
-      saves-dir (expand-file-name ".saves/" dotfiles-dir)
+(defvar saves-dir (expand-file-name ".saves/" user-emacs-directory))
+(setq custom-file (concat user-emacs-directory "custom.el")
       backup-directory-alist `((".*" . ,(concat saves-dir "backups/")))
       auto-save-list-file-prefix (concat saves-dir "auto-saves/.saves-")
       ;; auto-save-file-name-transforms `((".*" ,saves-dir t))
@@ -30,7 +26,6 @@
       initial-scratch-message nil
       show-trailing-whitespace t
       initial-major-mode 'org-mode
-      spell-command "aspell"
       visible-bell t
       fill-column 80
       tab-width 2
@@ -65,13 +60,13 @@
 (define-key global-map (kbd "C-h /") 'find-function)
 (define-key occur-mode-map (kbd "q") 'delete-window)
 
-(let ((default-directory (concat dotfiles-dir "vendor/")))
+(let ((default-directory (concat user-emacs-directory "vendor/")))
   (normal-top-level-add-subdirs-to-load-path)) ; this appends
 
-;; (add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
-(add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit/jabber"))
-(add-to-list 'load-path (concat dotfiles-dir "/vendor"))
+;; (add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path (concat user-emacs-directory "/elpa-to-submit"))
+(add-to-list 'load-path (concat user-emacs-directory "/elpa-to-submit/jabber"))
+(add-to-list 'load-path (concat user-emacs-directory "/vendor"))
 
 ;;(regen-autoloads)
 ;;(load autoload-file)
@@ -83,7 +78,7 @@
 (use-package ansi-color)
 
 (use-package package
-  :init (setq package-user-dir (concat dotfiles-dir "elpa")
+  :init (setq package-user-dir (concat user-emacs-directory "elpa")
               package-archives
               '(("melpa" . "http://melpa.milkbox.net/packages/")
                ("gnu" . "http://elpa.gnu.org/packages/")))
@@ -294,11 +289,12 @@
   :interpreter ("go" . go-mode))
 
 (use-package abbrev
-  :init (setq abbrev-file-name (concat dotfiles-dir ".abbrev_defs"))
+  :init (setq abbrev-file-name (concat user-emacs-directory ".abbrev_defs"))
   :config (setq save-abbrevs t))
 
 (use-package bookmark
-  :config (setq bookmark-default-file (concat dotfiles-dir ".emacs.bmk"))) 
+  :config (setq bookmark-default-file
+                (concat user-emacs-directory ".emacs.bmk"))) 
 
 (use-package jabber
   :load-path "vendor/jabber"
@@ -311,12 +307,13 @@
             system-name user-login-name
             "ext-custom" "org-custom"))
 (setq my-config-files
-      (mapcar (lambda (x) (expand-file-name x dotfiles-dir))
+      (mapcar (lambda (x) (expand-file-name x user-emacs-directory))
               my-configs))
 (dolist (config (cdr my-config-files)) ; skip init.el
   (load config 'noerror))
 
-(defvar user-specific-config (expand-file-name user-login-name dotfiles-dir))
+(defvar user-specific-config
+  (expand-file-name user-login-name user-emacs-directory))
 (when (file-exists-p user-specific-config)
   (add-to-list 'load-path user-specific-config)
   (dolist (file (directory-files user-specific-config 'noerror ".*el$"))
