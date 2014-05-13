@@ -63,7 +63,7 @@
 (define-key occur-mode-map (kbd "q") 'delete-window)
 
 (let ((default-directory (concat user-emacs-directory "vendor/")))
-  (normal-top-level-add-subdirs-to-load-path)) ; this appends
+  (normal-top-level-add-subdirs-to-load-path)) ; this appends load-path
 
 ;; (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path (concat user-emacs-directory "/elpa-to-submit"))
