@@ -252,6 +252,12 @@
           (set-face-foreground 'org-level-2
                                (face-attribute 'default :foreground)))))
 
+    (defun org-occur-open (uri)
+      "Run `occur' on the fragment after '#' in the link uri."
+      (let ((list (split-string uri "#")))
+        (org-open-file (car list) t)
+        (occur (mapconcat 'identity (cdr list) "#"))))
+    (org-add-link-type "occur" 'org-occur-open)
 
     (defun my-open-link (k)
       (unless (equal (string-to-char k) ?*) (org-occur-in-agenda-files k) t))
