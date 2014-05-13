@@ -406,6 +406,10 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 ;;(use-package 'org-collector)
 
+(use-package org-id
+  :init
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+  :commands (org-id-get-create org-id-find-id-file org-id-store-link))
 ;; this pushes id of current entry into the kill ring (crreates id if needed)
 ;; if invoked with C-u it creates a TRIGGER for the previously pushed id
 ;; if invoked with C-u C-u it sets the previously pushed id as a BLOCKER
@@ -448,10 +452,6 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
   :commands org-screen)
 (use-package org-bookmark
   :commands (org-bookmark-open org-bookmark-store-link))
-(use-package org-id
-  :init
-  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
-  :commands (org-id-get-create org-id-find-id-file org-id-store-link))
 (use-package org-git-link
   :commands org-git-open
   :idle (org-add-link-type "git" 'org-git-open) ;; org-link-types
