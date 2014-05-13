@@ -356,9 +356,17 @@
 
 (use-package desktop
   :init
-  (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
+  (progn
+    (setq history-length 250)
+    (setq desktop-restore-eager 1)      ; actually affects how it is saved
+    (add-to-list 'desktop-globals-to-save 'file-name-history)
+    (add-to-list 'desktop-modes-not-to-save 'Info-mode)
+    (add-to-list 'desktop-modes-not-to-save 'dired-mode)
+    (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode))
   :config
-  (desktop-save-mode 1)) ; this sets after-init hook
+  (progn
+    (add-hook 'desktop-not-loaded-hook (lambda () (desktop-save-mode 0)))
+    (desktop-save-mode 1)))             ; this sets after-init hook
 
 ;; if everything went ok, compile all init files to start faster next time
 (defun my-compile-init-files ()
