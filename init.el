@@ -39,6 +39,8 @@
 (setq-default indent-tabs-mode nil) ; use spaces
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
 (show-paren-mode 1)
+(column-number-mode 1)
+;; (size-indication-mode 0)
 
 ;; emacsclient opens new frame, closes when done
 (add-hook 'server-switch-hook
