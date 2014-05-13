@@ -252,13 +252,6 @@
           (set-face-foreground 'org-level-2
                                (face-attribute 'default :foreground)))))
 
-    ;; (add-hook 'desktop-after-read-hook 'org-show-context-in-buffers)
-    (defun org-show-context-in-buffers ()
-      (interactive)
-      (save-current-buffer
-        (dolist (buffer (buffer-list))
-          (when (string-match "\\.org\\'" (buffer-file-name buffer))
-            (switch-to-buffer buffer) (org-show-context)))))
 
     (defun my-open-link (k)
       (unless (equal (string-to-char k) ?*) (org-occur-in-agenda-files k) t))
