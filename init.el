@@ -325,13 +325,16 @@
   :config
   (desktop-save-mode 1)) ; this sets after-init hook
 
-;; if everything went ok, compile all startup files to start faster next time
-(dolist (file my-config-files)
-  (let ((elfile (concat file ".el"))
-        (elcfile (concat file ".elc")))
-    (when (file-exists-p elfile)
-      (unless (and (file-exists-p elcfile)
-                   (file-newer-than-file-p elcfile elfile)) 
-        (byte-compile-file elfile)))))
+;; if everything went ok, compile all init files to start faster next time
+(defun my-compile-init-files ()
+  (interactive)
+  (dolist (file my-config-files)
+    (let ((elfile (concat file ".el"))
+          (elcfile (concat file ".elc")))
+      (when (file-exists-p elfile)
+        (unless (and (file-exists-p elcfile)
+                     (file-newer-than-file-p elcfile elfile)) 
+          (byte-compile-file elfile))))))
 
+(use-package-init-on-idle 'my-compile-init-files 5)
 ;;; init.el ends here
