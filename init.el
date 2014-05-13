@@ -52,7 +52,6 @@
 
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
-;;(define-key global-map (kbd "C-x C-b") 'ibuffer)
 (define-key global-map (kbd "M-g") 'goto-line)
 (define-key global-map (kbd "M-/") 'hippie-expand)
 (define-key global-map (kbd "<f5>") 'edebug-defun)
