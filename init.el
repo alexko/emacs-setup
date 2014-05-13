@@ -233,10 +233,11 @@
 
 (use-package tramp
   :init
-  (setq tramp-auto-save-directory (concat saves-dir "auto-saves/")
-        tramp-persistency-file-name (expand-file-name "tramp" saves-dir)
+  (setq tramp-default-method "ssh"
+        shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$"
+        tramp-auto-save-directory (concat saves-dir "auto-saves/")
         tramp-backup-directory-alist backup-directory-alist
-        shell-prompt-pattern "[^\n]*\\([>#$%][ ]+\\)+$")
+        tramp-persistency-file-name (expand-file-name "tramp" saves-dir))
   :config
   (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:")))
 
