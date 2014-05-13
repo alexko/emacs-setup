@@ -199,8 +199,6 @@
   (when (functionp 'mmm-add-mode-ext-class)
     (mmm-add-mode-ext-class 'html-mode "\\.mako\\'" 'mako)))
 
-(use-package gccsense)
-
 (use-package google-c-style
   :config
   (progn
