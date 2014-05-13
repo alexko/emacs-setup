@@ -147,6 +147,22 @@
 (use-package magit
   :bind ("C-x g" . magit-status))
 
+(use-package compile
+  :defer t
+  :config
+  (setq compilation-scroll-output 'first-error))
+
+(use-package diff
+  :defer t
+  :config
+  (setq diff-switches "-u"))
+
+(use-package ediff
+  :defer t
+  :config
+  (setq ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain))
+
 (use-package windmove
   :init
   (progn ;; Make windmove work in org-mode:
