@@ -352,7 +352,6 @@
 (when (file-exists-p user-specific-config)
   (add-to-list 'load-path user-specific-config)
   (dolist (file (directory-files user-specific-config 'noerror ".*el$"))
-    (message "Loading %s" file)
     (or (load (concat file "c") 'noerror) (load file))))
 
 (use-package desktop
