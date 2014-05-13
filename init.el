@@ -80,7 +80,7 @@
 (use-package ansi-color)
 
 (use-package package
-  :init (setq package-user-dir (concat user-emacs-directory "elpa")
+  :init (setq package-user-dir (concat user-emacs-directory "elpa/")
               package-archives
               '(("melpa" . "http://melpa.milkbox.net/packages/")
                ("gnu" . "http://elpa.gnu.org/packages/")))
