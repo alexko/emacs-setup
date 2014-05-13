@@ -226,6 +226,11 @@
   :config
   (add-to-list 'tramp-default-proxies-alist '(nil "root" "/ssh:%h:")))
 
+(use-package shell
+  :defer t
+  :config
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
+
 (use-package saveplace
   "saves the cursor position for every opem file"
   :init
