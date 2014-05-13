@@ -27,6 +27,10 @@
       show-trailing-whitespace t
       initial-major-mode 'org-mode
       visible-bell t
+      echo-keystrokes 0.1
+      scroll-preserve-screen-position t
+      x-select-enable-clipboard t
+      x-select-enable-primary t
       fill-column 80
       tab-width 2
       text-mode-hook '(turn-on-auto-fill text-mode-hook-identify)
