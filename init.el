@@ -207,10 +207,21 @@
     (add-hook 'c-mode-common-hook 'google-set-c-style)
     (add-hook 'c-mode-common-hook 'google-make-newline-indent)))
 
+(use-package gccsense) ;; needs ruby script to work
+
 (use-package py-indent
   :disabled t
   :init (setq-default py-indent-offset 2))
 ;; end from tim-custom
+
+(use-package eldoc
+  :config
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+    (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+    (add-hook 'ielm-mode-hook 'eldoc-mode)
+    (eldoc-add-command 'paredit-backward-delete
+                       'paredit-close-round)))
 
 (use-package rainbow-delimiters
   :ensure t
