@@ -316,8 +316,12 @@
   :interpreter ("go" . go-mode))
 
 (use-package abbrev
-  :init (setq abbrev-file-name (concat user-emacs-directory ".abbrev_defs"))
-  :config (setq save-abbrevs t))
+  :config
+  (progn
+  ;; (setq abbrev-file-name (concat user-emacs-directory ".abbrev_defs"))
+  (setq abbrev-file-name (expand-file-name ".abbrev_defs" saves-dir))
+  (if (file-exists-p abbrev-file-name) (read-abbrev-file))
+  (setq save-abbrevs t)))
 
 (use-package bookmark
   :config (setq bookmark-default-file
