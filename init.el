@@ -183,8 +183,7 @@
 ;; begin from tim-custom
 (use-package pymacs
   :load-path "vendor/"
-  :init (eval-when-compile
-          (autoload 'pymacs-python-reference "pymacs"))
+  :init (autoload 'pymacs-python-reference "pymacs")
   :commands (pymacs-eval pymacs-exec pymacs-load))
 
 (use-package sgml-mode
