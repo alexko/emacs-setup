@@ -4,6 +4,7 @@
   :init (use-package org-install)
   :config
   (progn
+    (defvar org-root-dir (concat user-emacs-directory "org/"))
     (setq org-babel-results-keyword "results")
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -122,7 +123,7 @@
     (setq org-agenda-include-diary t)
 
     (add-to-list 'Info-default-directory-list
-                 (concat dotfiles-dir "/org/doc"))
+                 (concat org-root-dir "doc/"))
     (setq org-list-allow-alphabetical t)
     (setq org-cycle-include-plain-lists t)
     (setq org-catch-invisible-edits 'error)
