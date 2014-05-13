@@ -209,6 +209,11 @@
   :init (setq-default py-indent-offset 2))
 ;; end from tim-custom
 
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
 (use-package idle-highlight
   :init (add-hook 'espresso-mode-hook 'idle-highlight))
 
