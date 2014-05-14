@@ -214,7 +214,14 @@
 
 (use-package rainbow-delimiters
   :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  (if (boundp 'prog-mode-hook)
+      (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+    (progn
+      (add-hook 'lua-mode-hook 'rainbow-delimiters-mode)
+      (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+      (add-hook 'c-mode-common-hook 'rainbow-delimiters-mode)
+      (add-hook 'espresso-mode-hook 'rainbow-delimiters-mode)
+      (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))))
 
 (use-package idle-highlight
   :init (add-hook 'espresso-mode-hook 'idle-highlight))
