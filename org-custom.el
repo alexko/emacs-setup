@@ -28,6 +28,8 @@
             (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
                       "CANCELLED(c@/!)" "MEETING(m@/!)")))
 
+    (setq org-drawers '("PROPERTIES" "LOGBOOK"))
+
     (setq org-global-properties
           '(("Effort_ALL". "1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00 9:00 0:30")
             ("COLUMNS". "%48ITEM %PRIORITY %DEADLINE %SCHEDULED %7Effort{:} %5CLOCKSUM")))
@@ -244,16 +246,15 @@
 (use-package org-clock
   :config
   (progn
+    (setq org-clock-in-resume t)
+    (setq org-clock-into-drawer t)
     (setq org-clock-idle-time 10)
     (setq org-clock-history-length 36)
-    (setq org-clock-in-resume t)
-    (setq org-clock-in-switch-to-state 'my-clock-in-to-next)
-    (setq org-drawers '("PROPERTIES" "LOGBOOK"))
-    (setq org-clock-into-drawer t)
-    (setq org-clock-out-when-done t)
     (setq org-clock-persist-query-resume nil)
-    (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
     (setq org-clock-report-include-clocking-task t)
+    (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
+    (setq org-clock-out-when-done '("DONE" "WAITING" "HOLD" "CANCELLED"))
+    (setq org-clock-in-switch-to-state 'my-clock-in-to-next)
 
     (defun my-clock-in-to-next (kw)
       "Switch a task from TODO to NEXT when clocking in, except capture tasks"
