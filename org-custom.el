@@ -5,58 +5,10 @@
   :config
   (progn
     (defvar org-root-dir (concat user-emacs-directory "org/"))
-    (setq org-babel-results-keyword "results")
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((emacs-lisp . t) (python . t) (ruby . t) (lua . t) (sh . t)
-       (C . t) (R . t) (js . t) (octave . t) (ledger . t)
-       (latex . t) (gnuplot . t) (dot . t) (ditaa . t)))
-    (add-hook 'org-babel-after-execute-hook
-              'org-display-inline-images 'append)
-    ;; (org-babel-lob-ingest
-    ;;   "~/.emacs.d/org/contrib/babel/library-of-babel.org")
-    (org-babel-lob-ingest "~/org/lob.org")
-    (setq org-src-fontify-natively t)
-    (dolist (x org-structure-template-alist)
-      (setf (cadr x) (downcase (cadr x)))) ;; make them lowercase
 
-    (setq org-src-preserve-indentation nil)
-    (setq org-edit-src-content-indentation 0)
-    (add-to-list 'org-src-lang-modes (cons "cu" 'c++))
-    (add-to-list 'org-src-lang-modes (cons "js" 'espresso))
-    (setq org-export-coding-system 'utf-8)
-
-    (setq org-format-latex-options
-          (plist-put org-format-latex-options :scale 2.0))
-
-    (setq org-todo-keywords
-          '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
-            (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
-                      "CANCELLED(c@/!)" "MEETING(m@/!)")))
-
-    (setq
-     org-link-abbrev-alist
-     '(("g"        . "https://www.google.com/search?q=")
-       ("gs"       . "http://scholar.google.com/scholar?hl=en&q=")
-       ("gb"       . "https://www.google.com/search?tbm=bks&q=")
-       ("gt"       . "http://translate.google.com/#auto/en/")
-       ("pat"      . "https://www.google.com/search?tbm=pts&q=")
-       ("gfin"     . "http://www.google.com/finance?q=")
-       ("gmap"     . "http://maps.google.com/maps?q=")
-       ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")
-       ("tw"       . "http://twitter.com/")
-       ("d"        . "http://www.duckduckgo.com/?q=")
-       ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
-       ("sd"       . "http://slickdeals.net/newsearch.php?firstonly=1&q=")
-       ("cb"       . "http://crunchbase.com/search?query=")
-       ("usc"      . "http://www.law.cornell.edu/uscode/text/")
-       ("cfr"      . "http://www.law.cornell.edu/cfr/text/")
-       ("ups"      . "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=")
-       ("ontrack"  . "http://www.ontrac.com/trackres.asp?tracking_number=")
-       ("wp"       . "http://en.wikipedia.org/w/index.php?title=Special:Search&search=")
-       ("yelp"     . "http://www.yelp.com/search?find_desc=")))
-
-    (setq org-directory "~/org")
+    (setq org-directory "~/org/")
+    (setq org-default-notes-file (concat org-directory "notes.org"))
+    (setq org-attach-directory (concat org-directory "data"))
     ;; (setq org-agenda-files (list org-directory))
     (setq org-agenda-files
           '("~/org/notes.org"
@@ -64,77 +16,46 @@
     (setq org-agenda-text-search-extra-files
           '("~/org/journal.org"
             "~/org/bookmarks.org"))
-    (setq org-mobile-directory "~/org.mobile")
     (setq org-mobile-files
           (append org-agenda-files org-agenda-text-search-extra-files))
-    (setq org-default-notes-file (concat org-directory "/notes.org"))
-    (setq org-attach-directory (concat org-directory "/data"))
-    (setq org-drawers-for-agenda nil)
+    (setq org-mobile-directory "~/org.mobile")
     (setq org-mobile-inbox-for-pull "~/org/flagged.org")
+    (add-to-list 'Info-default-directory-list
+                 (concat org-root-dir "doc/"))
 
-    (setq org-file-apps
-          '((auto-mode . emacs)
-            ("\\.mm\\'" . default)
-            ("\\.x?html?\\'" . default)
-            ("\\.pdf\\'" . default)
-            ("\\.epub\\'" . "fbreader %s")))
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
+            (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
+                      "CANCELLED(c@/!)" "MEETING(m@/!)")))
 
-    (setq org-refile-use-outline-path 'file)
-    (setq org-reverse-note-order t)    ; refiling puts item at the top
-    (setq org-completion-use-ido t)
-    (setq org-imenu-depth 3)                       ; default is 2
-    (setq org-refile-targets '((nil :maxlevel . 4) ; current buffer
-                               (org-mobile-files :maxlevel . 4)))
-    ;; Use full outline paths for refile targets - we file directly with IDO
-    (setq org-refile-use-outline-path 'file)
-    ;; Targets complete directly with IDO
-    (setq org-outline-path-complete-in-steps nil)
-    ;; Allow refile to create parent tasks with confirmation
-    (setq org-refile-allow-creating-parent-nodes 'confirm)
-    (defun verify-refile-target ()
-      "Exclude todo keywords with a done state from refile targets"
-      (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-    (setq org-refile-target-verify-function 'verify-refile-target)
-
-    ;; Save all org buffers every hour
-    (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-
-    (setq org-sort-agenda-noeffort-is-high nil)
     (setq org-global-properties
           '(("Effort_ALL". "1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00 9:00 0:30")
             ("COLUMNS". "%48ITEM %PRIORITY %DEADLINE %SCHEDULED %7Effort{:} %5CLOCKSUM")))
-    ;; (setq org-global-properties nil)
-    (setq calendar-latitude 38)
-    (setq calendar-longitude -122)
 
-    (setq org-special-ctrl-a/e t)
     (setq org-special-ctrl-k t)
+    (setq org-special-ctrl-a/e t)
     (setq org-yank-adjusted-subtrees t)
+    (setq org-cycle-include-plain-lists t)
+    (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 
     (setq org-log-done t)
     ;;(setq org-log-done 'time)
     (setq org-log-into-drawer t)
-    ;;(setq org-log-state-notes-insert-after-drawers nil)
     (setq org-odd-levels-only nil) ; org.mobile gets confused if it is enabled
     (setq org-hide-leading-stars t)
-    (setq org-enforce-todo-dependencies t)
-    (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-    (setq org-agenda-include-diary t)
-
-    (add-to-list 'Info-default-directory-list
-                 (concat org-root-dir "doc/"))
     (setq org-list-allow-alphabetical t)
-    (setq org-cycle-include-plain-lists t)
+    (setq org-enforce-todo-dependencies t)
     (setq org-catch-invisible-edits 'error)
     (setq org-read-date-prefer-future 'time)
-    (setq org-agenda-persistent-filter t)
+    ;;(setq org-log-state-notes-insert-after-drawers nil)
     ;; (setq org-tags-match-list-sublevels 'indented)
 
-    (setq org-stuck-projects
-          '("+LEVEL=2/!-DONE-CANCELLED" ("TODO" "NEXT") nil ""))
-
-    (setq org-agenda-dim-blocked-tasks nil)
+    (setq org-drawers-for-agenda nil)
+    (setq org-agenda-include-diary t)
     (setq org-agenda-compact-blocks t)
+    (setq org-agenda-dim-blocked-tasks nil)
+    (setq org-sort-agenda-noeffort-is-high nil)
+    (setq org-agenda-persistent-filter t)
     (let ((my-agenda-commands
            '(("n" "Next Tasks" tags-todo "-WAITING/!NEXT" ;; ??
               ((org-agenda-overriding-header "Next Tasks")
@@ -172,19 +93,53 @@
             (append my-agenda-commands
              (if (boundp 'org-agenda-custom-commands)
                  org-agenda-custom-commands))))
+    (setq org-stuck-projects
+          '("+LEVEL=2/!-DONE-CANCELLED" ("TODO" "NEXT") nil ""))
 
-    (setq timestamp-entries t)
-    (defun toggle-timestamp-entries ()
-      (interactive)
-      (message
-       (if (setq timestamp-entries (not timestamp-entries)) "on" "off")))
-    (defun timestamp-entry ()
-      (when timestamp-entries
-        (save-excursion
-          (org-return)
-          (org-cycle)
-          (org-insert-time-stamp nil t t))))
-    (add-hook 'org-insert-heading-hook 'timestamp-entry 'append)
+    ;; Targets complete directly with ido
+    (setq org-outline-path-complete-in-steps nil)
+    (setq org-refile-use-outline-path 'file)
+    (setq org-refile-allow-creating-parent-nodes 'confirm)
+    (setq org-refile-use-outline-path 'file)
+    (setq org-reverse-note-order t)    ; refiling puts item at the top
+    (setq org-completion-use-ido t)
+    (setq org-imenu-depth 3)                       ; default is 2
+    (setq org-refile-targets '((nil :maxlevel . 4) ; current buffer
+                               (org-agenda-files :maxlevel . 4)
+                               (org-agenda-text-search-extra-files :maxlevel . 4)))
+
+    (defun verify-refile-target ()
+      "Exclude todo keywords with a done state from refile targets"
+      (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+    (setq org-refile-target-verify-function 'verify-refile-target)
+
+    ;; Save all org buffers every hour
+    (run-at-time "00:59" 3600 'org-save-all-org-buffers)
+
+    ;; org-babel setup
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t) (python . t) (ruby . t) (lua . t) (sh . t)
+       (C . t) (R . t) (js . t) (octave . t) (ledger . t)
+       (latex . t) (gnuplot . t) (dot . t) (ditaa . t)))
+    (add-hook 'org-babel-after-execute-hook
+              'org-display-inline-images 'append)
+    ;; (org-babel-lob-ingest
+    ;;   "~/.emacs.d/org/contrib/babel/library-of-babel.org")
+    (org-babel-lob-ingest "~/org/lob.org")
+
+    (setq org-src-fontify-natively t)
+    (setq org-src-preserve-indentation nil)
+    (setq org-edit-src-content-indentation 0)
+    (setq org-babel-results-keyword "results")
+    (dolist (x org-structure-template-alist)
+      (setf (cadr x) (downcase (cadr x)))) ;; make them lowercase
+    (add-to-list 'org-src-lang-modes (cons "cu" 'c++))
+    (add-to-list 'org-src-lang-modes (cons "js" 'espresso))
+
+    (setq org-export-coding-system 'utf-8)
+    (setq org-format-latex-options
+          (plist-put org-format-latex-options :scale 2.0))
 
     (defun org-toggle-eval-confirmation ()
       (interactive)
@@ -195,22 +150,20 @@
         (message
          (concat "org eval confirmation is " (if state "on" "off")))))
 
-    (defun adb-org-mobile-sync ()
-      "syncs with org-mobile android app via adb"
+    (defvar org-timestamp-entries t)
+    (defun org-toggle-timestamp-entries ()
       (interactive)
-      (let ((adb
-             (expand-file-name
-              "~/android/android-sdk-linux/platform-tools/adb"))
-            (org-mobile-remote-dir "/sdcard/org")
-            (org-mobile-local-dir (expand-file-name org-mobile-directory)))
-        (org-mobile-pull) ;; to prevent overwriting mobileorg.org
-        (call-process adb nil "*adb*" nil "-d" "pull"
-                      (concat org-mobile-remote-dir "/mobileorg.org")
-                      org-mobile-local-dir)
-        (org-mobile-pull)
-        (org-mobile-push)
-        (call-process adb nil "*adb*" nil "-d" "push"
-                      org-mobile-local-dir org-mobile-remote-dir)))
+      (message
+       (if (setq org-timestamp-entries
+                 (not org-timestamp-entries)) "on" "off")))
+
+    (defun org-timestamp-entry ()
+      (when org-timestamp-entries
+        (save-excursion
+          (org-return)
+          (org-cycle)
+          (org-insert-time-stamp nil t t))))
+    (add-hook 'org-insert-heading-hook 'org-timestamp-entry 'append)
 
     (defadvice org-columns (before ak-fix-org-columns activate)
       (when (fboundp 'set-face-attribute)
@@ -222,6 +175,7 @@
           (set-face-foreground 'org-level-2
                                (face-attribute 'default :foreground)))))
 
+    ;; org links config
     (defun org-occur-open (uri)
       "Run `occur' on the fragment after '#' in the link uri."
       (let ((list (split-string uri "#")))
@@ -234,9 +188,58 @@
     (add-hook 'org-open-link-functions 'my-open-link)
     (add-to-list 'org-link-frame-setup '(file . find-file-other-frame)))
 
+    (setq org-file-apps
+          '((auto-mode . emacs)
+            ("\\.mm\\'" . default)
+            ("\\.x?html?\\'" . default)
+            ("\\.pdf\\'" . default)
+            ("\\.epub\\'" . "fbreader %s")))
+
+    (setq
+     org-link-abbrev-alist
+     '(("g"        . "https://www.google.com/search?q=")
+       ("gs"       . "http://scholar.google.com/scholar?hl=en&q=")
+       ("gb"       . "https://www.google.com/search?tbm=bks&q=")
+       ("gt"       . "http://translate.google.com/#auto/en/")
+       ("pat"      . "https://www.google.com/search?tbm=pts&q=")
+       ("gfin"     . "http://www.google.com/finance?q=")
+       ("gmap"     . "http://maps.google.com/maps?q=")
+       ("nsf"      . "http://nsf.gov/awardsearch/showAward.do?AwardNumber=")
+       ("tw"       . "http://twitter.com/")
+       ("d"        . "http://www.duckduckgo.com/?q=")
+       ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
+       ("sd"       . "http://slickdeals.net/newsearch.php?firstonly=1&q=")
+       ("cb"       . "http://crunchbase.com/search?query=")
+       ("usc"      . "http://www.law.cornell.edu/uscode/text/")
+       ("cfr"      . "http://www.law.cornell.edu/cfr/text/")
+       ("ups"      . "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=")
+       ("ontrack"  . "http://www.ontrac.com/trackres.asp?tracking_number=")
+       ("wp"       . "http://en.wikipedia.org/w/index.php?title=Special:Search&search=")
+       ("yelp"     . "http://www.yelp.com/search?find_desc=")))
+
   :bind (("C-c a" . org-agenda)
          ("C-c b" . org-ido-switchb)
          ("C-c l" . org-store-link)))
+
+(use-package org-mobile
+  :commands (org-mobile-pull org-mobile-push)
+  :init
+  (defun adb-org-mobile-sync ()
+    "syncs with org-mobile android app via adb"
+    (interactive)
+    (let ((adb
+           (expand-file-name
+            "~/android/android-sdk-linux/platform-tools/adb"))
+          (org-mobile-remote-dir "/sdcard/org")
+          (org-mobile-local-dir (expand-file-name org-mobile-directory)))
+      (org-mobile-pull) ;; to prevent overwriting mobileorg.org
+      (call-process adb nil "*adb*" nil "-d" "pull"
+                    (concat org-mobile-remote-dir "/mobileorg.org")
+                    org-mobile-local-dir)
+      (org-mobile-pull)
+      (org-mobile-push)
+      (call-process adb nil "*adb*" nil "-d" "push"
+                    org-mobile-local-dir org-mobile-remote-dir))))
 
 (use-package org-clock
   :config
@@ -454,24 +457,30 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 (use-package org-habit
   :commands org-is-habit-p)
+
 (use-package org-learn
   :commands org-smart-reschedule)
+
 (use-package org-screen
   :commands org-screen)
+
 (use-package org-bookmark
   :commands (org-bookmark-open org-bookmark-store-link))
+
 (use-package org-git-link
   :commands org-git-open
   :idle (org-add-link-type "git" 'org-git-open) ;; org-link-types
   :config ;; this prevents interference with normal org linking
   (setq org-store-link-functions
         (delq 'org-git-store-link org-store-link-functions)))
+
 (use-package org-player
   :if window-system
   :commands org-player-start/stop
   :init
   (use-package bongo
     :commands bongo))
+
 (use-package org-sample
   :commands org-sample
   :init
