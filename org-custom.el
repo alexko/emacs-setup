@@ -104,7 +104,6 @@
           '(("Effort_ALL". "1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00 9:00 0:30")
             ("COLUMNS". "%48ITEM %PRIORITY %DEADLINE %SCHEDULED %7Effort{:} %5CLOCKSUM")))
     ;; (setq org-global-properties nil)
-    (setq org-clock-idle-time 10)
     (setq calendar-latitude 38)
     (setq calendar-longitude -122)
 
@@ -130,18 +129,6 @@
     (setq org-read-date-prefer-future 'time)
     (setq org-agenda-persistent-filter t)
     ;; (setq org-tags-match-list-sublevels 'indented)
-
-    (org-clock-persistence-insinuate)
-    (setq org-clock-history-length 36)
-    (setq org-clock-in-resume t)
-    (setq org-clock-in-switch-to-state 'my-clock-in-to-next)
-    (setq org-drawers '("PROPERTIES" "LOGBOOK"))
-    (setq org-clock-into-drawer t)
-    (setq org-clock-out-when-done t)
-    (setq org-clock-persist t)
-    (setq org-clock-persist-query-resume nil)
-    (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
-    (setq org-clock-report-include-clocking-task t)
 
     (setq org-stuck-projects
           '("+LEVEL=2/!-DONE-CANCELLED" ("TODO" "NEXT") nil ""))
@@ -199,23 +186,6 @@
           (org-insert-time-stamp nil t t))))
     (add-hook 'org-insert-heading-hook 'timestamp-entry 'append)
 
-    (defun my-clock-in-to-next (kw)
-      "Switch a task from TODO to NEXT when clocking in, except capture tasks"
-      (my-x11idle-set)
-      (when (not (and (boundp 'org-capture-mode) org-capture-mode))
-        (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
-
-    (defun my-x11idle-set ()
-      (unless (boundp 'org-clock-x11idle-program-name)
-        (setq org-clock-x11idle-program-name "x11idle"))
-      (setq org-x11idle-exists-p
-            (and (eq window-system 'x)
-                 (eq (call-process-shell-command
-                      "command" nil nil nil "-v"
-                      org-clock-x11idle-program-name) 0)
-                 (eq (call-process-shell-command
-                      org-clock-x11idle-program-name nil nil nil) 0))))
-
     (defun org-toggle-eval-confirmation ()
       (interactive)
       (let ((state (if org-confirm-babel-evaluate nil t)))
@@ -267,6 +237,44 @@
   :bind (("C-c a" . org-agenda)
          ("C-c b" . org-ido-switchb)
          ("C-c l" . org-store-link)))
+
+(use-package org-clock
+  :config
+  (progn
+    (setq org-clock-idle-time 10)
+    (setq org-clock-history-length 36)
+    (setq org-clock-in-resume t)
+    (setq org-clock-in-switch-to-state 'my-clock-in-to-next)
+    (setq org-drawers '("PROPERTIES" "LOGBOOK"))
+    (setq org-clock-into-drawer t)
+    (setq org-clock-out-when-done t)
+    (setq org-clock-persist-query-resume nil)
+    (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
+    (setq org-clock-report-include-clocking-task t)
+
+    (defun my-clock-in-to-next (kw)
+      "Switch a task from TODO to NEXT when clocking in, except capture tasks"
+      (my-x11idle-set)
+      (when (not (and (boundp 'org-capture-mode) org-capture-mode))
+        (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
+
+    (defun my-x11idle-set ()
+      (unless (boundp 'org-clock-x11idle-program-name)
+        (setq org-clock-x11idle-program-name "x11idle"))
+      (setq org-x11idle-exists-p
+            (and (eq window-system 'x)
+                 (eq (call-process-shell-command
+                      "command" nil nil nil "-v"
+                      org-clock-x11idle-program-name) 0)
+                 (eq (call-process-shell-command
+                      org-clock-x11idle-program-name nil nil nil) 0))))
+    ;; (org-clock-persistence-insinuate)
+    (defadvice desktop-lazy-create-buffer (after my-org-clock-load activate)
+      (unless desktop-buffer-args-list
+        (org-clock-load)))
+    ;; (add-hook 'desktop-after-read-hook 'my-desktop-after-read-hook)
+    (add-hook 'kill-emacs-hook 'org-clock-save)
+    (setq org-clock-persist t)))
 
 (use-package org-capture
   :init
