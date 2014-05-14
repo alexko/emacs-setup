@@ -379,5 +379,5 @@
                      (file-newer-than-file-p elcfile elfile)) 
           (byte-compile-file elfile))))))
 
-(use-package-init-on-idle 'my-compile-init-files 5)
+(use-package-init-on-idle 'my-compile-init-files 9)
 ;;; init.el ends here
