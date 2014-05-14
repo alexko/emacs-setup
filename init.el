@@ -290,8 +290,13 @@
 
 (use-package color-theme
   :config
-  (use-package lilacs
-    :config (color-theme-lilacs)))
+  (or
+   (use-package lilacs
+     :config (color-theme-lilacs))
+   (use-package "inkpot"
+     :config (color-theme-inkpot))
+   (use-package "twilight"
+     :config (color-theme-twilight))))
 
 (use-package command-frequency
   :init
