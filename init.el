@@ -301,8 +301,10 @@
    (use-package lilacs
      :config (color-theme-lilacs))
    (use-package "inkpot"
+     :if window-system
      :config (color-theme-inkpot))
    (use-package "twilight"
+     :if window-system
      :config (color-theme-twilight))))
 
 (use-package command-frequency
