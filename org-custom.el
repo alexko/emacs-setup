@@ -152,7 +152,7 @@
         (message
          (concat "org eval confirmation is " (if state "on" "off")))))
 
-    (defvar org-timestamp-entries t)
+    (defvar org-timestamp-entries nil)
     (defun org-toggle-timestamp-entries ()
       (interactive)
       (message
