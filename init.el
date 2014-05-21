@@ -39,6 +39,17 @@
       frame-title-format "%b %+ %[%f%]"
       icon-title-format "%b")
 
+(defvar prog-modes
+  (list 'c-mode 'lua-mode 'python-mode 'espresso-mode
+        'emacs-lisp-mode 'org-mode))
+(defvar prog-mode-hooks
+  (list 'c-mode-common-hook 'lua-mode-hook 'python-mode-hook
+        'espresso-mode-hook 'emacs-lisp-mode-hook 'org-mode-hook))
+(dolist (mode prog-modes)
+  (font-lock-add-keywords
+   mode '(("\\<\\(FIXME\\):" 1 font-lock-warning-face prepend) ; ???
+         ("\\<\\(\\?\\?\\?\\)" 1 font-lock-warning-face prepend))))
+
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode nil) ; use spaces
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
@@ -225,12 +236,8 @@
   :config
   (if (boundp 'prog-mode-hook)
       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-    (progn
-      (add-hook 'lua-mode-hook 'rainbow-delimiters-mode)
-      (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-      (add-hook 'c-mode-common-hook 'rainbow-delimiters-mode)
-      (add-hook 'espresso-mode-hook 'rainbow-delimiters-mode)
-      (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))))
+    (dolist (hook prog-mode-hooks)
+      (add-hook hook 'rainbow-delimiters-mode))))
 
 (use-package idle-highlight
   :init (add-hook 'espresso-mode-hook 'idle-highlight))
