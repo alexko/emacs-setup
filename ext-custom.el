@@ -86,11 +86,18 @@
 (define-key global-map (kbd "M-n") 'convert-win-to-frame)
 (define-key global-map (kbd "C-c n") nil)
 
+;; (defadvice occur-mode-goto-occurrence (around my-occur activate)
+;;   "Open occurrences in the same window if occur window is active"
+;;   (let ((pop-to-buffer-save (symbol-function 'pop-to-buffer)))
+;;     (fset 'pop-to-buffer 'switch-to-buffer)
+;;     ad-do-it
+;;     (fset 'pop-to-buffer pop-to-buffer-save)))
+
 (defadvice occur-mode-goto-occurrence (around my-occur activate)
   "Open occurrences in the same window if occur window is active"
   (let ((pop-to-buffer-save (symbol-function 'pop-to-buffer)))
-    (fset 'pop-to-buffer 'switch-to-buffer)
-    ad-do-it
-    (fset 'pop-to-buffer pop-to-buffer-save)))
+    (flet ((pop-to-buffer (buf &optional other-window norecord)
+                          (switch-to-buffer buf)))
+      ad-do-it)))
 
 (provide 'alex-custom)
