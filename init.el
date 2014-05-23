@@ -216,8 +216,6 @@
     (add-hook 'c-mode-common-hook 'google-set-c-style)
     (add-hook 'c-mode-common-hook 'google-make-newline-indent)))
 
-(use-package gccsense) ;; needs ruby script to work
-
 (use-package py-indent
   :disabled t
   :init (setq-default py-indent-offset 2))
