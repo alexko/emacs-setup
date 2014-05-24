@@ -121,7 +121,7 @@
     ;; org-babel setup
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((emacs-lisp . t) (python . t) (ruby . t) (lua . t) (sh . t)
+     '((emacs-lisp . t) (python . t) (ruby . t) (lua . t) (shell . t)
        (C . t) (R . t) (js . t) (octave . t) (ledger . t)
        (latex . t) (gnuplot . t) (dot . t) (ditaa . t)))
     (add-hook 'org-babel-after-execute-hook
