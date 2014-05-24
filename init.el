@@ -24,7 +24,6 @@
 
 (setq inhibit-startup-screen t
       initial-scratch-message nil
-      show-trailing-whitespace t
       initial-major-mode 'org-mode
       visible-bell t
       echo-keystrokes 0.1

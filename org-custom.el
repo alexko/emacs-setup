@@ -451,6 +451,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
       (message arg))
     (defun my-org-mode-hook ()
       (define-key org-mode-map (kbd "<f12>") 'org-make-dependency)
+      (setq show-trailing-whitespace t)
       (auto-fill-mode 1))
     (add-hook 'org-mode-hook 'my-org-mode-hook)
     (add-hook 'org-trigger-hook 'org-depend-trigger-todo)
