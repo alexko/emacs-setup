@@ -156,6 +156,8 @@
 (use-package imenu
   :commands imenu--make-index-alist)
 
+(use-package grep)
+
 (use-package find-file-in-project
   :init
   (progn
