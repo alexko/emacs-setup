@@ -73,7 +73,14 @@
 (define-key global-map (kbd "<f9>") 'next-error)
 (define-key global-map (kbd "C-c o") 'occur)
 (define-key global-map (kbd "C-h /") 'find-function)
-(define-key occur-mode-map (kbd "q") 'delete-window)
+
+(define-key occur-mode-map (kbd "q") 'my-quit-window)
+(define-key grep-mode-map (kbd "q") 'my-quit-window)
+(defun my-quit-window ()
+  (interactive)
+  (if (listp (car (window-tree)))
+      (delete-window)
+    (bury-buffer)))
 
 (let ((default-directory (concat user-emacs-directory "vendor/")))
   (normal-top-level-add-subdirs-to-load-path)) ; this appends load-path
