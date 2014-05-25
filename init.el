@@ -74,14 +74,6 @@
 (define-key global-map (kbd "C-c o") 'occur)
 (define-key global-map (kbd "C-h /") 'find-function)
 
-(define-key occur-mode-map (kbd "q") 'my-quit-window)
-(define-key grep-mode-map (kbd "q") 'my-quit-window)
-(defun my-quit-window ()
-  (interactive)
-  (if (listp (car (window-tree)))
-      (delete-window)
-    (bury-buffer)))
-
 (let ((default-directory (concat user-emacs-directory "vendor/")))
   (normal-top-level-add-subdirs-to-load-path)) ; this appends load-path
 
@@ -153,10 +145,24 @@
     (define-key global-map (kbd "C-x C-f") 'ido-find-file)
     (define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window))
 
+(defun my-quit-window ()
+  (interactive)
+  (if (listp (car (window-tree)))
+      (delete-window)
+    (bury-buffer)))
+
+(use-package occur
+  :config
+  (define-key occur-mode-map (kbd "q") 'my-quit-window))
+
+(use-package grep
+  :config
+  (progn
+    (grep-compute-defaults)
+    (define-key grep-mode-map (kbd "q") 'my-quit-window)))
+
 (use-package imenu
   :commands imenu--make-index-alist)
-
-(use-package grep)
 
 (use-package find-file-in-project
   :init
