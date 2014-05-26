@@ -327,6 +327,7 @@
                   (if (boundp 'org-capture-templates) org-capture-templates))))
   :config
   (progn
+    (setq org-refile-use-cache t) ; C-0 C-c C-w clears the cache
     ;; (defun my-delete-capture-frame ()
     ;;   (if (equal (frame-parameter nil 'name) "* url capture *")
     ;;       (delete-frame)))
