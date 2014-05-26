@@ -282,8 +282,7 @@
     (setq ibuffer-show-empty-filter-groups nil)
     (setq ibuffer-saved-filter-groups
           '(("home"
-             ("Org" (or (mode . org-mode)
-                        (filename . "OrgMode")))
+             ("Org" (filename . "\.org$"))
              ("Code" (or (mode . python-mode)
                          (mode . c-mode)
                          (mode . lua-mode)))
