@@ -204,10 +204,18 @@
     (add-hook 'org-shiftright-final-hook 'windmove-right)))
 
 (use-package espresso
+  :disabled t
   :init
     (setq espresso-indent-level 2)
   :mode
     (("\\.js$" . espresso-mode) ("\\.json$" . espresso-mode)))
+
+(use-package js2-mode
+  :init
+    (setq js2-basic-offset 2
+          js2-cleanup-whitespace t)
+  :mode
+    (("\\.js$" . js2-mode) ("\\.json$" . js2-mode)))
 
 ;; begin from tim-custom
 (use-package pymacs
