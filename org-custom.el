@@ -121,9 +121,10 @@
     ;; org-babel setup
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((emacs-lisp . t) (python . t) (ruby . t) (lua . t) (shell . t)
+     '((emacs-lisp . t) (python . t) (ruby . t) (lua . t)
        (C . t) (R . t) (js . t) (octave . t) (ledger . t)
        (latex . t) (gnuplot . t) (dot . t) (ditaa . t)))
+    (or (use-package ob-sh) (use-package ob-shell))
     (add-hook 'org-babel-after-execute-hook
               'org-display-inline-images 'append)
     ;; (org-babel-lob-ingest
