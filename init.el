@@ -40,10 +40,10 @@
 
 (defvar prog-modes
   (list 'c-mode 'lua-mode 'python-mode 'espresso-mode
-        'emacs-lisp-mode 'org-mode))
+        'emacs-lisp-mode))
 (defvar prog-mode-hooks
   (list 'c-mode-common-hook 'lua-mode-hook 'python-mode-hook
-        'espresso-mode-hook 'emacs-lisp-mode-hook 'org-mode-hook))
+        'espresso-mode-hook 'emacs-lisp-mode-hook))
 (dolist (mode prog-modes)
   (font-lock-add-keywords
    mode '(("\\<\\(FIXME\\):" 1 font-lock-warning-face prepend) ; ???
