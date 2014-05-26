@@ -106,9 +106,12 @@
     (setq org-reverse-note-order t)    ; refiling puts item at the top
     (setq org-completion-use-ido t)
     (setq org-imenu-depth 3)                       ; default is 2
-    (setq org-refile-targets '((nil :maxlevel . 4) ; current buffer
-                               (org-agenda-files :maxlevel . 4)
-                               (org-agenda-text-search-extra-files :maxlevel . 4)))
+    (setq org-refile-targets
+          '((nil :maxlevel . 4) ; current buffer
+            (org-agenda-files :maxlevel . 4)
+            (org-agenda-text-search-extra-files :maxlevel . 4)))
+    (setq org-refile-use-cache t) ; C-0 C-c C-w clears the cache
+
 
     (defun verify-refile-target ()
       "Exclude todo keywords with a done state from refile targets"
@@ -327,7 +330,6 @@
                   (if (boundp 'org-capture-templates) org-capture-templates))))
   :config
   (progn
-    (setq org-refile-use-cache t) ; C-0 C-c C-w clears the cache
     ;; (defun my-delete-capture-frame ()
     ;;   (if (equal (frame-parameter nil 'name) "* url capture *")
     ;;       (delete-frame)))
