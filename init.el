@@ -151,7 +151,7 @@
       (delete-window)
     (bury-buffer)))
 
-(use-package occur
+(use-package "replace"
   :config
   (define-key occur-mode-map (kbd "q") 'my-quit-window))
 
