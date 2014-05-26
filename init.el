@@ -155,6 +155,10 @@
   :config
   (define-key occur-mode-map (kbd "q") 'my-quit-window))
 
+(use-package compile
+  :config
+  (define-key compilation-mode-map (kbd "q") 'my-quit-window))
+
 (use-package grep
   :config
   (progn
