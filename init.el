@@ -309,6 +309,7 @@
 (use-package ledger)
 
 (use-package smex
+  :commands smex
   :config
   (progn
     (smex-initialize)
@@ -316,10 +317,14 @@
     (define-key global-map (kbd "M-X") 'smex-major-mode-commands)
     (define-key global-map (kbd "C-c C-c M-x") 'execute-extended-command)))
 
-(use-package scim-bridge
+(use-package icicles
+  :commands icy-mode
+  :load-path "vendor/icicles")
+
+(use-package "scim-bridge-dev"
   :config
   (progn
-    (add-hook 'after-init-hook 'scim-mode-on)
+    ;; (add-hook 'after-init-hook 'scim-mode-on)
     (scim-define-common-key (kbd "C-`") t)
     ;; Use C-SPC for Set Mark command
     (scim-define-common-key ?\C-\s nil)
