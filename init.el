@@ -343,6 +343,21 @@
     ;; Use C-/ for Undo command
     (scim-define-common-key ?\C-/ nil)))
 
+(use-package hideshow
+  :config
+  (progn
+    (add-hook 'c-mode-common-hook   'hs-minor-mode)
+    (add-hook 'lua-mode-hook        'hs-minor-mode)
+    (add-hook 'python-mode-hook     'hs-minor-mode)
+    (add-hook 'js2-mode-hook        'hs-minor-mode)
+    (add-hook 'espresso-mode-hook   'hs-minor-mode)
+    (add-hook 'perl-mode-hook       'hs-minor-mode)
+    (add-hook 'sh-mode-hook         'hs-minor-mode)
+    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+    (add-hook 'lisp-mode-hook       'hs-minor-mode)
+    (add-hook 'java-mode-hook       'hs-minor-mode)
+    (define-key hs-minor-mode-map (kbd "C-<f1>") 'hs-toggle-hiding))
+
 (use-package color-theme
   :config
   (or
