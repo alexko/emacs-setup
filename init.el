@@ -343,6 +343,10 @@
     ;; Use C-/ for Undo command
     (scim-define-common-key ?\C-/ nil)))
 
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+
 (use-package hideshow
   :config
   (progn
