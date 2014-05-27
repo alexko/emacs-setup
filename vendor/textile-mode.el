@@ -47,6 +47,8 @@
     map)
   "Keymap for `textile-mode'.")
 
+(defvar textile-mode-hook nil
+  "A list of functions to run when entering textile-mode.")
 
 (defun textile-re-concat (l)
   "Concatenate the elements of a list with a \\| separator and
@@ -233,13 +235,12 @@ non-matching parentheses"
 ;;   ...)
 
 
+;;;###autoload
 (define-derived-mode textile-mode text-mode "Textile"
   "A major mode for editing textile files."
   (set (make-local-variable 'font-lock-defaults) '(textile-font-lock-keywords t))
-  (set (make-local-variable 'font-lock-multiline) 'undecided))
-
-
-
+  (set (make-local-variable 'font-lock-multiline) 'undecided)
+  (run-mode-hooks 'textile-mode-hook))
 
 ;; FACES
 
@@ -258,7 +259,7 @@ non-matching parentheses"
   :group 'textile-faces)
 
 (defface textile-h3-face
-  '((t (:height 1.6 :weight bold)))
+  '((t (:height 1.5 :weight bold)))
   "Face used to highlight h3 headers."
   :group 'textile-faces)
 
@@ -397,6 +398,8 @@ non-matching parentheses"
   "Face used to highlight acronyms links."
   :group 'textile-faces)
 
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
 (provide 'textile-mode)
-;;; textile-mode.el ends here
+ ;;; textile-mode.el ends here
