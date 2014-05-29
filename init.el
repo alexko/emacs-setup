@@ -356,7 +356,7 @@
     (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
     (add-hook 'lisp-mode-hook       'hs-minor-mode)
     (add-hook 'java-mode-hook       'hs-minor-mode)
-    (define-key hs-minor-mode-map (kbd "C-<f1>") 'hs-toggle-hiding))
+    (define-key hs-minor-mode-map (kbd "C-<f1>") 'hs-toggle-hiding)))
 
 (use-package color-theme
   :config
