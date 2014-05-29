@@ -329,10 +329,6 @@
     (define-key global-map (kbd "M-X") 'smex-major-mode-commands)
     (define-key global-map (kbd "C-c C-c M-x") 'execute-extended-command)))
 
-(use-package icicles
-  :commands icy-mode
-  :load-path "vendor/icicles")
-
 (use-package "scim-bridge-dev"
   :config
   (progn
