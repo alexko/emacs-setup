@@ -215,6 +215,7 @@
        ("d"        . "http://www.duckduckgo.com/?q=")
        ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
        ("sd"       . "http://slickdeals.net/newsearch.php?firstonly=1&q=")
+       ("sg"       . "https://sourcegraph.com/search?q=")
        ("cb"       . "http://crunchbase.com/search?query=")
        ("usc"      . "http://www.law.cornell.edu/uscode/text/")
        ("cfr"      . "http://www.law.cornell.edu/cfr/text/")
