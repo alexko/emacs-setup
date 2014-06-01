@@ -20,7 +20,7 @@
           (append org-agenda-files org-agenda-text-search-extra-files))
     (setq org-mobile-directory "~/org.mobile")
     (setq org-mobile-inbox-for-pull "~/org/flagged.org")
-    (add-to-list 'Info-default-directory-list
+    (add-to-list 'Info-directory-list
                  (concat org-root-dir "doc/"))
 
     (setq org-todo-keywords
