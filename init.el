@@ -168,6 +168,9 @@
 (use-package imenu
   :commands imenu--make-index-alist)
 
+(use-package loccur
+  :bind ("C-o" . loccur))
+
 (use-package find-file-in-project
   :init
   (progn
