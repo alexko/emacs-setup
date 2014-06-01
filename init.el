@@ -69,7 +69,7 @@
 (define-key global-map (kbd "M-g") 'goto-line)
 (define-key global-map (kbd "M-/") 'hippie-expand)
 (define-key global-map (kbd "<f5>") 'edebug-defun)
-(define-key global-map (kbd "<C-f9>") 'compile)
+(define-key global-map (kbd "<C-f9>") 'recompile)
 (define-key global-map (kbd "<f9>") 'next-error)
 (define-key global-map (kbd "C-c o") 'occur)
 (define-key global-map (kbd "C-h /") 'find-function)
