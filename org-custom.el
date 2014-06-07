@@ -263,20 +263,19 @@
 
     (defun my-clock-in-to-next (kw)
       "Switch a task from TODO to NEXT when clocking in, except capture tasks"
-      (my-x11idle-set)
+      (or (my-x11idle-set "xprintidle") (my-x11idle-set "x11idle"))
       (when (not (and (boundp 'org-capture-mode) org-capture-mode))
         (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
 
-    (defun my-x11idle-set ()
-      (unless (boundp 'org-clock-x11idle-program-name)
-        (setq org-clock-x11idle-program-name "x11idle"))
-      (setq org-x11idle-exists-p
-            (and (eq window-system 'x)
-                 (eq (call-process-shell-command
-                      "command" nil nil nil "-v"
-                      org-clock-x11idle-program-name) 0)
-                 (eq (call-process-shell-command
-                      org-clock-x11idle-program-name nil nil nil) 0))))
+    (defun my-x11idle-set (pname)
+      (or org-x11idle-exists-p
+       (and
+        (setq org-x11idle-exists-p
+              (and (eq window-system 'x)
+                   (eq (call-process-shell-command "command" nil nil nil "-v"
+                                                  pname) 0)
+                   (eq (call-process-shell-command pname nil nil nil) 0)))
+        (setq org-clock-x11idle-program-name pname))))
     ;; (org-clock-persistence-insinuate)
     (defadvice desktop-lazy-create-buffer (after my-org-clock-load activate)
       (unless desktop-buffer-args-list
