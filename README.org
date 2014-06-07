@@ -9,6 +9,12 @@
   git submodule update --init
   make
 #+end_src
+
+  in Ubuntu
+#+begin_src sh
+  sudo apt-get install xprintidle
+#+end_src
+
 * Org-capture
 ** Global capture
    System > Preferences > Keyboard shortcuts > Custom Shortcuts > F12
