@@ -401,7 +401,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
                      url (if (string-match "[^[:space:]]" title) title url)))
            (query
             (or
-             (and (boundp 'org-protocol-convert-query-to-plist)
+             (and (fboundp 'org-protocol-convert-query-to-plist)
                   (org-protocol-convert-query-to-plist (cadddr parts))) ""))
            (org-capture-link-is-already-stored t) ; avoid call to org-store-link
            remember-annotation-functions)
