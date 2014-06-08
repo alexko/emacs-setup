@@ -319,6 +319,9 @@ e.g. when startup files run in the daemon mode"
            ("s" "op system" entry (file+headline "~/org/journal.org" "Entries")
             "* %:description :dtp:%^{Tags|notags}:\n  %i\n\n%?"
             :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
+           ("S" "op system" plain (clock)
+            "  %i\n  - %:link"
+            :prepend nil :empty-lines 1 :immediate-finish t)
            ("e" "Expenses" entry (file+headline "~/org/finance.org" "Log")
             "* %^{Title} %^g\n  %?"
             :prepend t :empty-lines-after 1 :clock-in t :clock-resume t)
