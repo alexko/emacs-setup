@@ -169,9 +169,9 @@
   :commands imenu--make-index-alist)
 
 (use-package loccur
-  :bind '(("C-o" . loccur-current)
-          ("C-M-o" . loccur)
-          ("C-S-o" . loccur-previous-match))
+  :bind (("C-o" . loccur-current)
+         ("C-M-o" . loccur)
+         ("C-S-o" . loccur-previous-match)))
 
 (use-package find-file-in-project
   :init
