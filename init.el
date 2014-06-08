@@ -295,6 +295,10 @@
   (setq save-place-file (concat user-emacs-directory ".emacs-places"))
   (setq-default save-place t))
 
+(use-package dired
+  :init
+  (setq image-dired-dir (concat saves-dir "image-dired/")))
+
 (use-package ibuf-ext
   :init
   (progn
