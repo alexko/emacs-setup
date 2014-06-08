@@ -267,10 +267,13 @@
       (when (not (and (boundp 'org-capture-mode) org-capture-mode))
         (cond ((member (org-get-todo-state) (list "TODO")) "NEXT"))))
 
+    (defvar org-x11idle-exists-p)
+    (defvar org-clock-x11idle-program-name)
     (defun my-x11idle-set (pname)
       "This sets org-clock-x11idle-program-name if it was not set on startup,
 e.g. when startup files run in the daemon mode"
-      (or org-x11idle-exists-p
+      (or
+       (and (boundp 'org-x11idle-exists-p) org-x11idle-exists-p)
        (and
         (setq org-x11idle-exists-p
               (and (eq window-system 'x)
