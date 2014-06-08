@@ -292,7 +292,7 @@
 (use-package saveplace
   "saves the cursor position for every opem file"
   :init
-  (setq save-place-file (concat user-emacs-directory ".emacs-places"))
+  (setq save-place-file (concat saves-dir ".emacs-places"))
   (setq-default save-place t))
 
 (use-package dired
