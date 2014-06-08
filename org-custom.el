@@ -387,7 +387,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
     (print (org-protocol-split-data info t))
     (let* ((cfunc (or capture-func 'org-capture))
            (parts
-            (if (boundp 'org-protocol-data-separatorxxx)
+            (if (boundp 'org-protocol-data-separator)
                 (org-protocol-split-data info t org-protocol-data-separator)
               (org-protocol-split-data info t)))
            (template (or (and (>= 2 (length (car parts))) (pop parts))
