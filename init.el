@@ -326,7 +326,6 @@
 (use-package ledger)
 
 (use-package smex
-  :commands smex
   :config
   (progn
     (smex-initialize)
