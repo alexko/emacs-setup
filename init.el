@@ -430,7 +430,6 @@
 (defvar user-specific-config
   (expand-file-name user-login-name user-emacs-directory))
 (when (file-exists-p user-specific-config)
-  (add-to-list 'load-path user-specific-config)
   (dolist (file (directory-files user-specific-config 'noerror ".*el$"))
     (or (load (concat file "c") 'noerror) (load file))))
 
