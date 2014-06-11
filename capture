@@ -1,0 +1,99 @@
+#!/usr/bin/env python
+### File: capture
+### Copyright (C) 2014 Alex Kosorukoff
+### Author: Alex Kosorukoff <alex at 3form dot com>
+### Keywords: org-mode desktop capture convenience
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+import urllib
+import argparse
+import subprocess
+import pwd
+import re
+import os
+
+def get_active_window(active=None):
+    if active is None:
+        root = gtk.gdk.screen_get_default()
+        if not root.supports_net_wm_hint("_NET_ACTIVE_WINDOW"):
+            return False
+        if not root.supports_net_wm_hint("_NET_WM_WINDOW_TYPE"):
+            return False
+        active = root.get_active_window()
+    return active
+
+def get_title():
+    active = get_active_window()
+    return active.property_get('WM_NAME')[2]
+
+def get_cmdline():
+    active = get_active_window()
+    pid = active.property_get('_NET_WM_PID')[2][0]
+    try:
+      cmdline = open("/proc/%s/cmdline" % pid).read().split("\x00")[:-1]
+      return cmdline
+    except IOError:
+      pass
+    return None
+
+def get_cwd():
+    active = get_active_window()
+    pid = active.property_get('_NET_WM_PID')[2][0]
+    link = "/proc/%s/cwd" % pid
+    if os.path.islink(link):
+      return os.path.realpath(link)
+    return None
+
+def get_homedir():
+    return pwd.getpwuid(os.getuid()).pw_dir
+
+def get_selection():
+    clipboard = gtk.clipboard_get(selection="PRIMARY")
+    pri = clipboard.wait_for_text()
+    clipboard = gtk.clipboard_get()
+    cli = clipboard.wait_for_text()
+    res = ""
+    if pri and len(pri)>0:
+        res = "P:" + pri.strip()
+    if cli and len(cli)>0 and cli != pri:
+        res += "\nC:" + cli.strip()
+    return res
+
+def shorten(path):
+    home = get_homedir()
+    if path.startswith(home):
+        return "~"+path[len(home)]
+    return path
+
+def main():
+    parser = argparse.ArgumentParser(description='Desktop capture')
+    parser.add_argument('-v', action='version', version='%(prog)s 0.01',
+                        help='print version and quit')
+    parser.add_argument('-t', type=str, default="s",
+                        help='capture template to use')
+    parser.add_argument('-d', action="store_true",
+                        help='capture cwd')
+    parser.add_argument('-n', action="store_true",
+                        help='dry run, print paramters only')
+    args = parser.parse_args()
+
+    sel = get_selection()
+    cwd = get_cwd()
+    cmd = get_cmdline()
+
+    ttl = get_title()
+    cnt = sel+"\nfile:"+os.getcwd() if args.d else sel
+    if cmd:
+        cnt += "\n"+cwd+" "+" ".join(cmd)
+    url = "org-protocol://capture://%s/desktop/%s/%s" \
+        % (args.t, urllib.quote(ttl,safe=""), urllib.quote(cnt,safe=""))
+    print ttl
+    print cnt
+    print url
+    if not args.n:
+        subprocess.call(["/usr/bin/emacsclient", url])
+
+if __name__ == '__main__':
+    main()
