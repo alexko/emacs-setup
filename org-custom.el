@@ -102,7 +102,6 @@
     (setq org-outline-path-complete-in-steps nil)
     (setq org-refile-use-outline-path 'file)
     (setq org-refile-allow-creating-parent-nodes 'confirm)
-    (setq org-refile-use-outline-path 'file)
     (setq org-reverse-note-order t)    ; refiling puts item at the top
     (setq org-completion-use-ido t)
     (setq org-imenu-depth 3)                       ; default is 2
