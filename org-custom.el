@@ -114,7 +114,11 @@
 
     (defun verify-refile-target ()
       "Exclude todo keywords with a done state from refile targets"
-      (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+      (let ((ohc (org-heading-components)))
+        (not
+         (or
+          (member (nth 2 ohc) org-done-keywords)
+          (member (nth 4 ohc) '("Settings"))))))
     (setq org-refile-target-verify-function 'verify-refile-target)
 
     ;; Save all org buffers every hour
