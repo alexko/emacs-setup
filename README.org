@@ -18,45 +18,7 @@
 * Org-capture
 ** Global capture
    System > Preferences > Keyboard shortcuts > Custom Shortcuts > F12
-
-#+begin_src python :shebang "/usr/bin/env python"
-import pygtk
-pygtk.require('2.0')
-import gtk
-import urllib
-import subprocess
-
-def get_title():
-    root = gtk.gdk.screen_get_default()
-    if not root.supports_net_wm_hint("_NET_ACTIVE_WINDOW"):
-        return False
-    if not root.supports_net_wm_hint("_NET_WM_WINDOW_TYPE"):
-        return False
-    active = root.get_active_window()
-    return active.property_get('WM_NAME')[2]
-
-def get_selection():
-    clipboard = gtk.clipboard_get(selection="PRIMARY")
-    pri = clipboard.wait_for_text()
-    clipboard = gtk.clipboard_get()
-    cli = clipboard.wait_for_text()
-    res = ""
-    if pri and len(pri)>0:
-        res = "P:" + pri.strip()
-    if cli and len(cli)>0 and cli != pri:
-        res += "\nC:" + cli.strip()
-    return res
-
-if __name__ == '__main__':
-    ttl = get_title()
-    sel = get_selection()
-    url = "org-protocol://capture://w/desktop/%s/%s" \
-        % (urllib.quote(ttl), urllib.quote(sel))
-    print ttl
-    print sel
-    print url
-    subprocess.call(["/usr/bin/emacsclient", url])
-#+end_src
+   set it to [[file:~/.emacs.d/capture]]
 
 * Org-protocol setup
   I use org-protocol to bookmark pages from browser.
