@@ -317,7 +317,8 @@
 (use-package dired
   :init
   (setq image-dired-dir (concat saves-dir "image-dired/")
-        image-dired-db-file (expand-file-name ".image-dired_db" saves-dir)))
+        image-dired-db-file (expand-file-name ".image-dired_db" saves-dir)
+        image-dired-temp-image-file (expand-file-name ".image-dired_temp" saves-dir)))
 
 (use-package ibuf-ext
   :init
