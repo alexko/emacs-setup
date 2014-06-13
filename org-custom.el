@@ -109,16 +109,24 @@
           '((nil :maxlevel . 4) ; current buffer
             (org-agenda-files :maxlevel . 4)
             (org-agenda-text-search-extra-files :maxlevel . 4)))
+    (setq my-capture-refile-targets ; reduced to make capture quick
+          '((nil :level . 1)
+            (org-agenda-files :level . 1)))
     (setq org-refile-use-cache t) ; C-0 C-c C-w clears the cache
 
 
     (defun verify-refile-target ()
       "Exclude todo keywords with a done state from refile targets"
-      (let ((ohc (org-heading-components)))
+      (let* ((ohc (org-heading-components))
+             (todo (nth 2 ohc))
+             (heading (nth 4 ohc))
+             (tags (nth 5 ohc))
+             (tagl (when tags (delete "" (split-string tags ":")))))
         (not
          (or
-          (member (nth 2 ohc) org-done-keywords)
-          (member (nth 4 ohc) '("Settings"))))))
+          (member todo org-done-keywords)
+          (member heading '("Settings"))
+          (member "log" tagl)))))
     (setq org-refile-target-verify-function 'verify-refile-target)
 
     ;; Save all org buffers every hour
