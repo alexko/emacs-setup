@@ -164,6 +164,25 @@
     (grep-compute-defaults)
     (define-key grep-mode-map (kbd "q") 'my-quit-window)))
 
+(defvar my-kill-buffer-history nil
+  "the history of killed buffers")
+(defun my-kill-buffer (arg)
+  "kills buffer unless it is open elsewhere, removes its window/frame"
+  (interactive "P")
+  (if arg
+      (let ((fname (car my-kill-buffer-history)))
+        (setq my-kill-buffer-history (cdr my-kill-buffer-history))
+        (if fname (find-file-other-frame fname)))
+    (when
+        (= 1 (length (get-buffer-window-list (current-buffer) nil t)))
+      (setq my-kill-buffer-history
+            (cons buffer-file-name my-kill-buffer-history))
+      (kill-buffer (current-buffer)))
+    (if (listp (car (window-tree)))
+        (delete-window)
+      (delete-frame))))
+(define-key global-map (kbd "C-x q") 'my-kill-buffer)
+
 (use-package imenu
   :commands imenu--make-index-alist)
 
