@@ -361,6 +361,11 @@ e.g. when startup files run in the daemon mode"
     (defadvice org-capture-fill-template (around ak-capture-point-fix activate)
       "prevents org-capture-fill-template from moving point"
       (save-excursion ad-do-it))
+
+    (defadvice org-capture-refile (around ak-capture-refile-targets activate)
+      "reduces the number of refile targets to make refile faster"
+      (let ((org-refile-targets my-capture-refile-targets)) ad-do-it))
+
     ;; this fixes "The mark is not set now, so there is no region" error
     ;; (defadvice org-capture-steal-local-variables ; alt minimal fix
     ;;   (after fix-org-steal activate) (setq mark-active nil))
