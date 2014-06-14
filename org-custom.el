@@ -110,8 +110,7 @@
             (org-agenda-files :maxlevel . 4)
             (org-agenda-text-search-extra-files :maxlevel . 4)))
     (setq my-capture-refile-targets ; reduced to make capture quick
-          '((nil :level . 1)
-            (org-agenda-files :level . 1)))
+          '((org-agenda-files :level . 1)))
     (setq org-refile-use-cache t) ; C-0 C-c C-w clears the cache
 
 
