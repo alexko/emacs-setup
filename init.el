@@ -69,8 +69,6 @@
 (define-key global-map (kbd "M-g") 'goto-line)
 (define-key global-map (kbd "M-/") 'hippie-expand)
 (define-key global-map (kbd "<f5>") 'edebug-defun)
-(define-key global-map (kbd "<C-f9>") 'recompile)
-(define-key global-map (kbd "<f9>") 'next-error)
 (define-key global-map (kbd "C-c o") 'occur)
 (define-key global-map (kbd "C-h /") 'find-function)
 
@@ -157,6 +155,10 @@
 (use-package compile
   :config
   (progn
+    (define-key global-map (kbd "<C-f9>") 'recompile)
+    (define-key global-map (kbd "<f9>") 'next-error)
+    (define-key global-map (kbd "S-<f9>") 'previous-error)
+    (define-key global-map (kbd "C-x ~") 'previous-error)
     (define-key compilation-mode-map (kbd "q") 'my-quit-window)
     (define-key compilation-mode-map (kbd "M-n") nil)))
 
