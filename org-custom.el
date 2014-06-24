@@ -9,6 +9,9 @@
     (setq org-directory "~/org/")
     (setq org-default-notes-file (concat org-directory "notes.org"))
     (setq org-attach-directory (concat org-directory "data"))
+    (defadvice org-attach-commit (around fix-attach-dir activate)
+      "run git in the correct directory if ATTACH_DIR is set"
+      (let ((org-attach-directory (org-attach-dir))) ad-do-it))
     ;; (setq org-agenda-files (list org-directory))
     (setq org-agenda-files
           '("~/org/notes.org"
