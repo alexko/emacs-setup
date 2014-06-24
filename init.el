@@ -156,7 +156,9 @@
 
 (use-package compile
   :config
-  (define-key compilation-mode-map (kbd "q") 'my-quit-window))
+  (progn
+    (define-key compilation-mode-map (kbd "q") 'my-quit-window)
+    (define-key compilation-mode-map (kbd "M-n") nil)))
 
 (use-package grep
   :config
