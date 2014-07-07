@@ -137,10 +137,18 @@
         (ido-completing-read
          "M-x "
          (all-completions "" obarray 'commandp)))))
+    (defun ido-bookmark-jump (bname)
+      "*Switch to bookmark using ido."
+      (interactive
+       (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+      (unless current-prefix-arg (bookmark-jump bookmark)
+       (bookmark-jump-other-window bookmark)))
+
     (define-key global-map (kbd "M-x") 'ido-execute-extended-command)
     (define-key global-map (kbd "C-x f") 'ido-recentf-find-file)
     (define-key global-map (kbd "C-x C-f") 'ido-find-file)
-    (define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window))
+    (define-key global-map (kbd "C-x M-f") 'ido-find-file-other-window)
+    (define-key global-map (kbd "C-x r b") 'ido-bookmark-jump))
 
 (defun my-quit-window ()
   (interactive)
