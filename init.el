@@ -137,7 +137,7 @@
         (ido-completing-read
          "M-x "
          (all-completions "" obarray 'commandp)))))
-    (defun ido-bookmark-jump (bname)
+    (defun ido-bookmark-jump (bookmark)
       "*Switch to bookmark using ido."
       (interactive
        (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
