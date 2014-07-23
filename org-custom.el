@@ -15,7 +15,8 @@
     ;; (setq org-agenda-files (list org-directory))
     (setq org-agenda-files
           '("~/org/notes.org"
-            "~/org/tasks.org"))
+            "~/org/tasks.org"
+            "~/org/agenda"))
     (setq org-agenda-text-search-extra-files
           '("~/org/journal.org"
             "~/org/bookmarks.org"))
