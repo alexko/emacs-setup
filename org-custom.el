@@ -154,7 +154,7 @@
     (dolist (x org-structure-template-alist)
       (setf (cadr x) (downcase (cadr x)))) ;; make them lowercase
     (add-to-list 'org-src-lang-modes (cons "cu" 'c++))
-    (add-to-list 'org-src-lang-modes (cons "js" 'espresso))
+    (add-to-list 'org-src-lang-modes (cons "js" 'java))
 
     (setq org-export-coding-system 'utf-8)
     (setq org-format-latex-options
