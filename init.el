@@ -240,14 +240,14 @@
 
 (or
  (use-package js2-mode
-   :config
+   :init
    (setq js2-basic-offset 2
          js2-cleanup-whitespace t)
    :mode
    (("\\.js$" . js2-mode) ("\\.json$" . js2-mode)))
 
  (use-package espresso
-   :config
+   :init
    (setq espresso-indent-level 2)
    :mode
    (("\\.js$" . espresso-mode) ("\\.json$" . espresso-mode)))
