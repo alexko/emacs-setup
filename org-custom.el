@@ -116,7 +116,7 @@
     (setq my-capture-refile-targets ; reduced to make capture quick
           '((org-agenda-files :level . 1)))
     (setq org-refile-use-cache t) ; C-0 C-c C-w clears the cache
-
+    (setq org-goto-interface 'outline-path-completion) ; use ido for C-c C-j
 
     (defun verify-refile-target ()
       "Exclude todo keywords with a done state from refile targets"
