@@ -23,6 +23,10 @@
 * Org-protocol setup
   I use org-protocol to bookmark pages from browser.
 ** Bookmarklets
+   Update: github org-to-html exporter now strips javascript
+   bookmarklet code when exporting, so dragging these links from
+   github page no longer works.
+
    You can drag these links to your browser toolbar. One is boomarking
    the current page into your bookmarks.org file. Another adds it to
    the currently clocked item:
