@@ -31,7 +31,6 @@
       x-select-enable-clipboard t
       x-select-enable-primary t
       fill-column 80
-      tab-width 2
       text-mode-hook '(turn-on-auto-fill text-mode-hook-identify)
       remote-shell-program "/usr/bin/ssh"
       compile-command "cd . ; make -j4 -k"
@@ -51,6 +50,9 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode nil) ; use spaces
+(setq-default tab-width 2)
+(setq-default python-indent 2)
+;; (setq-default python-guess-indent nil)
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
 (show-paren-mode 1)
 (column-number-mode 1)
