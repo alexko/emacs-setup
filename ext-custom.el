@@ -43,7 +43,7 @@
          (split-string (shell-command-to-string
                         (concat "ls -t " dir)) "\n")))
     (dotimes (i n)
-      (insert (concat "[[" dir (nth i rfiles) "]] ")))))
+      (insert (concat "[[" dir (nth i rfiles) "]]\n")))))
 
 (defun remove-blanklines-in-region ()
   "Removes all empty lines in the region"
