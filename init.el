@@ -54,6 +54,7 @@
 (setq-default python-indent 2)
 ;; (setq-default python-guess-indent nil)
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
+(add-to-list 'auto-mode-alist (cons "\\.cl$" 'c++-mode))
 (show-paren-mode 1)
 (column-number-mode 1)
 ;; (size-indication-mode 0)
