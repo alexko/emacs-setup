@@ -259,12 +259,17 @@
    :mode
    (("\\.js$" . javascript-basic-mode) ("\\.json$" . javascript-basic-mode))))
 
-;; begin from tim-custom
 (use-package pymacs
   :load-path "vendor/"
-  :init (autoload 'pymacs-python-reference "pymacs")
-  :commands (pymacs-eval pymacs-exec pymacs-load))
+  :init (progn
+          (autoload 'pymacs-python-reference "pymacs")
+          (defun ropemacs-mode (interactive)
+            (when (pymacs-load "ropemacs" "rope-")
+              (setq ropemacs-enable-autoimport t)
+              (ropemacs-mode))))
+  :commands (pymacs-eval pymacs-exec pymacs-load ropemacs-mode))
 
+;; begin from tim-custom
 (use-package sgml-mode
   :mode (("\\.html\\'" . html-mode) ("\\.mako\\'" . html-mode)))
 
