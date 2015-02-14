@@ -264,12 +264,10 @@
 
 (use-package pymacs
   :load-path "vendor/"
-  :init (progn
-          (autoload 'pymacs-python-reference "pymacs")
-          (defun ropemacs-mode (interactive)
-            (when (pymacs-load "ropemacs" "rope-")
-              (setq ropemacs-enable-autoimport t)
-              (ropemacs-mode))))
+  :config
+  (progn
+    (pymacs-load "ropemacs" "rope-")
+    (setq ropemacs-enable-autoimport t))
   :commands (pymacs-eval pymacs-exec pymacs-load ropemacs-mode))
 
 ;; begin from tim-custom
