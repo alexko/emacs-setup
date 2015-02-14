@@ -107,6 +107,9 @@
   :init (setq uniquify-buffer-name-style 'forward))
 
 (use-package recentf
+  :init
+  (setq recentf-save-file (expand-file-name ".recentf" saves-dir)
+        recentf-auto-cleanup 'never)
   :config (recentf-mode 1))
 
 (use-package ido
