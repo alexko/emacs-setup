@@ -134,7 +134,10 @@
     (defun ido-recentf-find-file ()
       "Find a recent file using ido."
       (interactive)
-      (let ((file (ido-completing-read "Recent files: " recentf-list nil t)))
+      (let ((file
+             (ido-completing-read
+              "Recent files: "
+              (mapcar 'abbreviate-file-name recentf-list) nil t)))
         (when file (find-file file))))
     (defun ido-execute-extended-command ()
       (interactive)
