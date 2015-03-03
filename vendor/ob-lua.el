@@ -27,13 +27,14 @@
 ;; Org-Babel support for evaluating lua source code.
 
 ;;; Code:
+(require 'lua-mode)
 (require 'ob)
 (require 'ob-ref)
 (require 'ob-comint)
 (require 'ob-eval)
 (eval-when-compile (require 'cl))
 
-(declare-function org-remove-indentation "org" )
+(declare-function org-remove-indentation "org")
 (declare-function lua-shell "ext:lua-mode" (&optional argprompt))
 (declare-function run-lua "ext:lua" (&optional cmd noshow new))
 
@@ -41,11 +42,19 @@
 
 (defvar org-babel-default-header-args:lua '())
 
-(defvar org-babel-lua-command "lua"
-  "Name of command for executing lua code.")
+(defcustom org-babel-lua-command "lua"
+  "Name of command for executing lua code."
+  :version "23.1"
+  :package-version '(Org . "7.7")
+  :group 'org-babel
+  :type 'string)
 
-(defvar org-babel-lua-mode (if (featurep 'xemacs) 'lua-mode 'lua)
-  "Preferred lua mode for use in running lua interactively.")
+(defcustom org-babel-lua-mode (if (featurep 'xemacs) 'lua-mode 'lua)
+  "Preferred lua mode for use in running lua interactively."
+  :group 'org-babel
+  :version "23.1"
+  :package-version '(Org . "7.7")
+  :type 'symbol)
 
 (defvar org-src-preserve-indentation)
 
@@ -282,7 +291,5 @@ last statement in BODY, as elisp."
     string))
 
 (provide 'ob-lua)
-
-;; arch-tag: f19b6c3d-dfcb-4a1a-9ce0-45ade1ebc212
 
 ;;; ob-lua.el ends here
