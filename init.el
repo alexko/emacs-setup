@@ -269,7 +269,16 @@
   :load-path "vendor/"
   :config
   (progn
+    (setq ropemacs-enable-shortcuts nil) ;; keep M-/ for hippie-expand
+    ;; (define-key python-mode-map (kbd "M-/") 'rope-code-assist)
+    (define-key python-mode-map (kbd "C-c g") 'rope-goto-definition)
+    (define-key python-mode-map (kbd "C-c u") 'rope-pop-mark)
+    (define-key python-mode-map (kbd "C-c d") 'rope-show-doc)
+    (define-key python-mode-map (kbd "C-c f") 'rope-find-occurrences)
+    (define-key python-mode-map (kbd "M-?") 'rope-lucky-assist)
+    ;; (setq ropemacs-local-prefix "C-c C-p")
     (pymacs-load "ropemacs" "rope-")
+    (setq ropemacs-autoimport-modules '("os" "shutil" "random" "bisect"))
     (setq ropemacs-enable-autoimport t))
   :commands (pymacs-eval pymacs-exec pymacs-load ropemacs-mode))
 
