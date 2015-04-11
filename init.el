@@ -247,14 +247,13 @@
     (add-hook 'org-shiftdown-final-hook 'windmove-down)
     (add-hook 'org-shiftright-final-hook 'windmove-right)))
 
-(or
- (use-package js2-mode
-   :init
-   (setq js2-basic-offset 2
-         js2-cleanup-whitespace t)
-   :mode
-   (("\\.js$" . js2-mode) ("\\.json$" . js2-mode)))
+(use-package js2-mode
+  :init
+  (setq js2-basic-offset 2
+        js2-cleanup-whitespace t)
+  :commands js2-mode)
 
+(or
  (use-package espresso
    :init
    (setq espresso-indent-level 2)
@@ -403,7 +402,12 @@
 
 (use-package yasnippet
   :config
-  (yas-global-mode 1))
+  (progn
+    (yas-global-mode 1)
+    (defun my-yas-activate-js ()
+      (yas-activate-extra-mode 'js-mode))
+    (add-hook 'espresso-mode-hook 'my-yas-activate-js)
+    (add-hook 'javascript-basic-mode 'my-yas-activate-js)))
 
 (use-package hideshow
   :config
