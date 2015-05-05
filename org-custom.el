@@ -237,6 +237,7 @@
        ("flickr"   . "https://flickr.com/search/?q=")
        ("flid"     . "https://flickr.com/photo.gne?id=")
        ("ar"       . "https://web.archive.org/web/*/")
+       ("rfc"      . "https://tools.ietf.org/html/rfc")
        ;; sites not supporting https at the moment
        ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
        ("negg"     . "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&Description=")
