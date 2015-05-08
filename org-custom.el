@@ -1,6 +1,7 @@
 ;; org-mode setup
 (use-package org
   :load-path "org/lisp"
+  :requires info
   :init (use-package org-install)
   :config
   (progn
