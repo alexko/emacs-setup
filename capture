@@ -7,7 +7,9 @@
 import pygtk
 pygtk.require('2.0')
 import gtk
+import json
 import urllib
+import logging
 import argparse
 import subprocess
 import pwd
@@ -43,7 +45,10 @@ def get_cwd():
     pid = active.property_get('_NET_WM_PID')[2][0]
     link = "/proc/%s/cwd" % pid
     if os.path.islink(link):
-      return os.path.realpath(link)
+        try:
+            return os.path.realpath(link)
+        except OSError:
+            pass
     return None
 
 def get_homedir():
@@ -71,13 +76,25 @@ def main():
     parser = argparse.ArgumentParser(description='Desktop capture')
     parser.add_argument('-v', action='version', version='%(prog)s 0.01',
                         help='print version and quit')
-    parser.add_argument('-t', type=str, default="s",
+    parser.add_argument('-t', type=str, default="s", nargs='?', const="S",
                         help='capture template to use')
     parser.add_argument('-d', action="store_true",
                         help='capture cwd')
     parser.add_argument('-n', action="store_true",
                         help='dry run, print paramters only')
+    parser.add_argument('-l', '--logfile', type=str, nargs='?',
+                        default=None, const="~/capture.log",
+                        help='log file')
     args = parser.parse_args()
+
+    logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s')
+    logging.getLogger('').setLevel(logging.DEBUG)
+    if args.logfile:
+        fname = os.path.expanduser(args.logfile)
+        fh = logging.FileHandler(fname, encoding="utf-8")
+        logging.getLogger('').addHandler(fh)
+        fmt = logging.Formatter(fmt='%(asctime)s %(levelname)s %(message)s')
+        fh.setFormatter(fmt)
 
     sel = get_selection()
     cwd = get_cwd()
@@ -86,12 +103,11 @@ def main():
     ttl = get_title()
     cnt = sel+"\nfile:"+os.getcwd() if args.d else sel
     if cmd:
-        cnt += "\n"+cwd+" "+" ".join(cmd)
+        cnt += "\n"+str(cwd)+" "+" ".join(cmd)
     url = "org-protocol://capture://%s/desktop/%s/%s" \
         % (args.t, urllib.quote(ttl,safe=""), urllib.quote(cnt,safe=""))
-    print ttl
-    print cnt
-    print url
+
+    logging.info("capture %s", json.dumps(dict(ttl=ttl, url=url, cnt=cnt)))
     if not args.n:
         subprocess.call(["/usr/bin/emacsclient", url])
 
