@@ -17,6 +17,7 @@
     (setq org-agenda-files
           '("~/org/notes.org"
             "~/org/tasks.org"
+            "~/org/projects.org"
             "~/org/agenda"))
     (setq org-agenda-text-search-extra-files
           '("~/org/journal.org"
