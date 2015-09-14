@@ -7,3 +7,6 @@
 [submodule "vendor/ess"]
 	path = vendor/ess
 	url = https://github.com/emacs-ess/ESS
+[submodule "vendor/pymacs"]
+	path = vendor/pymacs
+	url = https://github.com/pinard/Pymacs/
