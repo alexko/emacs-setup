@@ -13,6 +13,7 @@
 (setq locale-coding-system 'utf-8)
 
 (defvar saves-dir (expand-file-name ".saves/" user-emacs-directory))
+(make-directory saves-dir t) ;; make sure saves-dir exists
 (setq custom-file (concat user-emacs-directory "custom.el")
       backup-directory-alist `((".*" . ,(concat saves-dir "backups/")))
       auto-save-list-file-prefix (concat saves-dir "auto-saves/.saves-")
