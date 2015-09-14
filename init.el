@@ -267,6 +267,7 @@
 
 (use-package pymacs
   :load-path "vendor/"
+  :requires python-mode
   :config
   (progn
     (setq ropemacs-autoimport-modules '("os" "shutil" "random" "bisect"))
