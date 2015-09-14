@@ -96,8 +96,9 @@
 (defadvice occur-mode-goto-occurrence (around my-occur activate)
   "Open occurrences in the same window if occur window is active"
   (let ((pop-to-buffer-save (symbol-function 'pop-to-buffer)))
-    (flet ((pop-to-buffer (buf &optional other-window norecord)
-                          (switch-to-buffer buf)))
+    (cl-letf (((symbol-function 'pop-to-buffer)
+            (lambda (buf &optional other-window norecord)
+              (switch-to-buffer buf))))
       ad-do-it)))
 
 (provide 'alex-custom)
