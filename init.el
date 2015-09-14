@@ -266,10 +266,11 @@
    (("\\.js$" . javascript-basic-mode) ("\\.json$" . javascript-basic-mode))))
 
 (use-package pymacs
-  :load-path "vendor/"
-  :requires python-mode
+  :load-path "vendor/pymacs"
+  ;; :requires python ; prevents pymacs from loading
   :config
   (progn
+    (require 'python)
     (setq ropemacs-autoimport-modules '("os" "shutil" "random" "bisect"))
     (setq ropemacs-enable-autoimport t)
     (setq ropemacs-enable-shortcuts nil) ;; keep M-/ for hippie-expand
