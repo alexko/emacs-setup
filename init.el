@@ -263,7 +263,7 @@
 
  (use-package generic-x
    :mode
-   (("\\.js$" . javascript-basic-mode) ("\\.json$" . javascript-basic-mode))))
+   (("\\.js$" . javascript-generic-mode) ("\\.json$" . javascript-generic-mode))))
 
 (use-package pymacs
   :load-path "vendor/pymacs"
