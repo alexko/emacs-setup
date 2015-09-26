@@ -288,6 +288,11 @@
 (use-package sgml-mode
   :mode (("\\.html\\'" . html-mode) ("\\.mako\\'" . html-mode)))
 
+(use-package nginx-mode
+  :init
+  (add-to-list 'auto-mode-alist
+               '("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode)))
+
 (use-package mmm-auto
   :load-path "vendor/mmm-mode"
   :config (setq mmm-global-mode 'maybe))
