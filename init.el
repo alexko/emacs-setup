@@ -56,6 +56,8 @@
 ;; (setq-default python-guess-indent nil)
 (add-to-list 'auto-mode-alist (cons "\\.cu$" 'c++-mode))
 (add-to-list 'auto-mode-alist (cons "\\.cl$" 'c++-mode))
+(add-to-list 'auto-mode-alist (cons "\\.pyx$" 'python-mode))
+(add-to-list 'auto-mode-alist (cons "\\.R$" 'R-mode))
 (show-paren-mode 1)
 (column-number-mode 1)
 ;; (size-indication-mode 0)
@@ -217,7 +219,7 @@
   :init
   (progn
     (setq ffip-patterns '("*.c" "*.h" "*.cc" "*.cpp" "*.cu"
-                          "*.py" "*.el" "*.java" "*.js" "*.go"))
+                          "*.py" ".pyx" "*.R" "*.el" "*.java" "*.js" "*.go"))
     (put 'ffip-patterns 'safe-local-variable 'listp))
   :bind ("C-x C-M-f" . find-file-in-project))
 
