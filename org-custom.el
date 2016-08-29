@@ -59,6 +59,11 @@
     ;;(setq org-log-state-notes-insert-after-drawers nil)
     ;; (setq org-tags-match-list-sublevels 'indented)
 
+    (setq org-agenda-sorting-strategy
+          '((agenda habit-down time-up deadline-up priority-down category-keep)
+            (todo deadline-up priority-down category-keep)
+            (tags deadline-up priority-down category-keep)
+            (search category-keep)))
     (setq org-drawers-for-agenda nil)
     (setq org-agenda-include-diary t)
     (setq org-agenda-compact-blocks t)
