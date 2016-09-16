@@ -204,6 +204,17 @@
           (set-face-foreground 'org-level-2
                                (face-attribute 'default :foreground)))))
 
+    ;; org appt notifications config
+    (defun my-org-agenda-to-appt ()
+      (interactive)
+      (setq appt-time-msg-list nil)
+      (org-agenda-to-appt))
+
+    (appt-activate t)
+    (my-org-agenda-to-appt)
+    (add-hook 'org-finalize-agenda-hook 'my-org-agenda-to-appt 'append)
+    (run-at-time "24:01" nil 'my-org-agenda-to-appt)
+
     ;; org links config
     (defun org-occur-open (uri)
       "Run `occur' on the fragment after '#' in the link uri."
