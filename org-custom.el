@@ -16,6 +16,7 @@
     ;; (setq org-agenda-files (list org-directory))
     (setq org-agenda-files
           '("~/org/notes.org"
+            "~/org/3form.org"
             "~/org/places.org"
             "~/org/projects.org"
             "~/org/tasks.org"
