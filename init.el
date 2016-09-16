@@ -394,7 +394,6 @@
 (use-package ledger)
 
 (use-package smex
-  :disabled noninteractive
   :config
   (progn
     (smex-initialize)
@@ -403,7 +402,6 @@
     (define-key global-map (kbd "C-c C-c M-x") 'execute-extended-command)))
 
 (use-package "scim-bridge-dev"
-  :disabled noninteractive
   :config
   (progn
     ;; (add-hook 'after-init-hook 'scim-mode-on)
@@ -414,7 +412,6 @@
     (scim-define-common-key ?\C-/ nil)))
 
 (use-package yasnippet
-  :disabled noninteractive
   :config
   (progn
     (yas-global-mode 1)
@@ -451,7 +448,6 @@
      :config (color-theme-twilight))))
 
 (use-package command-frequency
-  :disabled noninteractive
   :init
   (setq command-frequency-table-file
         (concat saves-dir ".emacs.frequencies"))
@@ -477,7 +473,6 @@
   :interpreter ("go" . go-mode))
 
 (use-package abbrev
-  :disabled noninteractive
   :config
   (progn
   ;; (setq abbrev-file-name (concat user-emacs-directory ".abbrev_defs"))
@@ -491,7 +486,6 @@
 
 (use-package jabber
   :load-path "vendor/jabber"
-  :disabled noninteractive
   :commands (jabber-connect jabber-connect-all))
 
 ;; System, host and user specific configuration
@@ -513,7 +507,6 @@
     (or (load (concat file "c") 'noerror) (load file))))
 
 (use-package desktop
-  :disabled noninteractive
   :init
   (progn
     (setq history-length 250)
