@@ -129,6 +129,7 @@
     (setq ido-file-extensions-order
           '(".org" ".py" ".txt" ".el" ".ini" ".cfg" ".cnf"))
     (setq ido-use-filename-at-point 'guess)
+    (setq ido-auto-merge-delay-time 1.5)
     (setq ido-everywhere t)
     (setq ido-enable-flex-matching t)
     (setq ido-max-directory-size 300000)
