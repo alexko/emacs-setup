@@ -262,6 +262,7 @@
        ("amz"      . "http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=")
        ("negg"     . "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&Description=")
        ("ups"      . "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=")
+       ("fedex"    . "https://www.fedex.com/apps/fedextrack/?cntry_code=us&tracknumbers=")
        ("yelp"     . "http://www.yelp.com/search?find_desc=")))
 
   :bind (("C-c a" . org-agenda)
